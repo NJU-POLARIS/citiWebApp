@@ -4,7 +4,7 @@ citi2017 api
 财务系统
 -------
 ### `凭证`
-#### `新增凭证`  /api/voucher/entry
+#### `新增凭证`  /api/finance/voucher/entry
 + post
 ```
 "voucher" = {}
@@ -14,7 +14,7 @@ citi2017 api
 "notifcation" = {}
 ```
 
-#### `查询凭证`  /api/voucher/query
+#### `查询凭证`  /api/finance/voucher/query
 + post
 ```
 "voucher_query" = {}
@@ -25,7 +25,7 @@ citi2017 api
 ```
 
 ### `账簿`
-#### `明细账`  /api/book/detail
+#### `明细账`  /api/finance/book/detail
 + post
 ```
 "book_query" = {}
@@ -34,7 +34,7 @@ citi2017 api
 ```
 "book" = {}
 ```
-#### `总账`  /api/book/general
+#### `总账`  /api/finance/book/general
 + post
 ```
 "book_query" = {}
@@ -43,7 +43,7 @@ citi2017 api
 ```
 "book" = {}
 ```
-#### `科目余额表`  /api/book/balance
+#### `科目余额表`  /api/finance/book/balance
 + post
 ```
 "book_query" = {}
@@ -52,7 +52,7 @@ citi2017 api
 ```
 "book" = {}
 ```
-#### `科目汇总表`  /api/book/summary
+#### `科目汇总表`  /api/finance/book/summary
 + post
 ```
 "book_query" = {}
@@ -61,7 +61,13 @@ citi2017 api
 ```
 "book" = {}
 ```
-
+### `财务预警` /api/finance/warning
++ post
+```
+```
++ get
+```
+```
 供应链管理
 ---------
 
