@@ -41,20 +41,6 @@ const data = [{
   name: 'CHAINS', // for breadcrumb
   path: '',
   children: [{
-    name: '财务管理',
-    icon: 'form',
-    path: 'finance',
-    children: [{
-      name: '凭证',
-      icon: 'form',
-      path: 'voucher',
-      component: Voucher,
-    }, {
-      name: '账簿',
-      icon: 'book',
-      path: 'book',
-    }],
-  }, {
     name: 'Dashboard',
     icon: 'dashboard',
     path: 'dashboard',
@@ -74,6 +60,43 @@ const data = [{
       name: '工作台',
       path: 'workplace',
       component: Workplace,
+    }],
+  }, {
+    name: '财务管理',
+    icon: 'form',
+    path: 'finance',
+    children: [{
+      name: '凭证',
+      icon: 'form',
+      path: 'voucher',
+      component: Voucher,
+    }, {
+      name: '账簿',
+      icon: 'book',
+      path: 'book',
+    }],
+  }, {
+    name: '供应链管理',
+    icon: 'dashboard',
+    path: 'supply',
+    children: [{
+      name: '现金管理',
+      // icon: 'cash',
+      path: 'cash',
+      // component: Voucher,
+    }, {
+      name: '库存管理',
+      // icon: 'book',
+      path: 'b',
+    }],
+  }, {
+    name: '设置',
+    path: 'setting',
+    icon: 'setting',
+    children: [{
+      name: '期初设置',
+      path: '///',
+      // component: BasicForm,
     }],
   }, {
     name: '表单页',
