@@ -33,16 +33,36 @@ import Login from '../routes/User/Login';
 import Register from '../routes/User/Register';
 import RegisterResult from '../routes/User/RegisterResult';
 
+import Voucher from '../routes/Finance/Voucher';
+
 const data = [{
   component: BasicLayout,
   layout: 'BasicLayout',
-  name: '首页', // for breadcrumb
+  name: 'CHAINS', // for breadcrumb
   path: '',
   children: [{
+    name: '财务管理',
+    icon: 'form',
+    path: 'finance',
+    children: [{
+      name: '凭证',
+      icon: 'form',
+      path: 'voucher',
+      component: Voucher,
+    }, {
+      name: '账簿',
+      icon: 'book',
+      path: 'book',
+    }],
+  }, {
     name: 'Dashboard',
     icon: 'dashboard',
     path: 'dashboard',
     children: [{
+      name: '财务预警',
+      path: 'warning',
+      // component: Monitor,
+    }, {
       name: '分析页',
       path: 'analysis',
       component: Analysis,
