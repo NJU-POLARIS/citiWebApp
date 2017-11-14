@@ -1,12 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux, Link } from 'dva/router';
-import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
+import { Form, Input, Button, Popover, Progress, Cascader, DatePicker } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
-const { Option } = Select;
+
 const InputGroup = Input.Group;
+const { MonthPicker } = DatePicker;
+
+const options = [{
+  value: '工业',
+  label: '工业',
+  children: [{
+    value: '钢铁',
+    label: '钢铁',
+
+  }],
+}, {
+  value: '服务业',
+  label: '服务业',
+  children: [{
+    value: '餐饮',
+    label: '餐饮',
+
+  }],
+}];
+
+const supplyChain = [{ value: '供应商', label: '供应商' },
+  { value: '生产商', label: '生产商' },
+  { value: '分销商', label: '分销商' }];
+
 
 const passwordStatusMap = {
   ok: <p className={styles.success}>强度：强</p>,
@@ -26,7 +50,6 @@ const passwordProgressMap = {
 @Form.create()
 export default class Register extends Component {
   state = {
-    count: 0,
     confirmDirty: false,
     visible: false,
     help: '',
@@ -40,18 +63,6 @@ export default class Register extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  }
-
-  onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
-      }
-    }, 1000);
   }
 
   getPasswordStatus = () => {
@@ -141,20 +152,20 @@ export default class Register extends Component {
   render() {
     const { form, register } = this.props;
     const { getFieldDecorator } = form;
-    const { count } = this.state;
     return (
       <div className={styles.main}>
-        <h3>注册</h3>
+
+
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('mail', {
               rules: [{
-                required: true, message: '请输入邮箱地址！',
+                required: true, message: '请输入要注册的账户！',
               }, {
-                type: 'email', message: '邮箱地址格式错误！',
+                type: 'email', message: '该账户已存在！',
               }],
             })(
-              <Input size="large" placeholder="邮箱" />
+              <Input size="large" placeholder="账户" />
             )}
           </FormItem>
           <FormItem help={this.state.help}>
@@ -199,56 +210,96 @@ export default class Register extends Component {
             )}
           </FormItem>
           <FormItem>
+            {getFieldDecorator('name', {
+              rules: [{
+                required: true, message: '请输入单位名称！',
+              }],
+            })(
+              <Input size="large" placeholder="单位名称" />
+            )}
+
+
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('address', {
+              rules: [{
+                required: true, message: '请输入单位地址！',
+              }],
+            })(
+              <Input size="large" placeholder="单位地址" />
+            )}
+
+
+          </FormItem>
+
+          <FormItem>
             <InputGroup size="large" className={styles.mobileGroup} compact>
-              <FormItem style={{ width: '20%' }}>
-                {getFieldDecorator('prefix', {
-                  initialValue: '86',
-                })(
-                  <Select size="large">
-                    <Option value="86">+86</Option>
-                    <Option value="87">+87</Option>
-                  </Select>
-                )}
-              </FormItem>
-              <FormItem style={{ width: '80%' }}>
+              <FormItem style={{ width: '45%' }}>
                 {getFieldDecorator('mobile', {
                   rules: [{
                     required: true, message: '请输入手机号！',
                   }, {
                     pattern: /^1\d{10}$/, message: '手机号格式错误！',
-                  }],
+                  },
+                    ],
                 })(
-                  <Input placeholder="11位手机号" />
+                  <Input placeholder="联系方式" />
+                )}
+              </FormItem>
+              <FormItem style={{ width: '55%' }}>
+                {getFieldDecorator('creditcode', {
+                  rules: [{
+                    required: true, message: '请输入统一社会信用代码！',
+                  }, {
+                    pattern: /^\w{18}$/, message: '信用代码格式错误！',
+                  },
+                    ],
+                })(
+                  <Input placeholder="统一社会信用代码" />
                 )}
               </FormItem>
             </InputGroup>
           </FormItem>
+
+
           <FormItem>
-            <Row gutter={8}>
-              <Col span={16}>
-                {getFieldDecorator('captcha', {
+
+            <InputGroup size="large" className={styles.mobileGroup} compact>
+              <FormItem style={{ width: '45%' }}>
+                {getFieldDecorator('supplyChain', {
                   rules: [{
-                    required: true, message: '请输入验证码！',
+                    required: true, message: '请选择供应链！',
                   }],
                 })(
-                  <Input
-                    size="large"
-                    placeholder="验证码"
-                  />
+                  <Cascader options={supplyChain} placeholder="供应链" />
                 )}
-              </Col>
-              <Col span={8}>
-                <Button
-                  size="large"
-                  disabled={count}
-                  className={styles.getCaptcha}
-                  onClick={this.onGetCaptcha}
-                >
-                  {count ? `${count} s` : '获取验证码'}
-                </Button>
-              </Col>
-            </Row>
+              </FormItem>
+              <FormItem style={{ width: '55%' }}>
+                {getFieldDecorator('industry', {
+                  rules: [{
+                    required: true, message: '请选择行业！',
+                  }],
+                })(
+                  <Cascader options={options} placeholder="行业" />
+                )}
+
+              </FormItem>
+            </InputGroup>
+
+
           </FormItem>
+
+          <FormItem >
+            {getFieldDecorator('vouchertime', {
+              rules: [{
+                required: true, message: '请选择账套启用年月！',
+              }],
+            })(
+              <MonthPicker placeholder="账套启用年月" />
+            )}
+          </FormItem>
+
+
           <FormItem>
             <Button size="large" loading={register.submitting} className={styles.submit} type="primary" htmlType="submit">
               注册
@@ -256,6 +307,7 @@ export default class Register extends Component {
             <Link className={styles.login} to="/user/login">使用已有账户登录</Link>
           </FormItem>
         </Form>
+
       </div>
     );
   }
