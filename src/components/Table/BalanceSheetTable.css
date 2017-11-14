@@ -2,9 +2,11 @@
  * Created by YZ on 2017/11/12.
  */
 .table1 {
+  margin-top: 5px;
   width: 50%;
 }
 .table2 {
+  /* margin-top: 5px; */
   width: 50%;
   margin-left: 49%;
   margin-top: -109px;

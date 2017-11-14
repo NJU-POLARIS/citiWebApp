@@ -34,6 +34,7 @@ import Register from '../routes/User/Register';
 import RegisterResult from '../routes/User/RegisterResult';
 
 import Voucher from '../routes/Finance/Voucher';
+import Tables from '../routes/Finance/BalanceSheetPage';
 
 const data = [{
   component: BasicLayout,
@@ -74,6 +75,11 @@ const data = [{
       name: '账簿',
       icon: 'book',
       path: 'book',
+    }, {
+      name: '报表',
+      icon: 'file-text',
+      path: 'tables',
+      component: Tables,
     }],
   }, {
     name: '供应链管理',
