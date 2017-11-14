@@ -9,7 +9,7 @@ export default class BasicForms extends PureComponent {
     return (
       <PageHeaderLayout title="资产负债表">
         <Button icon="file-text">打印</Button>
-        <Button icon="export">导出</Button>
+        <Button icon="export" style={{ margin: '10px' }}>导出</Button>
         <BalanceSheetTable />
       </PageHeaderLayout>
     );
