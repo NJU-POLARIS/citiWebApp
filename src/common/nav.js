@@ -35,6 +35,8 @@ import RegisterResult from '../routes/User/RegisterResult';
 
 import Voucher from '../routes/Finance/Voucher';
 import Tables from '../routes/Finance/BalanceSheetPage';
+import ProfitPage from '../routes/Finance/ProfitPage';
+import CashFlowPage from '../routes/Finance/CashFlowPage';
 
 const data = [{
   component: BasicLayout,
@@ -80,6 +82,13 @@ const data = [{
       icon: 'file-text',
       path: 'tables',
       component: Tables,
+      children: [{
+        path: 'profit',
+        component: ProfitPage,
+      }, {
+        path: 'cash-flow',
+        component: CashFlowPage,
+      }],
     }],
   }, {
     name: '供应链管理',

@@ -4,8 +4,6 @@ import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import BasicLayout from './layouts/BasicLayout';
 import UserLayout from './layouts/UserLayout';
-import ProfitPage from './routes/Finance/ProfitPage';
-import CashFlowPage from './routes/Finance/CashFlowPage';
 
 function RouterConfig({ history }) {
   return (
@@ -14,8 +12,8 @@ function RouterConfig({ history }) {
         <Switch>
           <Route path="/user" component={UserLayout} />
           <Route path="/" component={BasicLayout} />
-          <Route path="/profit" component={ProfitPage} />
-          <Route path="/cashflow" component={CashFlowPage} />
+          {/* <Route path="/profit" component={ProfitPage} /> */}
+          {/* <Route path="/cashflow" component={CashFlowPage} /> */}
           <Redirect to="/" />
         </Switch>
       </Router>
