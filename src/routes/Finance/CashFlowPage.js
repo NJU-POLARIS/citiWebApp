@@ -3,8 +3,9 @@
  */
 import React, { PureComponent } from 'react';
 // import { connect } from 'dva';
-import { Button } from 'antd';
 import { routerRedux } from 'dva/router';
+import CashFlowTable from '../../components/Table/CashFlowTable';
+import TableOperation from '../../components/Table/TableOperation';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 export default class BasicForms extends PureComponent {
@@ -15,10 +16,10 @@ export default class BasicForms extends PureComponent {
         dispatch(routerRedux.push('./finance/tables'));
         break;
       case 'profit':
-        dispatch(routerRedux.push(''));
+        dispatch(routerRedux.push('./finance/tables/profit'));
         break;
       case 'cashflow':
-        dispatch(routerRedux.push('CashFlowPage.js'));
+        dispatch(routerRedux.push('./finance/tables/cash-flow'));
         break;
       default:
         break;
@@ -41,8 +42,8 @@ export default class BasicForms extends PureComponent {
         tabList={tablist}
         onTabChange={this.handleTabChange}
       >
-        <Button icon="file-text">打印</Button>
-        <Button icon="export" style={{ margin: '10px' }}>导出</Button>
+        <TableOperation />
+        <CashFlowTable />
       </PageHeaderLayout>
     );
   }

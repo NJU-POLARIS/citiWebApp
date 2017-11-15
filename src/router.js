@@ -12,8 +12,6 @@ function RouterConfig({ history }) {
         <Switch>
           <Route path="/user" component={UserLayout} />
           <Route path="/" component={BasicLayout} />
-          {/* <Route path="/profit" component={ProfitPage} /> */}
-          {/* <Route path="/cashflow" component={CashFlowPage} /> */}
           <Redirect to="/" />
         </Switch>
       </Router>

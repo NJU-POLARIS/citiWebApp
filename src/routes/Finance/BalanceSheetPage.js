@@ -13,13 +13,13 @@ export default class BasicForms extends PureComponent {
     const { dispatch } = this.props;
     switch (key) {
       case 'property':
-        dispatch(routerRedux.push('./finance/tables'));
+        dispatch(routerRedux.push('/finance/tables'));
         break;
       case 'profit':
-        dispatch(routerRedux.push('./finance/tables/profit'));
+        dispatch(routerRedux.push('/finance/tables/profit'));
         break;
       case 'cashflow':
-        dispatch(routerRedux.push('./finance/tables/cash-flow'));
+        dispatch(routerRedux.push('/finance/tables/cash-flow'));
         break;
       default:
         break;
@@ -37,16 +37,12 @@ export default class BasicForms extends PureComponent {
       tab: '现金流量表',
     },
     ];
-    const props = {
-      year: 2017,
-      month: 11,
-    };
     return (
       <PageHeaderLayout
         tabList={tablist}
         onTabChange={this.handleTabChange}
       >
-        <TableOperation {...props} />
+        <TableOperation />
         <BalanceSheetTable />
       </PageHeaderLayout>
     );

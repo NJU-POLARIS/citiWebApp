@@ -2,7 +2,7 @@
  * Created by YZ on 2017/11/13.
  */
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Row, Button } from 'antd';
 import styles from './TableOperation.less';
 
 export default class TableOperation extends Component {
@@ -29,19 +29,17 @@ export default class TableOperation extends Component {
   render() {
     const { year, month } = this.state;
     return (
-      <div className={styles.op}>
-        <div className={styles.pagination}>
-          <Button className={styles.left_icon} icon="left" onClick={this.getLastMonth} />
-          <Button className={styles.btn_context} >
-            <span>{year}年第{month}期</span>
-          </Button>
-          <Button className={styles.right_icon} icon="right" onClick={this.getLateMonth} />
+      <Row className={styles.op}>
+        <Button col={2} className={styles.left_icon} icon="left" onClick={this.getLastMonth} />
+        <Button col={6} className={styles.btn_context} >
+          <span>{year}年第{month}期</span>
+        </Button>
+        <Button col={2} className={styles.right_icon} icon="right" onClick={this.getLateMonth} />
+        <div className={styles.twobtn}>
+          <Button lg={6} className={styles.print} icon="file-text">打印</Button>
+          <Button icon="export" className={styles.export}>导出</Button>
         </div>
-        <div className={styles.twobt}>
-          <Button className={styles.print} icon="file-text">打印</Button>
-          <Button icon="export">导出</Button>
-        </div>
-      </div>
+      </Row>
     );
   }
 }

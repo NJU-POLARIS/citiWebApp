@@ -19,7 +19,7 @@ import AdvancedProfile from '../routes/Profile/AdvancedProfile';
 import BasicForm from '../routes/Forms/BasicForm';
 import AdvancedForm from '../routes/Forms/AdvancedForm';
 import StepForm from '../routes/Forms/StepForm';
-import Step2 from '../routes/Forms/StepForm/Step2';
+import Step2 from '../routes/Forms/Step2';
 import Step3 from '../routes/Forms/StepForm/Step3';
 
 import Exception403 from '../routes/Exception/403';
@@ -37,6 +37,8 @@ import Voucher from '../routes/Finance/Voucher';
 import Tables from '../routes/Finance/BalanceSheetPage';
 import ProfitPage from '../routes/Finance/ProfitPage';
 import CashFlowPage from '../routes/Finance/CashFlowPage';
+
+import SupplierStock from '../routes/Stock/SupplierStock';
 
 const data = [{
   component: BasicLayout,
@@ -92,16 +94,25 @@ const data = [{
     }],
   }, {
     name: '供应链管理',
-    icon: 'dashboard',
+    icon: 'api',
     path: 'supply',
     children: [{
       name: '现金管理',
-      // icon: 'cash',
+      icon: 'pay-circle-o',
       path: 'cash',
       // component: Voucher,
     }, {
       name: '库存管理',
-      // icon: 'book',
+      icon: 'shopping-cart',
+      path: 'stock',
+      component: SupplierStock,
+    }, {
+      name: '融资服务',
+      icon: 'bank',
+      path: 'b',
+    }, {
+      name: '绩效评价',
+      icon: 'like-o',
       path: 'b',
     }],
   }, {
