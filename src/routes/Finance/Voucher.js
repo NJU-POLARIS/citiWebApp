@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd';
-import StandardTable from '../../components/StandardTable';
+import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, Radio, InputNumber, DatePicker, Modal, message } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+
+import NewVoucher from '../../components/NewVoucher';
 
 import styles from './Voucher.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
+const { RadioGroup } = Radio.Group;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
+const period = [[<Option value="0">全部期间</Option>], [<Option value="1">2017年第8期</Option>], [<Option value="2">2017年第9期</Option>]];
 
 @connect(state => ({
   rule: state.rule,
@@ -158,20 +161,28 @@ export default class Voucher extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则编号">
-              {getFieldDecorator('no')(
-                <Input placeholder="请输入" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>
-              )}
+            <FormItem label="会计期间">
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startPeriod')(
+                    <Select placeholder="开始期间" style={{ width: '100%' }}>
+                      {period}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startPeriod')(
+                    <Select placeholder="结束期间" style={{ width: '100%' }}>
+                      {period}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -194,15 +205,104 @@ export default class Voucher extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则编号">
-              {getFieldDecorator('no')(
-                <Input placeholder="请输入" />
+            <FormItem label="会计期间">
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startPeriod')(
+                    <Select placeholder="开始期间" style={{ width: '100%' }}>
+                      {period}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startPeriod')(
+                    <Select placeholder="结束期间" style={{ width: '100%' }}>
+                      {period}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="凭证号" style={{ marginLeft: 14 }}>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startNumber')(
+                    <InputNumber min={0} placeholder="起始字号" style={{ width: '100%' }} />
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startNumber')(
+                    <InputNumber min={0} placeholder="结束字号" style={{ width: '100%' }}/>
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="金额" style={{ marginLeft: 28 }}>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('lowPrice')(
+                    <InputNumber
+                      placeholder="金额下限"
+                      defaultValue={0}
+                      min={0}
+                      formatter={value => `￥${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      parser={value => value.replace(/￥\s?|(,*)/g, '')}
+                      style={{ width: '100%' }}
+                    />
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('highPrice')(
+                    <InputNumber
+                      placeholder="金额上限"
+                      defaultValue={0}
+                      min={0}
+                      formatter={value => `￥${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      parser={value => value.replace(/￥\s?|(,*)/g, '')}
+                      style={{ width: '100%' }}
+                    />
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="凭证字" style={{ marginLeft: 14 }}>
+              {getFieldDecorator('voucherKey')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
+                  <Option value="0">全部</Option>
+                  <Option value="1">记</Option>
+                  <Option value="2">收</Option>
+                  <Option value="3">付</Option>
+                  <Option value="4">转</Option>
+                </Select>
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status')(
+            <FormItem label="科目" style={{ marginLeft: 28 }}>
+              {getFieldDecorator('subject')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
@@ -211,37 +311,29 @@ export default class Voucher extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="调用次数">
-              {getFieldDecorator('number')(
-                <InputNumber style={{ width: '100%' }} />
+            <FormItem label="制单人" style={{ marginLeft: 14 }}>
+              {getFieldDecorator('producer')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
+                  {period}
+                </Select>
               )}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="更新日期">
-              {getFieldDecorator('date')(
-                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
+            <FormItem label="摘要" style={{ marginLeft: 28 }}>
+              {getFieldDecorator('abstract')(
+                <Input style={{ width: '100%' }} placeholder="请输入" />
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status3')(
+            <FormItem label="排序方式">
+              {getFieldDecorator('sort')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status4')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
+                  <Option value="0">按凭证号排序</Option>
+                  <Option value="1">按凭证日期排序</Option>
                 </Select>
               )}
             </FormItem>
@@ -276,7 +368,7 @@ export default class Voucher extends PureComponent {
     );
 
     return (
-      <PageHeaderLayout title="查询表格">
+      <PageHeaderLayout title="查询凭证">
         <Card bordered={false}>
           <div className={styles.Voucher}>
             <div className={styles.VoucherForm}>
@@ -287,7 +379,6 @@ export default class Voucher extends PureComponent {
               {
                 selectedRows.length > 0 && (
                   <span>
-                    <Button>批量操作</Button>
                     <Dropdown overlay={menu}>
                       <Button>
                         更多操作 <Icon type="down" />
@@ -297,28 +388,22 @@ export default class Voucher extends PureComponent {
                 )
               }
             </div>
-            <StandardTable
+            {/* <StandardTable
               selectedRows={selectedRows}
               loading={ruleLoading}
               data={data}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
-            />
+            /> */}
           </div>
         </Card>
         <Modal
-          title="新建规则"
+          title="新增凭证"
           visible={modalVisible}
-          onOk={this.handleAdd}
+          // onOk={this.handleAdd}
           onCancel={() => this.handleModalVisible()}
+          width={1200}
         >
-          <FormItem
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 15 }}
-            label="描述"
-          >
-            <Input placeholder="请输入" onChange={this.handleAddInput} value={addInputValue} />
-          </FormItem>
         </Modal>
       </PageHeaderLayout>
     );

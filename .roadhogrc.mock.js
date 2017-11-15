@@ -82,3 +82,10 @@ const proxy = {
 };
 
 export default noProxy ? {} : delay(proxy, 1000);
+
+// export default {
+//   // 'GET /api/users': { users: [1, 2] },
+//
+//   'GET /api/(.*)': 'http://localhost:8080/api',
+//
+// };
