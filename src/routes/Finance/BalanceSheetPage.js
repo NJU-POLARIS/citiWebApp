@@ -2,7 +2,7 @@
  * Created by YZ on 2017/11/13.
  */
 import React, { PureComponent } from 'react';
-// import { connect } from 'dva';
+import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import BalanceSheetTable from '../../components/Table/BalanceSheetTable';
 import TableOperation from '../../components/Table/TableOperation';

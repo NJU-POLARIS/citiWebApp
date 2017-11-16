@@ -41,6 +41,7 @@ import CashFlowPage from '../routes/Finance/CashFlowPage';
 import SupplierStock from '../routes/Stock/SupplierStock';
 
 import Financing from '../routes/Chains/Financing/Financing';
+import Appraisal from '../routes/Chains/Appraisal/Appraisal';
 
 const data = [{
   component: BasicLayout,
@@ -116,7 +117,8 @@ const data = [{
     }, {
       name: '绩效评价',
       icon: 'like-o',
-      path: 'b',
+      path: 'appraisal',
+      component: Appraisal,
     }],
   }, {
     name: '设置',
