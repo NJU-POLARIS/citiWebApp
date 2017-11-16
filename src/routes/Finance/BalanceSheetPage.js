@@ -8,7 +8,7 @@ import BalanceSheetTable from '../../components/Table/BalanceSheetTable';
 import TableOperation from '../../components/Table/TableOperation';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
-export default class BasicForms extends PureComponent {
+export default class BalanceSheetPage extends PureComponent {
   handleTabChange = (key) => {
     const { dispatch } = this.props;
     switch (key) {

@@ -8,7 +8,7 @@ import CashFlowTable from '../../components/Table/CashFlowTable';
 import TableOperation from '../../components/Table/TableOperation';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
-export default class BasicForms extends PureComponent {
+export default class CashFlowPage extends PureComponent {
   handleTabChange = (key) => {
     const { dispatch } = this.props;
     switch (key) {

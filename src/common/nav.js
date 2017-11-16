@@ -40,6 +40,8 @@ import CashFlowPage from '../routes/Finance/CashFlowPage';
 
 import SupplierStock from '../routes/Stock/SupplierStock';
 
+import Financing from '../routes/Chains/Financing/Financing';
+
 const data = [{
   component: BasicLayout,
   layout: 'BasicLayout',
@@ -109,7 +111,8 @@ const data = [{
     }, {
       name: '融资服务',
       icon: 'bank',
-      path: 'b',
+      path: 'financing',
+      component: Financing,
     }, {
       name: '绩效评价',
       icon: 'like-o',
