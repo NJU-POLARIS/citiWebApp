@@ -8,6 +8,7 @@ import styles from './BalanceSheetTable.css';
 
 class BalanceSheetTable extends Component {
   render() {
+    const { data } =this.props;
     const columns1 = [{
       title: '资产',
       dataIndex: 'property1',
@@ -50,5 +51,4 @@ class BalanceSheetTable extends Component {
     );
   }
 }
-BalanceSheetTable.propTypes = {};
-export default connect()(BalanceSheetTable);
+export default BalanceSheetTable;

@@ -4,7 +4,7 @@
 import * as tableService from '../services/table';
 
 export default {
-  namespace: 'table',
+  namespace: 'tables',
   state: {
     balancesheetData: null,
     profitData: null,
@@ -25,7 +25,7 @@ export default {
         type: 'fillBalanceSheet',
         payload: null,
       });
-      const { data } = yield call(tableService.fetchBalanceSheet(code));
+      const { data } = yield call(tableService.fetchBalanceSheet, code);
       yield put({
         type: 'fillBalanceSheet',
         payload: data,

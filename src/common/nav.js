@@ -45,6 +45,7 @@ import Appraisal from '../routes/Chains/Appraisal/Appraisal';
 
 import InitialSetting from '../routes/Setting/InitialSetting';
 import DataManagement from '../routes/Setting/DataManagement';
+import Institutions from '../routes/FinancialInstitutions/Institutions';
 
 const data = [{
   component: BasicLayout,
@@ -115,6 +116,10 @@ const data = [{
       icon: 'like-o',
       path: 'appraisal',
       component: Appraisal,
+    }, {
+      name: '金融机构',
+      path: 'fi',
+      component: Institutions,
     }],
   }, {
     name: '设置',
