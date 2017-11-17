@@ -43,6 +43,9 @@ import SupplierStock from '../routes/Stock/SupplierStock';
 import Financing from '../routes/Chains/Financing/Financing';
 import Appraisal from '../routes/Chains/Appraisal/Appraisal';
 
+import InitialSetting from '../routes/Setting/InitialSetting';
+import DataManagement from '../routes/Setting/DataManagement';
+
 const data = [{
   component: BasicLayout,
   layout: 'BasicLayout',
@@ -118,10 +121,14 @@ const data = [{
     path: 'setting',
     icon: 'setting',
     children: [{
-      name: '期初设置',
-      path: '///',
-      // component: BasicForm,
-    }],
+      name: '个人设置',
+      path: 'DataManagement',
+      component: DataManagement,
+    },{
+		name:'期初设置',
+		path:'InitialSetting',
+		component: InitialSetting,
+	}],
   }, {
     name: '表单页',
     path: 'form',
