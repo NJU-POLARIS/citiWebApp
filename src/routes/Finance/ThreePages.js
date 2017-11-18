@@ -13,7 +13,7 @@ import ProfitTable from '../../components/Table/ProfitTable';
 
 const TabPane = Tabs.TabPane;
 function ThreePages ({ balanceSheetData, profitData, cashflowData }) {
-  // console.log(balanceSheetData);
+  console.log(balanceSheetData);
   return (
     <PageHeaderLayout
       title="报表"

@@ -131,7 +131,7 @@ class InsTable extends PureComponent {
             <Description term="行业"></Description>
             <Description term="单位所在地"></Description>
             <Description term="统一社会信用代码"></Description>
-            <Description term="联系电话"></Description>
+            <Description term="联系电话"></Description>·
           </DescriptionList>
           <Divider style={{ marginBottom: 32 }}/>
           <DescriptionList size="large" title="融资信息" style={{ marginBottom: 32 }}>
