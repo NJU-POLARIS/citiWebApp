@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
+import { Table, Button, Input, message, Divider } from 'antd';
 import styles from './style.less';
 
 export default class NewVoucher extends PureComponent {
@@ -112,9 +112,9 @@ export default class NewVoucher extends PureComponent {
   }
   render() {
     const columns = [{
-      title: '成员姓名',
-      dataIndex: 'name',
-      key: 'name',
+      title: '摘要',
+      dataIndex: 'abstract',
+      key: 'abstract',
       width: '20%',
       render: (text, record) => {
         if (record.editable) {
@@ -132,9 +132,9 @@ export default class NewVoucher extends PureComponent {
         return text;
       },
     }, {
-      title: '工号',
-      dataIndex: 'workId',
-      key: 'workId',
+      title: '科目',
+      dataIndex: 'subject',
+      key: 'subject',
       width: '20%',
       render: (text, record) => {
         if (record.editable) {
@@ -151,10 +151,29 @@ export default class NewVoucher extends PureComponent {
         return text;
       },
     }, {
-      title: '所属部门',
-      dataIndex: 'department',
-      key: 'department',
-      width: '40%',
+      title: '借方金额',
+      dataIndex: 'debit',
+      key: 'debit',
+      width: '20%',
+      render: (text, record) => {
+        if (record.editable) {
+          return (
+            <Input
+              value={text}
+              onChange={e => this.handleFieldChange(e, 'department', record.key)}
+              onBlur={e => this.saveRow(e, record.key)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
+              placeholder="所属部门"
+            />
+          );
+        }
+        return text;
+      },
+    }, {
+      title: '贷方金额',
+      dataIndex: 'credit',
+      key: 'credit',
+      width: '20%',
       render: (text, record) => {
         if (record.editable) {
           return (
@@ -179,9 +198,7 @@ export default class NewVoucher extends PureComponent {
               <span>
                 <a>保存</a>
                 <Divider type="vertical" />
-                <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
-                  <a>删除</a>
-                </Popconfirm>
+                <a onClick={e => this.remove(e, record.key)}>删除</a>
               </span>
             );
           }
@@ -197,9 +214,7 @@ export default class NewVoucher extends PureComponent {
           <span>
             <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
             <Divider type="vertical" />
-            <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
-              <a>删除</a>
-            </Popconfirm>
+            <a onClick={e => this.remove(e, record.key)}>删除</a>
           </span>
         );
       },
@@ -221,7 +236,7 @@ export default class NewVoucher extends PureComponent {
           onClick={this.newMember}
           icon="plus"
         >
-          新增成员
+          新增记录
         </Button>
       </div>
     );
