@@ -1,13 +1,12 @@
 /**
  * Created by YZ on 2017/11/15.
  */
-import stringify from 'qs';
+import { stringify } from 'qs';
 import request from '../utils/request';
 
 export function fetchBalanceSheet(param) {
   const { companyID, phase } = param;
-  console.log(param);
-  console.log(stringify(phase));
+  console.log(`/api/sheets/balance/${JSON.stringify(companyID)}?${stringify(phase)}`);
   return request(`/api/sheets/balance/${JSON.stringify(companyID)}?${stringify(phase)}`);
 }
 

@@ -25,8 +25,8 @@ export default {
         type: 'fillBalanceSheet',
         payload: null,
       });
-      const { data } = yield call(tableService.fetchBalanceSheet, payload);
-      console.log("models"+data);
+      const data = yield call(tableService.fetchBalanceSheet, payload);
+      console.log(payload);
       yield put({
         type: 'fillBalanceSheet',
         payload: data,
@@ -34,13 +34,13 @@ export default {
     },
   },
   subscriptions: {
-    setup({dispatch, history}) {
-      return history.listen(({pathname, query}) => {
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
         dispatch({
           type: 'fetchBalanceSheet',
           payload: {
             companyID: 1,
-            phase: {phase: "2017-10"},
+            phase: { phase: '2017-10' },
           },
         });
         // console.log(pathname.split('/'));

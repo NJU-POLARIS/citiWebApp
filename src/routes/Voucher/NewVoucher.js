@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import styles from './style.less';
 
-export default class TableForm extends PureComponent {
+export default class NewVoucher extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -14,7 +14,7 @@ export default class TableForm extends PureComponent {
     if ('value' in nextProps) {
       this.setState({
         data: nextProps.value,
-      });ioi
+      });
     }
   }
   getRowByKey(key) {
@@ -81,7 +81,7 @@ export default class TableForm extends PureComponent {
     // save field when blur input
     setTimeout(() => {
       if (document.activeElement.tagName === 'INPUT' &&
-          document.activeElement !== e.target) {
+        document.activeElement !== e.target) {
         return;
       }
       if (this.clickedCancel) {

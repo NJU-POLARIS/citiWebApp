@@ -4,7 +4,7 @@ import Login from '../routes/User/Login';
 import Register from '../routes/User/Register';
 import RegisterResult from '../routes/User/RegisterResult';
 
-import Voucher from '../routes/Finance/Voucher';
+import Voucher from '../routes/Voucher/Voucher';
 import Tables from '../routes/Finance/ThreePages';
 
 import SupplierStock from '../routes/Stock/SupplierStock';
