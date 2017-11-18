@@ -43,7 +43,7 @@ import SupplierStock from '../routes/Stock/SupplierStock';
 import Financing from '../routes/Chains/Financing/Financing';
 import Appraisal from '../routes/Chains/Appraisal/Appraisal';
 
-import InitialSetting from '../routes/Setting/InitialSetting';
+import { InitialSetting } from '../routes/Setting/InitialSetting';
 import DataManagement from '../routes/Setting/DataManagement';
 
 const data = [{
