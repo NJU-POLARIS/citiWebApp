@@ -47,6 +47,8 @@ import InitialSetting from '../routes/Setting/InitialSetting';
 import DataManagement from '../routes/Setting/DataManagement';
 import Institutions from '../routes/FinancialInstitutions/Institutions';
 
+import Demo from '../routes/Demo';
+
 const data = [{
   component: BasicLayout,
   layout: 'BasicLayout',
@@ -60,6 +62,10 @@ const data = [{
       name: '财务预警',
       path: 'warning',
       // component: Monitor,
+    }, {
+      name: 'DEMO',
+      path: 'demo',
+      component: Demo,
     }],
   }, {
     name: '财务管理',
