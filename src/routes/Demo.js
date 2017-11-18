@@ -9,6 +9,10 @@ export default class Demo extends PureComponent {
   componentDidMount() {
     this.props.dispatch({
       type: 'demo/fetch',
+      payload: {
+        key: '记-1',
+        companyId: { companyId: 1 },
+      },
     });
   }
   sub = [{ subjectId: '1001', subjectName: '库存现金', direction: '借', type: '资产' }, { subjectId: '1002', subjectName: '银行存款', direction: '借', type: '资产' }];
