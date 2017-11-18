@@ -9,7 +9,7 @@ import { getNotices } from './mock/notices';
 import { format, delay } from 'roadhog-api-doc';
 
 // 是否禁用代理
-const noProxy = process.env.NO_PROXY === 'true';
+const noProxy = process.env.NO_PROXY === 'false';
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
@@ -29,6 +29,7 @@ const proxy = {
       notifyCount: 12,
     },
   },
+  'GET /api/subjects': [{ subjectId: '1001', subjectName: '库存现金', direction: '借', type: '资产' }, { subjectId: '1002', subjectName: '银行存款', direction: '借', type: '资产' }],
   // GET POST 可省略
   'GET /api/users': [{
     key: '1',
