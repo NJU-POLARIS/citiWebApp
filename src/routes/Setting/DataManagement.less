@@ -26,10 +26,38 @@
       flex: 1;
     }
   }
+  .mobileGroup {
+    :global {
+      .ant-form-item {
+        margin-bottom: 0;
+        vertical-align: top;
+
+        &:first-child .ant-select-selection {
+          border-right-width: 0;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &:last-child .ant-input {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+  }
+
   .submitButtons {
     white-space: nowrap;
     margin-bottom: 24px;
   }
+}
+.submit {
+  width: 20%;
+}
+
+.login {
+  float: right;
+  line-height: @btn-height-lg;
 }
 
 @media screen and (max-width: @screen-lg) {
