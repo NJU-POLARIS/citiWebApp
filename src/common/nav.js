@@ -73,11 +73,11 @@ export const getNavData = app => [
             ],
           },
           {
-      name: '报表',
-      icon: 'file-text',
-      path: 'tables',
-      component: Tables,
-    },
+            name: '报表',
+            icon: 'file-text',
+            path: 'tables',
+            component: Tables,
+          },
           {
             name: '财务预警',
             icon: 'warning',
@@ -86,27 +86,36 @@ export const getNavData = app => [
           },
         ],
       },
-{
-      name: '库存管理',
-      icon: 'shopping-cart',
-      path: 'stock',
-      component: SupplierStock,
-    }, {
-      name: '融资服务',
-      icon: 'bank',
-      path: 'financing',
-      component: Financing,
-    }, {
-      name: '绩效评价',
-      icon: 'like-o',
-      path: 'appraisal',
-      component: Appraisal,
-    }, {
-      name: '金融机构',
-      path: 'fi',
-      component: Institutions,
-    }],
-  },
+      {
+        name: '供应链管理',
+        icon: 'api',
+        path: 'supply',
+        children: [{
+          name: '现金管理',
+          icon: 'pay-circle-o',
+          path: 'cash',
+          // component: Voucher,
+        }, {
+          name: '库存管理',
+          icon: 'shopping-cart',
+          path: 'stock',
+          component: SupplierStock,
+        }, {
+          name: '融资服务',
+          icon: 'bank',
+          path: 'financing',
+          component: Financing,
+        }, {
+          name: '绩效评价',
+          icon: 'like-o',
+          path: 'appraisal',
+          component: Appraisal,
+        }, {
+          name: '金融机构',
+          path: 'fi',
+          component: Institutions,
+        }],
+      },
       {
         name: '表单页',
         path: 'form',
