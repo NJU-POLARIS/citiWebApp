@@ -2,16 +2,25 @@
  * Created by YZ on 2017/11/15.
  */
 import React, { PureComponent } from 'react';
-// import { connect } from 'dva';
+import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { Tabs, Table, DatePicker } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import StackBarChart from '../../components/Charts/StackBar/StackBarChart';
 import styles from './SupplierStock.less';
 
 const TabPane = Tabs.TabPane;
 
-export default class SupplierStock extends PureComponent {
-  render() {
+function SupplierStock({ Chartdata }) {
+  Chartdata=[{
+    inventory: 100,
+    safe_inventory: 290,
+    variety: "圣诞树",
+  }, {
+    inventory: 10,
+    safe_inventory: 90,
+    variety: "hm树",
+  }];
     const columns = [{
       title: '原材料种类',
       dataIndex: 'raw_material',
@@ -45,9 +54,18 @@ export default class SupplierStock extends PureComponent {
             <br />
             <Table columns={columns} className={styles.t1} />
           </TabPane>
-          <TabPane tab="原材料安全库存量" key="2"></TabPane>
+          <TabPane tab="原材料安全库存量" key="2">
+            <br/>
+            <StackBarChart data={ Chartdata }/>
+          </TabPane>
         </Tabs>
       </PageHeaderLayout>
     );
-  }
 }
+SupplierStock.propTypes={};
+function mapStateToProps(state) {
+  return {
+    Chartdata: state.stock.materialSafeRelation,
+  };
+}
+export default connect(mapStateToProps)(SupplierStock);
