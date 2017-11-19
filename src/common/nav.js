@@ -46,7 +46,7 @@ export const getNavData = app => [
             name: '凭证',
             icon: 'credit-card',
             path: 'voucher',
-            component: dynamicWrapper(app, [], import('../routes/Finance/Voucher/Voucher')),
+            component: dynamicWrapper(app, [], import('../routes/Finance/Voucher')),
           },
           {
             name: '账簿',
