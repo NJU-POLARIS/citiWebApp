@@ -85,7 +85,7 @@ export const getNavData = app => [
             icon: 'file-text',
             path: 'tables',
             isHide: false,
-            component: dynamicWrapper(app, ['tables'], import('../routes/Finance/ThreePages')),
+            component: dynamicWrapper(app, ['tables'], import('../routes/Finance/Sheet/ThreePages')),
           },
           {
             name: '财务预警',
@@ -112,7 +112,7 @@ export const getNavData = app => [
           icon: 'shopping-cart',
           path: 'stock',
           isHide: false,
-          component: dynamicWrapper(app, ['stock'], import('../routes/Stock/SupplierStock')),
+          component: dynamicWrapper(app, ['stock'], import('../routes/Chains/Stock/SupplierStock')),
         }, {
           name: '融资服务',
           icon: 'bank',
