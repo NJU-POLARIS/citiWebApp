@@ -76,7 +76,7 @@ export const getNavData = app => [
             name: '报表',
             icon: 'file-text',
             path: 'tables',
-            component: Tables,
+            component: dynamicWrapper(app, [], import('../routes/Finance/ThreePages')),
           },
           {
             name: '财务预警',
@@ -99,21 +99,21 @@ export const getNavData = app => [
           name: '库存管理',
           icon: 'shopping-cart',
           path: 'stock',
-          component: SupplierStock,
+          component: dynamicWrapper(app, [], import('../routes/Stock/SupplierStock')),
         }, {
           name: '融资服务',
           icon: 'bank',
           path: 'financing',
-          component: Financing,
+          component: dynamicWrapper(app, [], import('../routes/Chains/Financing/Financing')),
         }, {
           name: '绩效评价',
           icon: 'like-o',
           path: 'appraisal',
-          component: Appraisal,
+          component: dynamicWrapper(app, [], import('../routes/Chains/Appraisal/Appraisal')),
         }, {
           name: '金融机构',
           path: 'fi',
-          component: Institutions,
+          component: dynamicWrapper(app, [], import('../routes/FinancialInstitutions/Institutions')),
         }],
       },
       {
