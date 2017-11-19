@@ -45,6 +45,8 @@ import Appraisal from '../routes/Chains/Appraisal/Appraisal';
 
 import { InitialSetting } from '../routes/Setting/InitialSetting';
 import DataManagement from '../routes/Setting/DataManagement';
+import { SafetyInventory } from '../routes/Setting/SafeInventory';
+import { RootSetting } from '../routes/Setting/RootSetting';
 import Institutions from '../routes/FinancialInstitutions/Institutions';
 
 import Demo from '../routes/Demo';
@@ -137,6 +139,14 @@ const data = [{
       name: '期初设置',
       path: 'InitialSetting',
       component: InitialSetting,
+    }, {
+      name: '安全库存量设置',
+      path: 'SafeInventory',
+      component: SafetyInventory,
+    }, {
+      name: '权限设置',
+      path: 'rootsetting',
+      component: RootSetting,
     }],
   }],
 }, {
