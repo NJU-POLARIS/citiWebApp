@@ -9,7 +9,7 @@ import { getNotices } from './mock/notices';
 import { format, delay } from 'roadhog-api-doc';
 
 // 是否禁用代理
-const noProxy = process.env.NO_PROXY === 'false';
+const noProxy = process.env.NO_PROXY === 'true';
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
@@ -29,7 +29,6 @@ const proxy = {
       notifyCount: 12,
     },
   },
-  'GET /api/subjects': [{ subjectId: '1001', subjectName: '库存现金', direction: '借', type: '资产' }, { subjectId: '1002', subjectName: '银行存款', direction: '借', type: '资产' }],
   // GET POST 可省略
   'GET /api/users': [{
     key: '1',
@@ -60,7 +59,7 @@ const proxy = {
     $body: postRule,
   },
   'POST /api/forms': (req, res) => {
-    res.send('Ok');
+    res.send({ message: 'Ok' });
   },
   'GET /api/tags': mockjs.mock({
     'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }]
@@ -83,10 +82,6 @@ const proxy = {
 };
 
 export default noProxy ? {} : delay(proxy, 1000);
-
 // export default {
-//   // 'GET /api/users': { users: [1, 2] },
-//
-//   'GET /api/(.*)': 'http://localhost:8080/api',
-//
-// };
+//   '/api/*': 'http://localhost:8080/',
+// }

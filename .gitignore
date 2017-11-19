@@ -2,7 +2,9 @@
 .idea/
 
 # dependencies
-node_modules/
+/node_modules
+# roadhog-api-doc ignore
+/src/utils/request-temp.js
 
 # production
 /dist
@@ -12,3 +14,4 @@ node_modules/
 npm-debug.log*
 
 /coverage
+

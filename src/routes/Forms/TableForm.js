@@ -14,7 +14,7 @@ export default class TableForm extends PureComponent {
     if ('value' in nextProps) {
       this.setState({
         data: nextProps.value,
-      });ioi
+      });
     }
   }
   getRowByKey(key) {

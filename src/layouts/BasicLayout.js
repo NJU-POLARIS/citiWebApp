@@ -8,12 +8,12 @@ import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import styles from './BasicLayout.less';
+import Debounce from 'lodash-decorators/debounce';
 import HeaderSearch from '../components/HeaderSearch';
 import NoticeIcon from '../components/NoticeIcon';
 import GlobalFooter from '../components/GlobalFooter';
-import { getNavData } from '../common/nav';
-import { getRouteData } from '../utils/utils';
+import NotFound from '../routes/Exception/404';
+import styles from './BasicLayout.less';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -47,15 +47,15 @@ class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
     // 把一级 Layout 的 children 作为菜单项
-    this.menus = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    this.menus = props.navData.reduce((arr, current) => arr.concat(current.children), []);
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
   }
   getChildContext() {
-    const { location } = this.props;
+    const { location, navData, getRouteData } = this.props;
     const routeData = getRouteData('BasicLayout');
-    const firstMenuData = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    const firstMenuData = navData.reduce((arr, current) => arr.concat(current.children), []);
     const menuData = this.getMenuData(firstMenuData, '');
     const breadcrumbNameMap = {};
 
@@ -70,7 +70,7 @@ class BasicLayout extends React.PureComponent {
     });
   }
   componentWillUnmount() {
-    clearTimeout(this.resizeTimeout);
+    this.triggerResizeEvent.cancel();
   }
   onCollapse = (collapsed) => {
     this.props.dispatch({
@@ -151,7 +151,11 @@ class BasicLayout extends React.PureComponent {
                 {icon}<span>{item.name}</span>
               </a>
             ) : (
-              <Link to={itemPath} target={item.target}>
+              <Link
+                to={itemPath}
+                target={item.target}
+                replace={itemPath === this.props.location.pathname}
+              >
                 {icon}<span>{item.name}</span>
               </Link>
             )
@@ -161,7 +165,7 @@ class BasicLayout extends React.PureComponent {
     });
   }
   getPageTitle() {
-    const { location } = this.props;
+    const { location, getRouteData } = this.props;
     const { pathname } = location;
     let title = 'Ant Design Pro';
     getRouteData('BasicLayout').forEach((item) => {
@@ -201,7 +205,7 @@ class BasicLayout extends React.PureComponent {
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
     const isMainMenu = this.menus.some(
-      item => (item.key === lastOpenKey || item.path === lastOpenKey)
+      item => lastOpenKey && (item.key === lastOpenKey || item.path === lastOpenKey)
     );
     this.setState({
       openKeys: isMainMenu ? [lastOpenKey] : [...openKeys],
@@ -213,11 +217,13 @@ class BasicLayout extends React.PureComponent {
       type: 'global/changeLayoutCollapsed',
       payload: !collapsed,
     });
-    this.resizeTimeout = setTimeout(() => {
-      const event = document.createEvent('HTMLEvents');
-      event.initEvent('resize', true, false);
-      window.dispatchEvent(event);
-    }, 600);
+    this.triggerResizeEvent();
+  }
+  @Debounce(600)
+  triggerResizeEvent() { // eslint-disable-line
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent('resize', true, false);
+    window.dispatchEvent(event);
   }
   handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
@@ -234,7 +240,7 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
-    const { currentUser, collapsed, fetchingNotices } = this.props;
+    const { currentUser, collapsed, fetchingNotices, getRouteData } = this.props;
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
@@ -352,7 +358,8 @@ class BasicLayout extends React.PureComponent {
                   )
                 )
               }
-              <Redirect to="/dashboard/analysis" />
+              <Redirect exact from="/" to="/dashboard/analysis" />
+              <Route component={NotFound} />
             </Switch>
             <GlobalFooter
               links={[{
@@ -370,7 +377,7 @@ class BasicLayout extends React.PureComponent {
               }]}
               copyright={
                 <div>
-                  Copyright <Icon type="copyright" /> 2017 Polaris
+                  Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品
                 </div>
               }
             />

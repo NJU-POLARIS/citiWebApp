@@ -1,6 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "plugins": ["compat"],
   "env": {
     "browser": true,
     "node": true,
@@ -44,6 +45,7 @@
     "function-paren-newline": [0],
     "no-restricted-globals": [0],
     "require-yield": [1],
+    "compat/compat": "error",
     "linebreak-style": [0],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
   },
@@ -51,5 +53,8 @@
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
+  },
+  "settings": {
+    "polyfills": ["fetch"]
   }
 }

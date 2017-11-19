@@ -84,10 +84,3 @@ export async function fakeRegister(params) {
 export async function queryNotices() {
   return request('/api/notices');
 }
-
-export async function queryVoucher(params) {
-  return request('/api/voucher/search', {
-    method: 'GET',
-    body: params,
-  });
-}
