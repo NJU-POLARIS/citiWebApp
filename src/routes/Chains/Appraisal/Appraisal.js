@@ -8,6 +8,7 @@ import { Tabs, Radio, Divider, Select, List, Progress, Row, Col } from 'antd';
 import {MiniArea, ChartCard } from '../../../components/Charts';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import DescriptionList from '../../../components/DescriptionList';
+import LineChart from '../../../components/Charts/Line/LineChart';
 import styles from './Appraisal.less';
 
 const TabPane = Tabs.TabPane;
@@ -19,43 +20,43 @@ const { Description } = DescriptionList;
 export default class Appraisal extends PureComponent {
   render() {
     const list=[{
-      title: "总资产报酬率",
+      title: "盈利--总资产报酬率",
       num: 98,
     }, {
-      title: "销售利润率",
+      title: "盈利--销售利润率",
       num: 58,
     }, {
-      title: "总资产周转率",
+      title: "运营--总资产周转率",
       num: 78,
     }, {
-      title: "存货周转率",
+      title: "运营--存货周转率",
       num: 92,
     }, {
-      title: "销售增长率",
+      title: "发展--销售增长率",
       num: 87,
     }, {
-      title: "利润增长率",
+      title: "发展--利润增长率",
       num: 20,
     }, {
-      title: "资产负债率",
+      title: "偿债--资产负债率",
       num: -13,
     }, {
-      title: "速动比率",
+      title: "偿债--速动比率",
       num: 95,
     }];
 
-    const list2=[{
-      title: "准时交货率",
-      num: 98,
+    const lineData=[{
+      date: "2017-01-01",
+      value: 0.8,
     }, {
-      title: "成本利润率",
-      num: 58,
+      date: "2017-01-05",
+      value: 0.3,
     }, {
-      title: "退货率",
-      num: 78,
+      date: "2017-01-09",
+      value: 0.6,
     }, {
-      title: "产需率",
-      num: 92,
+      date: "2017-01-13",
+      value: 0.7,
     }];
     const topCol = {
       xs: 24,
@@ -63,6 +64,14 @@ export default class Appraisal extends PureComponent {
       md: 12,
       lg: 12,
       xl: 12,
+      style: { marginBottom: 24 },
+    };
+    const topSmallCol = {
+      xs: 24,
+      sm: 12,
+      md: 12,
+      lg: 12,
+      xl: 6,
       style: { marginBottom: 24 },
     };
 
@@ -123,28 +132,31 @@ export default class Appraisal extends PureComponent {
                   action={<Select style={{ width: 150 }} placeholder="请选择">
                     <Option value="a">a</Option>
                   </Select>}>
-                  <MiniArea/>
+                    <LineChart chartData={lineData}/>
                 </ChartCard>
               </Col>
               <Col {...topCol}>
                 <ChartCard
                   bordered={false}
                   title="成本利润率">
-
+                  <LineChart chartData={lineData}/>
                 </ChartCard>
               </Col>
               <Col {...topCol}>
                 <ChartCard
                   bordered={false}
-                  title="退货率">
-
+                  title="退货率"
+                  action={<Select style={{ width: 150 }} placeholder="请选择">
+                    <Option value="a">a</Option>
+                  </Select>}>
+                  <LineChart chartData={lineData}/>
                 </ChartCard>
               </Col>
               <Col {...topCol}>
                 <ChartCard
                   bordered={false}
                   title="产需率">
-
+                  <LineChart chartData={lineData}/>
                 </ChartCard>
               </Col>
             </Row>
@@ -154,27 +166,81 @@ export default class Appraisal extends PureComponent {
             <Select className={styles.select} style={{ width: 200 }} placeholder="请选择一条供应链">
               <Option value="a&b&c">a&b&c</Option>
             </Select>
-            <DescriptionList size="large" title="财务方面" style={{ marginBottom: 32 }}>
-              <Description term="供应链资产收益率"></Description>
-              <Description term="现金周转率"></Description>
-              <Description term="资产负债率"></Description>
-            </DescriptionList>
-            <Divider style={{ marginBottom: 32 }} />
-            <DescriptionList size="large" title="客户方面" style={{ marginBottom: 32 }}>
-              <Description term="退货率"></Description>
-              <Description term="准时交货率"></Description>
-              <Description term="产品柔性"></Description>
-            </DescriptionList>
-            <Divider style={{ marginBottom: 32 }} />
-            <DescriptionList size="large" title="业务流程" style={{ marginBottom: 32 }}>
-              <Description term="存货周转率"></Description>
-              <Description term="完美交货完成水平"></Description>
-            </DescriptionList>
-            <Divider style={{ marginBottom: 32 }} />
-            <DescriptionList size="large" title="未来发展" style={{ marginBottom: 32 }}>
-              <Description term="新产品销售比率"></Description>
-              <Description term="利润增长率"></Description>
-            </DescriptionList>
+            <br />
+            <Row gutter={48}>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="财务方面--供应链资产收益率"
+                  >
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="财务方面--现金周转率">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="财务方面--资产负债率"
+                  >
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="客户方面--退货率">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="客户方面--准时交货率">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="客户方面--产品柔性">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="业务流程--存货周转率">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="业务流程--完美交货完成水平">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="未来发展--新产品销售比率">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+              <Col {...topSmallCol}>
+                <ChartCard
+                  bordered={false}
+                  title="未来发展--利润增长率">
+                  <LineChart chartData={lineData}/>
+                </ChartCard>
+              </Col>
+            </Row>
           </TabPane>
 
         </Tabs>

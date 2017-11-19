@@ -5,8 +5,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { Tabs, Table, DatePicker } from 'antd';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-import StackBarChart from '../../components/Charts/StackBar/StackBarChart';
+import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import StackBarChart from '../../../components/Charts/StackBar/StackBarChart';
 import styles from './SupplierStock.less';
 
 const TabPane = Tabs.TabPane;

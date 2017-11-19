@@ -4,9 +4,9 @@
 import React, { PureComponent } from 'react';
 // import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import CashFlowTable from '../../components/Table/CashFlowTable';
-import TableOperation from '../../components/Table/TableOperation';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import CashFlowTable from '../../../components/Table/CashFlowTable';
+import TableOperation from '../../../components/Table/TableOperation';
+import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
 export default class CashFlowPage extends PureComponent {
   handleTabChange = (key) => {

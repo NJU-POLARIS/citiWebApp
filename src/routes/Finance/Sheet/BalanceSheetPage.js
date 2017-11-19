@@ -4,9 +4,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import BalanceSheetTable from '../../components/Table/BalanceSheetTable';
-import TableOperation from '../../components/Table/TableOperation';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import BalanceSheetTable from '../../../components/Table/BalanceSheetTable';
+import TableOperation from '../../../components/Table/TableOperation';
+import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
 export default class BalanceSheetPage extends PureComponent {
   handleTabChange = (key) => {
