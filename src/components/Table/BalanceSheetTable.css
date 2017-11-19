@@ -1,0 +1,22 @@
+/**
+ * Created by YZ on 2017/11/12.
+ */
+.table1 {
+  /* margin-top: 5px; */
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.table1 tr:nth-child(1),.table1 tr:nth-child(17),.table1 tr:nth-child(32) {
+  font-weight: bolder;
+  color: #0B1013;
+}
+.table2 tr:nth-child(1),.table2 tr:nth-child(13),.table2 tr:nth-child(19),.table2 tr:nth-child(20),.table2 tr:nth-child(26) {
+  font-weight: bolder;
+  color: #0B1013;
+}
+.table2 {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
