@@ -15,7 +15,7 @@ const { Description } =DescriptionList;
 class InsTable extends PureComponent {
   state = {
     selectedRowKeys: [],
-    modalVisible: true,
+    modalVisible: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +31,6 @@ class InsTable extends PureComponent {
     if (this.props.onSelectRow) {
       this.props.onSelectRow(selectedRows);
     }
-
     this.setState({ selectedRowKeys });
   }
 
@@ -49,10 +48,17 @@ class InsTable extends PureComponent {
     this.handleRowSelectChange([], []);
   }
 
+  renderCell(text) {
+    return (
+      <a onClick={this.handleModalVisible}>
+        {text}
+      </a>
+    );
+  }
 
   render() {
-
     const { selectedRowKeys, modalVisible } = this.state;
+
     const { data, pagination, loading } = this.props;
 
     const status = ['应收账款融资', '动产质押融资', '保兑仓融资'];
@@ -61,25 +67,12 @@ class InsTable extends PureComponent {
       {
         title: '企业名称',
         dataIndex: 'no',
-        info(){
-          Modal.info({
-            title: '企业信息',
-            content: (
-              <div>
-                <p>cnm</p>
-              </div>
-            ),
-          });
-        },
-        render (text, record, index) {
-          return (
-            <a>
-              { text }
-            </a>
-          );
+        render (text){
+          return(
+            <a>{text}</a>
+          )
         }
-      },
-      {
+      }, {
         title: '融资方式',
         dataIndex: 'status',
         filters: [
@@ -131,7 +124,7 @@ class InsTable extends PureComponent {
             <Description term="行业"></Description>
             <Description term="单位所在地"></Description>
             <Description term="统一社会信用代码"></Description>
-            <Description term="联系电话"></Description>
+            <Description term="联系电话"></Description>·
           </DescriptionList>
           <Divider style={{ marginBottom: 32 }}/>
           <DescriptionList size="large" title="融资信息" style={{ marginBottom: 32 }}>

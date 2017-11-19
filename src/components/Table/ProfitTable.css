@@ -1,3 +1,7 @@
 /**
  * Created by YZ on 2017/11/13.
  */
+.table1 tr:nth-child(1),.table1 tr:nth-child(21),.table1 tr:nth-child(30),.table1 tr:nth-child(32) {
+  font-weight: bolder;
+  color: #0B1013;
+}

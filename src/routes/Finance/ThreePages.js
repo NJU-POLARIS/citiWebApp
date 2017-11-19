@@ -12,8 +12,8 @@ import CashFlowTable from '../../components/Table/CashFlowTable';
 import ProfitTable from '../../components/Table/ProfitTable';
 
 const TabPane = Tabs.TabPane;
-function ThreePages ({ balanceSheetData, profitData, cashflowData }) {
-  // console.log(balanceSheetData);
+function ThreePages ({ balancesheetData, profitData, cashflowData }) {
+  console.log(balancesheetData);
   return (
     <PageHeaderLayout
       title="报表"
@@ -21,15 +21,15 @@ function ThreePages ({ balanceSheetData, profitData, cashflowData }) {
       <Tabs defaultActiveKey="1">
         <TabPane tab="资产负债表" key="1">
           <TableOperation/>
-          <BalanceSheetTable data={ balanceSheetData } />
+          <BalanceSheetTable data={ balancesheetData } />
         </TabPane>
         <TabPane tab="利润表" key="2">
           <TableOperation/>
-          <ProfitTable/>
+          <ProfitTable data={ profitData }/>
         </TabPane>
         <TabPane tab="现金流量表" key="3">
           <TableOperation/>
-          <CashFlowTable/>
+          <CashFlowTable data={ cashflowData }/>
         </TabPane>
       </Tabs>
     </PageHeaderLayout>
@@ -41,6 +41,6 @@ function mapStateToProps(state) {
     balancesheetData: state.tables.balancesheetData,
     profitData: state.tables.profitData,
     cashflowData: state.tables.cashflowData,
-  }
+  };
 }
 export default connect(mapStateToProps)(ThreePages);

@@ -8,8 +8,8 @@ export default {
   },
 
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(querySubjects);
+    *fetch({ payload }, { call, put }) {
+      const response = yield call(querySubjects, payload);
       yield put({
         type: 'getSubjects',
         payload: response,

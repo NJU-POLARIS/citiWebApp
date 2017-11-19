@@ -8,6 +8,25 @@ import styles from './CashFlowTable.css';
 
 class CashFlowTable extends Component {
   render() {
+    const { data } = this.props;
+    const cashflowData= [];
+    if(data){
+      cashflowData.push({ project: "一、经营活动产生的现金流量", row: null, year_price: null, period_price: null });
+      for(let i=0;i<data.length;i++){
+        if(i===6){
+          cashflowData.push({ project: "二、投资活动产生的现金流量", row: null, year_price: null, period_price: null });
+        }
+        if(i===12){
+          cashflowData.push({ project: "三、筹资活动产生的现金流量", row: null, year_price: null, period_price: null });
+        }
+        cashflowData.push({
+          project: data[i].project,
+          row: data[i].line,
+          year_price: data[i].year_amount,
+          period_price: data[i].period_amount,
+        });
+      }
+    }
     const columns = [{
       title: '项目',
       dataIndex: 'project',
@@ -27,10 +46,9 @@ class CashFlowTable extends Component {
     }];
     return (
       <div>
-        <Table className={styles.table} dataSource={0} columns={columns} bordered="true" />
+        <Table className={styles.table1} dataSource={cashflowData} columns={columns} bordered="true" pagination={false} />
       </div>
     );
   }
 }
-CashFlowTable.propTypes = {};
-export default connect()(CashFlowTable);
+export default CashFlowTable;

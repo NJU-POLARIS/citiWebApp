@@ -1,42 +1,11 @@
 import BasicLayout from '../layouts/BasicLayout';
 import UserLayout from '../layouts/UserLayout';
-import BlankLayout from '../layouts/BlankLayout';
-
-import Analysis from '../routes/Dashboard/Analysis';
-import Monitor from '../routes/Dashboard/Monitor';
-import Workplace from '../routes/Dashboard/Workplace';
-
-import TableList from '../routes/List/TableList';
-import CoverCardList from '../routes/List/CoverCardList';
-import CardList from '../routes/List/CardList';
-import FilterCardList from '../routes/List/FilterCardList';
-import SearchList from '../routes/List/SearchList';
-import BasicList from '../routes/List/BasicList';
-
-import BasicProfile from '../routes/Profile/BasicProfile';
-import AdvancedProfile from '../routes/Profile/AdvancedProfile';
-
-import BasicForm from '../routes/Forms/BasicForm';
-import AdvancedForm from '../routes/Forms/AdvancedForm';
-import StepForm from '../routes/Forms/StepForm';
-import Step2 from '../routes/Forms/Step2';
-import Step3 from '../routes/Forms/StepForm/Step3';
-
-import Exception403 from '../routes/Exception/403';
-import Exception404 from '../routes/Exception/404';
-import Exception500 from '../routes/Exception/500';
-
-import Success from '../routes/Result/Success';
-import Error from '../routes/Result/Error';
-
 import Login from '../routes/User/Login';
 import Register from '../routes/User/Register';
 import RegisterResult from '../routes/User/RegisterResult';
 
-import Voucher from '../routes/Finance/Voucher';
+import Voucher from '../routes/Voucher/Voucher';
 import Tables from '../routes/Finance/ThreePages';
-import ProfitPage from '../routes/Finance/ProfitPage';
-import CashFlowPage from '../routes/Finance/CashFlowPage';
 
 import SupplierStock from '../routes/Stock/SupplierStock';
 

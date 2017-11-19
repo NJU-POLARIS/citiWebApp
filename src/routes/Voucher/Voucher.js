@@ -3,13 +3,12 @@ import { connect } from 'dva';
 import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, Radio, InputNumber, DatePicker, Modal, message } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
-import NewVoucher from '../../components/NewVoucher';
+import NewVoucher from './NewVoucher';
 
 import styles from './Voucher.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const { RadioGroup } = Radio.Group;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const period = [[<Option value="0">全部期间</Option>], [<Option value="1">2017年第8期</Option>], [<Option value="2">2017年第9期</Option>]];
 
@@ -388,13 +387,7 @@ export default class Voucher extends PureComponent {
                 )
               }
             </div>
-            {/* <StandardTable
-              selectedRows={selectedRows}
-              loading={ruleLoading}
-              data={data}
-              onSelectRow={this.handleSelectRows}
-              onChange={this.handleStandardTableChange}
-            /> */}
+            <NewVoucher />
           </div>
         </Card>
         <Modal
@@ -404,6 +397,7 @@ export default class Voucher extends PureComponent {
           onCancel={() => this.handleModalVisible()}
           width={1200}
         >
+          <NewVoucher />
         </Modal>
       </PageHeaderLayout>
     );
