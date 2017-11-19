@@ -1,11 +1,12 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux, Link } from 'dva/router';
-import { Form, Input, Button, Popover, Progress, Cascader, DatePicker } from 'antd';
+import { Select, Form, Input, Button, Popover, Progress, Cascader, DatePicker } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
-
+const Option = Select.Option;
 const InputGroup = Input.Group;
 const { MonthPicker } = DatePicker;
 
@@ -30,6 +31,8 @@ const options = [{
 const supplyChain = [{ value: '供应商', label: '供应商' },
   { value: '生产商', label: '生产商' },
   { value: '分销商', label: '分销商' }];
+const scale = [{ value: '小型企业', label: '小型企业' },
+  { value: '中型企业', label: '中型企业' }];
 
 
 const passwordStatusMap = {
@@ -53,6 +56,7 @@ export default class Register extends Component {
     confirmDirty: false,
     visible: false,
     help: '',
+    options: [],
   }
 
   componentWillReceiveProps(nextProps) {
@@ -132,6 +136,18 @@ export default class Register extends Component {
       }
     }
   }
+  handleChange = (value) => {
+    let options;
+    if (!value || value.indexOf('@') >= 0) {
+      options = [];
+    } else {
+      options = ['gmail.com', '163.com', 'qq.com', '126.com', 'smail.nju.edu.cn'].map((domain) => {
+        const email = `${value}@${domain}`;
+        return <Option key={email}>{email}</Option>;
+      });
+    }
+    this.setState({ options });
+  }
 
   renderPasswordProgress = () => {
     const { form } = this.props;
@@ -158,7 +174,7 @@ export default class Register extends Component {
 
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('account', {
               rules: [{
                 required: true, message: '请输入要注册的账户！',
               }, {
@@ -234,28 +250,33 @@ export default class Register extends Component {
 
           <FormItem>
             <InputGroup size="large" className={styles.mobileGroup} compact>
-              <FormItem style={{ width: '45%' }}>
-                {getFieldDecorator('mobile', {
+              <FormItem style={{ width: '65%' }}>
+                {getFieldDecorator('email', {
                   rules: [{
-                    required: true, message: '请输入手机号！',
+                    required: true, message: '请输入企业邮箱！',
                   }, {
-                    pattern: /^1\d{10}$/, message: '手机号格式错误！',
+                    type: 'email', message: '邮箱格式错误！',
                   },
                     ],
                 })(
-                  <Input placeholder="联系方式" />
+                  <Select
+                    mode="combobox"
+                    style={{ width: 238 }}
+                    onChange={this.handleChange}
+                    filterOption={false}
+                    placeholder="企业邮箱"
+                  >
+                    {this.state.options}
+                  </Select>
                 )}
               </FormItem>
-              <FormItem style={{ width: '55%' }}>
-                {getFieldDecorator('creditcode', {
+              <FormItem style={{ width: '35%' }}>
+                {getFieldDecorator('scale', {
                   rules: [{
-                    required: true, message: '请输入统一社会信用代码！',
-                  }, {
-                    pattern: /^\w{18}$/, message: '信用代码格式错误！',
-                  },
-                    ],
+                    required: true, message: '请选择规模！',
+                  }],
                 })(
-                  <Input placeholder="统一社会信用代码" />
+                  <Cascader options={scale} placeholder="规模" />
                 )}
               </FormItem>
             </InputGroup>
@@ -295,7 +316,7 @@ export default class Register extends Component {
                 required: true, message: '请选择账套启用年月！',
               }],
             })(
-              <MonthPicker placeholder="账套启用年月" />
+              <DatePicker placeholder="账套启用年月" />
             )}
           </FormItem>
 

@@ -1,28 +1,15 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars,prefer-destructuring */
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { connect } from 'dva';
-import { Form, Table, Input, Icon, Button, Popconfirm, Menu } from 'antd';
+import { Tabs, Form, Table, Input, Icon, Button, Popconfirm, Menu } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableTable from '../Setting/EditTable';
+import { subjects5, subjects4, other, subjects3, subjects2, subjects1 } from '../../utils/persistence';
 
 const FormItem = Form.Item;
-let dataSource = [{
-  key: '1',
-  code: 'John Brown',
-  name: 32,
-  direction: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  code: 'John Brown',
-  name: 32,
-  direction: 'New York No. 1 Lake Park',
-}, {
-  key: '3',
-  code: 'John Brown',
-  name: 32,
-  direction: 'New York No. 1 Lake Park',
-}];
+const dataSource = subjects1;
+const TabPane = Tabs.TabPane;
 
 
 @connect(state => ({
@@ -32,33 +19,12 @@ let dataSource = [{
 
 class InitialSetting extends React.Component {
   state = {
-    current: 'debt',
+    current: 'balance',
   }
   handleClick = (e) => {
     this.setState({
       current: e.key,
     });
-    if (e.key === [this.state.current]) {
-      console.log('debt');
-      dataSource = [{
-        key: '1',
-        code: 'John Brown',
-        name: 32,
-        direction: 'New York No. 1 Lake Park',
-      }, {
-        key: '2',
-        code: 'John Brown',
-        name: 32,
-        direction: 'New York No. 1 Lake Park',
-      }];
-    } else if (e.key === 'cleanBalance') {
-      dataSource = [{
-        key: '1',
-        code: 'John Brown',
-        name: 32,
-        direction: 'New York No. 1 Lake Park',
-      }];
-    }
   }
   render() {
     return (
@@ -66,31 +32,31 @@ class InitialSetting extends React.Component {
         <Button icon="file-text">打印</Button>
         <Button icon="export" style={{ margin: '10px' }}>导出</Button>
         <Button icon="reload" onClick="">初始化</Button>
-        <Menu
-          onClick={this.handleClick}
-          selectedKeys={[this.state.current]}
-          mode="horizontal"
-        >
-          <Menu.Item key="balance">
-            <Icon type="balance" />资产
-          </Menu.Item>
-          <Menu.Item key="debt" >
-            <Icon type="debt" />负债
-          </Menu.Item>
-          <Menu.Item key="cleanBalance">
-            <Icon type="cleanBalance" />净资产
-          </Menu.Item>
-          <Menu.Item key="income">
-            <Icon type="income" />收入
-          </Menu.Item>
-          <Menu.Item key="fee">
-            <Icon type="fee" />费用
-          </Menu.Item>
-          <Menu.Item key="safeInventory">
-            <Icon type="safeInventory" />安全库存量
-          </Menu.Item>
-        </Menu>
-        <EditableTable />
+        <Tabs>
+          <TabPane key="balance" tab={<span><Icon type="wallet" />资产</span>} >
+            <EditableTable identi="balance" />
+          </TabPane>
+          <TabPane key="debt" tab={<span><Icon type="bank" />负债</span>}>
+            <EditableTable identi="debt" />
+
+          </TabPane>
+          <TabPane key="cleanBalance" tab={<span><Icon type="red-envelope" />净资产</span>}>
+            <EditableTable identi="cleanBalance" />
+
+          </TabPane>
+          <TabPane key="income" tab={<span><Icon type="gift" />收入</span>}>
+            <EditableTable identi="income" />
+
+          </TabPane>
+          <TabPane key="fee" tab={<span><Icon type="coffee" />费用</span>}>
+            <EditableTable identi="fee" />
+
+          </TabPane>
+          <TabPane key="other" tab={<span><Icon type="plus" />其他</span>}>
+            <EditableTable identi="others" />
+
+          </TabPane>
+        </Tabs>
       </PageHeaderLayout>
     );
   }

@@ -80,7 +80,7 @@ export default class Login extends Component {
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit}>
           <Tabs animated={false} className={styles.tabs} activeKey={type} onChange={this.onSwitch}>
-            <TabPane tab="账户登录" key="account">
+            <TabPane tab="企业入口" key="account">
               {
                 login.status === 'error' &&
                 login.type === 'account' &&
@@ -96,7 +96,7 @@ export default class Login extends Component {
                   <Input
                     size="large"
                     prefix={<Icon type="user" className={styles.prefixIcon} />}
-                    placeholder="admin"
+                    placeholder="请输入账户名"
                   />
                 )}
               </FormItem>
@@ -110,7 +110,42 @@ export default class Login extends Component {
                     size="large"
                     prefix={<Icon type="lock" className={styles.prefixIcon} />}
                     type="password"
-                    placeholder="888888"
+                    placeholder="请输入密码"
+                  />
+                )}
+              </FormItem>
+            </TabPane>
+            <TabPane tab="金融机构入口" key="Finance">
+              {
+                login.status === 'error' &&
+                login.type === 'Finance' &&
+                login.submitting === false &&
+                this.renderMessage('账户或密码不正确')
+              }
+              <FormItem>
+                {getFieldDecorator('userName', {
+                  rules: [{
+                    required: type === 'Finance', message: '请输入账户名！',
+                  }],
+                })(
+                  <Input
+                    size="large"
+                    prefix={<Icon type="user" className={styles.prefixIcon} />}
+                    placeholder="请输入账户名"
+                  />
+                )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [{
+                    required: type === 'Finance', message: '请输入密码！',
+                  }],
+                })(
+                  <Input
+                    size="large"
+                    prefix={<Icon type="lock" className={styles.prefixIcon} />}
+                    type="password"
+                    placeholder="请输入密码"
                   />
                 )}
               </FormItem>

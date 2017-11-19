@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp */
+/* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp,react/no-unused-state */
 import React from 'react';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 import styles from './EditTable.less';
-import { getData } from './InitialSetting';
+import { subjects5, subjects4, other, subjects3, subjects2, subjects1 } from '../../utils/persistence';
 
 class EditableCell extends React.Component {
   state = {
@@ -60,11 +60,11 @@ class EditableTable extends React.Component {
     super(props);
     this.columns = [{
       title: '科目编码',
-      dataIndex: 'code',
+      dataIndex: 'subjectId',
       width: '12.5%',
     }, {
       title: '科目名称',
-      dataIndex: 'name',
+      dataIndex: 'subjectName',
       width: '20%',
     }, {
       title: '方向',
@@ -112,9 +112,14 @@ class EditableTable extends React.Component {
       width: '10%',
     },
     ];
-
     this.state = {
-      dataSource: getData(),
+      dataSource: this.getData,
+      balance: subjects1,
+      debt: subjects2,
+      cleanBalance: subjects3,
+      income: subjects4,
+      fee: subjects5,
+      others: other,
     };
   }
   onCellChange = (key, dataIndex) => {
@@ -127,16 +132,64 @@ class EditableTable extends React.Component {
       }
     };
   }
+  getData = () => {
+    const { identi } = this.props;
+    switch (identi) {
+      case 'balance':
+        return (subjects1);
+      case 'debt':
+        return (subjects2);
+      case 'cleanBalance':
+        return (subjects3);
+      default:
+        break;
+    }
+  };
   handleInitial = () => {
   }
   render() {
-    const { dataSource } = this.state;
+    const { identi } = this.props;
+    const { dataSource, balance, cleanBalance, debt, income, fee, others } = this.state;
     const columns = this.columns;
-    return (
+    switch (identi) {
+      case 'balance':
+        return (
+          <div>
+            <Table bordered dataSource={subjects1} columns={columns} />
+          </div>);
+      case 'debt':
+        return (
+          <div>
+            <Table bordered dataSource={subjects2} columns={columns} />
+          </div>);
+      case 'cleanBalance':
+        return (
+          <div>
+            <Table bordered dataSource={subjects3} columns={columns} />
+          </div>);
+      case 'income':
+        return (
+          <div>
+            <Table bordered dataSource={subjects4} columns={columns} />
+          </div>);
+      case 'fee':
+        return (
+          <div>
+            <Table bordered dataSource={subjects5} columns={columns} />
+          </div>);
+      case 'others':
+        return (
+          <div>
+            <Table bordered dataSource={other} columns={columns} />
+          </div>);
+      default:
+        break;
+    }
+    /* return (
       <div>
-        <Table bordered dataSource={dataSource} columns={columns} />
+        <Table bordered dataSource={this.getData} columns={columns} />
       </div>
-    );
+    ); */
   }
 }
 
