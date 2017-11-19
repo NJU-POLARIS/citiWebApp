@@ -116,7 +116,7 @@ class BasicLayout extends React.PureComponent {
       return [];
     }
     return menusData.map((item) => {
-      if (!item.name) {
+      if (!item.name || item.isHide) {
         return null;
       }
       let itemPath;
@@ -143,6 +143,7 @@ class BasicLayout extends React.PureComponent {
         );
       }
       const icon = item.icon && <Icon type={item.icon} />;
+      if (item.isHide) return;
       return (
         <Menu.Item key={item.key || item.path}>
           {
