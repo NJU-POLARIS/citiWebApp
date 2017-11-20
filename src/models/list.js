@@ -21,7 +21,7 @@ export default {
       });
       yield put({
         type: 'changeLoading',
-        payload: false,
+        payload: true,
       });
     },
   },

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
+import { Table } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
 @connect(state => ({
@@ -48,13 +49,41 @@ class DetailBook extends PureComponent {
       },
     ];
 
+    const columns = [
+      {
+        key: 'date',
+        title: '日期',
+      }, {
+        key: 'voucherId',
+        title: '凭证号',
+      }, {
+        key: 'subjectName',
+        title: '科目',
+      }, {
+        key: 'abstract',
+        title: '摘要',
+      }, {
+        key: 'debit',
+        title: '借方金额',
+      }, {
+        key: 'credit',
+        title: '贷方金额',
+      }, {
+        key: 'direction',
+        title: '方向',
+      }, {
+        key: 'balance',
+        title: '余额',
+      }
+    ];
+
     return (
       <PageHeaderLayout
         title="账簿-明细账"
         tabList={tabList}
         onTabChange={this.handleTabChange}
       >
-        <div>Detail</div>
+        <Table columns={columns} />
       </PageHeaderLayout>
     );
   }

@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Form, Input, Select, Icon, Button, InputNumber, Card, Modal, message } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import NewVoucher from './NewVoucher';
+import TableForm from '../../Forms/TableForm';
+import SubjectSelector from '../../../components/Selector/SubjectSelector';
 
 import styles from './index.less';
 
@@ -9,6 +12,23 @@ const FormItem = Form.Item;
 const { Option } = Select;
 // const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const period = [[<Option value="0">全部期间</Option>], [<Option value="1">2017年第8期</Option>], [<Option value="2">2017年第9期</Option>]];
+
+const tableData = [{
+  key: '1',
+  workId: '00001',
+  name: 'John Brown',
+  department: 'New York No. 1 Lake Park',
+}, {
+  key: '2',
+  workId: '00002',
+  name: 'Jim Green',
+  department: 'London No. 1 Lake Park',
+}, {
+  key: '3',
+  workId: '00003',
+  name: 'Joe Black',
+  department: 'Sidney No. 1 Lake Park',
+}];
 
 @connect(state => ({
   voucher: state.voucher,
@@ -182,10 +202,7 @@ class Voucher extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="科目" style={{ marginLeft: 28 }}>
               {getFieldDecorator('subject')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>
+                <SubjectSelector />
               )}
             </FormItem>
           </Col>
@@ -233,7 +250,7 @@ class Voucher extends PureComponent {
 
   render() {
     const { modalVisible } = this.state;
-
+    const { getFieldDecorator } = this.props.form;
     return (
       <PageHeaderLayout title="查询凭证">
         <Card bordered={false}>
@@ -242,7 +259,7 @@ class Voucher extends PureComponent {
               {this.renderForm()}
             </div>
             <div className={styles.voucherOperator}>
-              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>新建</Button>
+              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>新增凭证</Button>
             </div>
           </div>
         </Card>
@@ -252,7 +269,11 @@ class Voucher extends PureComponent {
           // onOk={this.handleAdd}
           onCancel={() => this.handleModalVisible()}
           width={1200}
-        />
+        >
+          {getFieldDecorator('newVoucher', {
+            initialValue: []
+          })(<NewVoucher/>)}
+        </Modal>
       </PageHeaderLayout>
     );
   }
