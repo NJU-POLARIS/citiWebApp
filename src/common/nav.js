@@ -92,7 +92,7 @@ export const getNavData = app => [
             icon: 'warning',
             path: 'warning',
             isHide: false,
-            component: dynamicWrapper(app, [], import('../routes/Finance/Warning')),
+            component: dynamicWrapper(app, ['warning'], import('../routes/Finance/Warning')),
           },
         ],
       },

@@ -13,13 +13,6 @@
       ]
     }
   },
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:8080/api",
-      "changeOrigin": true,
-      "pathRewrite": { "^/api" : "" }
-    }
-  },
   "externals": {
     "g2": "G2",
     "g-cloud": "Cloud",
