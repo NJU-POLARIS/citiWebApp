@@ -16,12 +16,12 @@ export default {
         payload: true,
       });
       yield put({
-        type: 'ifSucceed',
+        type: 'saveGeneral',
         payload: response,
       });
       yield put({
         type: 'changeLoading',
-        payload: true,
+        payload: false,
       });
     },
   },
