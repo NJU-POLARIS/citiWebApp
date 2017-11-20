@@ -2,8 +2,8 @@
  * Created by YZ on 2017/11/15.
  */
 import React, { PureComponent } from 'react';
-// import { connect } from 'dva';
-// import { routerRedux } from 'dva/router';
+import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { Tabs } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import GetpaidForm from '../../../components/Form/getpaidFinancing';

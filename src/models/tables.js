@@ -49,7 +49,6 @@ export default {
         payload: null,
       });
       const data = yield call(tableService.fetchProfit, payload);
-      console.log(data);
       yield put({
         type: 'fillProfit',
         payload: data,
@@ -61,7 +60,6 @@ export default {
         payload: null,
       });
       const data = yield call(tableService.fetchCashFlow, payload);
-      console.log(data);
       yield put({
         type: 'fillCashflow',
         payload: data,

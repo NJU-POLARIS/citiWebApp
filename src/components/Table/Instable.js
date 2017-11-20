@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Table, Alert, Badge, Modal, Form, Divider, Row, Col, Button } from 'antd';
 import DescriptionList from '../../components/DescriptionList';
 import styles from './Instable.less';
+import Cell from './Cell';
 
 const FormItem = Form.Item;
 const statusMap = ['success', 'error', 'warning'];
@@ -15,7 +16,6 @@ const { Description } =DescriptionList;
 class InsTable extends PureComponent {
   state = {
     selectedRowKeys: [],
-    modalVisible: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -38,26 +38,8 @@ class InsTable extends PureComponent {
     this.props.onChange(pagination, filters, sorter);
   }
 
-  handleModalVisible = (flag) => {
-    this.setState({
-      modalVisible: !!flag,
-    });
-  }
-
-  cleanSelectedKeys = () => {
-    this.handleRowSelectChange([], []);
-  }
-
-  renderCell(text) {
-    return (
-      <a onClick={this.handleModalVisible}>
-        {text}
-      </a>
-    );
-  }
-
   render() {
-    const { selectedRowKeys, modalVisible } = this.state;
+    const { selectedRowKeys } = this.state;
 
     const { data, pagination, loading } = this.props;
 
@@ -69,7 +51,10 @@ class InsTable extends PureComponent {
         dataIndex: 'no',
         render (text){
           return(
-            <a>{text}</a>
+            <Cell
+              value={text}
+              modalVisible={false}
+            />
           )
         }
       }, {
@@ -113,38 +98,6 @@ class InsTable extends PureComponent {
           pagination={paginationProps}
           onChange={this.handleTableChange}
         />
-        <Modal
-          title="企业信息"
-          visible={modalVisible}
-          onCancel={() => this.handleModalVisible()}
-          footer={[<span />]}
-        >
-          <DescriptionList size="large" title="企业基本信息" style={{ marginBottom: 32 }}>
-            <Description term="单位名称"></Description>
-            <Description term="行业"></Description>
-            <Description term="单位所在地"></Description>
-            <Description term="统一社会信用代码"></Description>
-            <Description term="联系电话"></Description>·
-          </DescriptionList>
-          <Divider style={{ marginBottom: 32 }}/>
-          <DescriptionList size="large" title="融资信息" style={{ marginBottom: 32 }}>
-            <Description term="应收账款对象"></Description>
-            <Description term="应收账款净额"></Description>
-            <Description term="应收账款抵押额"></Description>
-          </DescriptionList>
-          <Divider style={{ marginBottom: 32 }}/>
-          <DescriptionList size="large" title="供应链构成" style={{ marginBottom: 32 }}>
-          </DescriptionList>
-          <Divider style={{ marginBottom: 32 }}/>
-          <DescriptionList size="large" title="企业报表查看" style={{ marginBottom: 32 }}>
-            <Row>
-              <Col md={8} sm={24}><Button type="primary">资产负债表</Button></Col>
-              <Col md={8} sm={24}><Button type="primary">利润表</Button></Col>
-              <Col md={8} sm={24}><Button type="primary">现金流量表</Button></Col>
-            </Row>
-            <br/>
-          </DescriptionList>
-        </Modal>
       </div>
     );
   }

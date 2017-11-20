@@ -118,7 +118,7 @@ export const getNavData = app => [
           icon: 'bank',
           path: 'financing',
           isHide: false,
-          component: dynamicWrapper(app, [], import('../routes/Chains/Financing/Financing')),
+          component: dynamicWrapper(app, ['receiveFinancing'], import('../routes/Chains/Financing/Financing')),
         }, {
           name: '绩效评价',
           icon: 'like-o',

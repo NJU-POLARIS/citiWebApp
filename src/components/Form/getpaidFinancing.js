@@ -2,15 +2,21 @@
 /**
  * Created by YZ on 2017/11/16.
  */
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import styles from './form.less';
+import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 
 const Option = Select.Option;
 
 @Form.create()
-class getpaidFinancing extends React.Component {
+class getpaidFinancing extends Component {
+  handleSubmit = (e) => {
+
+  }
   render() {
+    const { cid, companyName, net, mortgage, receiveCompanies } = this.props;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -20,19 +26,30 @@ class getpaidFinancing extends React.Component {
         span: 16,
       },
     };
+    /**
+     * 处理select数据
+     * @type {Array}
+     */
+    const companyList=[];
+    if(receiveCompanies) {
+      for (let i = 0; i < receiveCompanies.length; i++) {
+        companyList.push(<Option key={receiveCompanies.get(i)}>{receiveCompanies.get(i)}</Option>);
+      }
+    }
+
     return (
-      <Form layout="horizontal" className={styles.getpaidFinancing}>
+      <Form layout="horizontal" className={styles.getpaidFinancing} onSubmit={this.handleSubmit}>
         <Form.Item {...formItemLayout} label="应收账款对象">
           {getFieldDecorator('getpaidObject', {
             rules: [{required: true, message: '请选择公司名称'}],
           })(
             <Select placeholder="选择公司名称">
-              <Option value="南京大学">南京大学</Option>
+              {companyList}
             </Select>
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="应收账款净额">
-          <Input/>
+          <Input value={net} disabled={true}/>
         </Form.Item>
         <Form.Item {...formItemLayout} label="应收账款抵押额">
           {getFieldDecorator('getpaidAmount', {
@@ -61,4 +78,16 @@ class getpaidFinancing extends React.Component {
     );
   }
 }
-export default getpaidFinancing;
+getpaidFinancing.propTypes={};
+
+function mapStateToProps(state) {
+  return {
+    cid: state.receiveFinancing.companyId,
+    companyName: state.receiveFinancing.companyName,
+    net: state.receiveFinancing.net,
+    mortgage: state.receiveFinancing.mortgage,
+    receiveCompanies: state.receiveFinancing.receiveCompanies,
+  };
+}
+
+export default connect(mapStateToProps)(getpaidFinancing);

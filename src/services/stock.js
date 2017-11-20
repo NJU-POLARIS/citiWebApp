@@ -4,7 +4,24 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
 
-export function fetchBalanceSheet(param) {
-  const { companyId } = param;
-  return request(`/api/inventory/relation/safe/material?${stringify(companyId)}`);
+export function fetchRawMaterialMonitor(param) {
+
+}
+export function fetchProductMonitor(param) {
+
+}
+export function fetchStockTime(param) {
+
+}
+export function fetchOntimeTime(param) {
+
+}
+export function fetchReturnTime(param) {
+
+}
+export function fetchRawMaterialSafeStock(param) {
+
+}
+export function fetchProductSafeStock(param) {
+
 }
