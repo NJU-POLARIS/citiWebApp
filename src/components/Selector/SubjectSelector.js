@@ -1,3 +1,4 @@
+import React, {PureComponent} from 'react';
 import { Cascader } from 'antd';
 
 const subjects = [{
@@ -230,14 +231,54 @@ const subjects = [{
   }, {"label": "8000 其他流动负债", "value": "8000"}, {"label": "8001 其他非流动负债", "value": "8001"}], "label": "其他", "value": "6"
 }];
 
-const SubjectSelector = () => {
-  return (
-    <Cascader
-      options={subjects}
-      placeholder="选择科目"
-      showSearch
-    />
-  );
+const displayRender = (labels, selectedOptions) => labels.map((label, i) => {
+  const option = selectedOptions[i];
+  if (i === 0) {
+    return;
+  }
+  return <span key={option.value}>{label}</span>;
+});
+
+
+class SubjectSelector extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    const values = this.props.value;
+    this.state = {
+      value: values.value,
+    };
+  }
+
+  handleSubjectChange = (value, selectedOptions) => {
+    selectedOptions.map((item, i) => {
+      if (i === 1) {
+        this.triggerChange(item);
+
+      }
+    });
+  };
+
+  triggerChange = (changedValue) => {
+    // Should provide an event to pass value to Form.
+    const onChange = this.props.onChange;
+    if (onChange) {
+      onChange(Object.assign({}, this.state, changedValue));
+    }
+  }
+
+  render() {
+    return (
+      <Cascader
+        defaultValue={this.state.value}
+        options={subjects}
+        placeholder="选择科目"
+        showSearch
+        displayRender={displayRender}
+        onChange={this.handleSubjectChange}
+      />
+    );
+  }
 };
 
 export default SubjectSelector;

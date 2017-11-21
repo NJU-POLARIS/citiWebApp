@@ -9,14 +9,20 @@ import styles from './style.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const period = [[<Option value="0">全部期间</Option>], [<Option value="1">2017年第8期</Option>], [<Option value="2">2017年第9期</Option>]];
-
 @connect(state => ({
   book: state.book,
+  voucher: state.voucher,
 }))
 @Form.create()
 class GeneralBook extends PureComponent {
   componentDidMount() {
+    this.props.dispatch({
+      type: 'voucher/fetchPeriod',
+      payload: {
+        companyId: 1,
+      },
+    });
+
     this.props.dispatch({
       type: 'book/fetchGeneral',
       payload: {
@@ -31,24 +37,50 @@ class GeneralBook extends PureComponent {
     });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  state = {
+    expandForm: false,
+  };
+
+  handleDefaultSubmit() {
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log(values);
-        // this.props.dispatch({
-        //   type: 'book/fetchGeneral',
-        //   payload: {
-        //     companyId: 1,
-        //     ...values,
-        //   },
-        // });
+      if (!err && !this.state.expandForm) {
+        const { startPeriod, endPeriod } = values;
+        this.props.dispatch({
+          type: 'book/fetchGeneral',
+          payload: {
+            companyId: 1,
+            startPeriod: startPeriod,
+            endPeriod: endPeriod,
+            startSubjectId: '1001',
+            endSubjectId: '8001',
+            lowLevel: 1,
+            highLevel: 1,
+          },
+        });
       }
     });
   }
 
-  state = {
-    expandForm: false,
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        const { startPeriod, endPeriod, startSubject, endSubject, lowLevel, highLevel } = values;
+        console.log(startSubject.value.slice(1));
+        this.props.dispatch({
+          type: 'book/fetchGeneral',
+          payload: {
+            companyId: 1,
+            startPeriod: startPeriod,
+            endPeriod: endPeriod,
+            startSubjectId: startSubject.value.slice(1).toString(),
+            endSubjectId: endSubject.value.slice(1).toString(),
+            lowLevel: lowLevel,
+            highLevel: highLevel,
+          },
+        });
+      }
+    });
   };
 
   toggleForm = () => {
@@ -60,7 +92,18 @@ class GeneralBook extends PureComponent {
   renderForm() {
     return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
+
   renderSimpleForm() {
+    const options = [];
+    const { voucher: { period } } = this.props;
+    for (let item of period) {
+      options.push(<Option value={item}>{item}</Option>);
+    }
+    const first = period.map((item, i) => {
+      if (i === period.length - 1)
+        return item;
+    }).toString();
+
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline">
@@ -69,9 +112,11 @@ class GeneralBook extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod')(
+                  {getFieldDecorator('startPeriod', {
+                    initialValue: first,
+                  })(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
-                      {period}
+                      {options}
                     </Select>
                   )}
                 </FormItem>
@@ -81,9 +126,11 @@ class GeneralBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod')(
+                  {getFieldDecorator('endPeriod', {
+                    initialValue: first,
+                  })(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
-                      {period}
+                      {options}
                     </Select>
                   )}
                 </FormItem>
@@ -103,7 +150,18 @@ class GeneralBook extends PureComponent {
       </Form>
     );
   }
+
   renderAdvancedForm() {
+    const options = [];
+    const { voucher: { period } } = this.props;
+    for (let item of period) {
+      options.push(<Option value={item}>{item}</Option>);
+    }
+    const first = period.map((item, i) => {
+      if (i === period.length - 1)
+        return item;
+    }).toString();
+
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline">
@@ -112,9 +170,11 @@ class GeneralBook extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod')(
+                  {getFieldDecorator('startPeriod', {
+                    initialValue: first,
+                  })(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
-                      {period}
+                      {options}
                     </Select>
                   )}
                 </FormItem>
@@ -124,9 +184,11 @@ class GeneralBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod')(
+                  {getFieldDecorator('endPeriod', {
+                    initialValue: first,
+                  })(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
-                      {period}
+                      {options}
                     </Select>
                   )}
                 </FormItem>
@@ -139,7 +201,11 @@ class GeneralBook extends PureComponent {
             <FormItem label="科目区间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startSubject')(
+                  {getFieldDecorator('startSubject', {
+                    initialValue: {
+                      value: ['1', '1001'],
+                    }
+                  })(
                     <SubjectSelector />
                   )}
                 </FormItem>
@@ -149,7 +215,13 @@ class GeneralBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endSubject')(
+                  {getFieldDecorator('endSubject',
+                    {
+                      initialValue: {
+                        value: ['6', '8001'],
+                      }
+                    }
+                  )(
                     <SubjectSelector />
                   )}
                 </FormItem>
@@ -160,7 +232,9 @@ class GeneralBook extends PureComponent {
             <FormItem label="科目级别">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('lowLevel')(
+                  {getFieldDecorator('lowLevel', {
+                    initialValue: 1
+                  })(
                     <InputNumber min={0} placeholder="起始级别" style={{ width: '100%' }} />
                   )}
                 </FormItem>
@@ -170,7 +244,9 @@ class GeneralBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('highLevel')(
+                  {getFieldDecorator('highLevel', {
+                    initialValue: 1
+                  })(
                     <InputNumber min={0} placeholder="结束级别" style={{ width: '100%' }} />
                   )}
                 </FormItem>
@@ -214,6 +290,7 @@ class GeneralBook extends PureComponent {
   };
 
   render() {
+
     const { getFieldDecorator } = this.props.form;
     const { book: { loading, general } } = this.props;
 
@@ -223,8 +300,6 @@ class GeneralBook extends PureComponent {
       for (let subItem of amountVoArrayList)
         tableData.push(subItem);
     }
-
-    console.log(tableData);
 
     const tabList = [
       {
@@ -300,6 +375,7 @@ class GeneralBook extends PureComponent {
             loading={loading}
             columns={columns}
             dataSource={tableData}
+            pagination={false}
           />
         </Card>
       </PageHeaderLayout>

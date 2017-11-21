@@ -1,13 +1,252 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Table } from 'antd';
+import { Table, Row, Col, Form, Input, Select, Icon, Button, InputNumber, Card, Modal, message } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import SubjectSelector from '../../../components/Selector/SubjectSelector';
 
+import styles from './style.less';
+
+const FormItem = Form.Item;
+const { Option } = Select;
 @connect(state => ({
   book: state.book,
+  voucher: state.voucher,
 }))
+@Form.create()
 class SummaryBook extends PureComponent {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'voucher/fetchPeriod',
+      payload: {
+        companyId: 1,
+      },
+    });
+
+    this.props.dispatch({
+      type: 'book/fetchSummary',
+      payload: {
+        companyId: 1,
+        startPeriod: '2017年第10期',
+        endPeriod: '2017年第10期',
+        startSubjectId: '1001',
+        endSubjectId: '8001',
+        lowLevel: 1,
+        highLevel: 1,
+      },
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        const { startPeriod, endPeriod, startSubject, endSubject, lowLevel, highLevel } = values;
+        console.log(values);
+        this.props.dispatch({
+          type: 'book/fetchSummary',
+          payload: {
+            companyId: 1,
+            startPeriod: startPeriod,
+            endPeriod: endPeriod,
+            startSubjectId: startSubject.value.slice(1).slice(1).toString(),
+            endSubjectId: endSubject.value.slice(1).slice(1).toString(),
+            lowLevel: lowLevel,
+            highLevel: highLevel,
+          },
+        });
+      }
+    });
+  };
+
+  state = {
+    expandForm: false,
+  };
+
+  toggleForm = () => {
+    this.setState({
+      expandForm: !this.state.expandForm,
+    });
+  };
+
+  renderForm() {
+    return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
+  }
+
+  renderSimpleForm() {
+    const options = [];
+    const { voucher: { period } } = this.props;
+    for (let item of period) {
+      options.push(<Option value={item}>{item}</Option>);
+    }
+    const first = period.map((item, i) => {
+      if (i === period.length - 1)
+        return item;
+    }).toString();
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Form layout="inline">
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="会计期间">
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startPeriod', {
+                    initialValue: first,
+                  })(
+                    <Select placeholder="开始期间" style={{ width: '100%' }}>
+                      {options}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('endPeriod', {
+                    initialValue: first,
+                  })(
+                    <Select placeholder="结束期间" style={{ width: '100%' }}>
+                      {options}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <span className={styles.submitButtons}>
+              <Button type="primary" htmlType="submit" onClick={this.handleSubmit}>查询</Button>
+              <Button style={{ marginLeft: 8 }}>重置</Button>
+              <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                展开 <Icon type="down" />
+              </a>
+            </span>
+          </Col>
+        </Row>
+      </Form>
+    );
+  }
+
+  renderAdvancedForm() {
+    const options = [];
+    const { voucher: { period } } = this.props;
+    for (let item of period) {
+      options.push(<Option value={item}>{item}</Option>);
+    }
+    const first = period.map((item, i) => {
+      if (i === period.length - 1)
+        return item;
+    }).toString();
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Form layout="inline">
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="会计期间">
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startPeriod', {
+                    initialValue: first,
+                  })(
+                    <Select placeholder="开始期间" style={{ width: '100%' }}>
+                      {options}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('endPeriod', {
+                    initialValue: first,
+                  })(
+                    <Select placeholder="结束期间" style={{ width: '100%' }}>
+                      {options}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="科目区间">
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('startSubject', {
+                    initialValue: {
+                      value: ['1', '1001'],
+                    }
+                  })(
+                    <SubjectSelector />
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('endSubject',
+                    {
+                      initialValue: {
+                        value: ['6', '8001'],
+                      }
+                    }
+                  )(
+                    <SubjectSelector />
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="科目级别">
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('lowLevel', {
+                    initialValue: 1
+                  })(
+                    <InputNumber min={0} placeholder="起始级别" style={{ width: '100%' }} />
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={2}>
+                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>-</span>
+              </Col>
+              <Col span={11}>
+                <FormItem>
+                  {getFieldDecorator('highLevel', {
+                    initialValue: 1
+                  })(
+                    <InputNumber min={0} placeholder="结束级别" style={{ width: '100%' }} />
+                  )}
+                </FormItem>
+              </Col>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <div style={{ overflow: 'hidden' }}>
+              <span style={{ float: 'left', marginBottom: 24 }}>
+                <Button type="primary" htmlType="submit" onClick={this.handleSubmit}>查询</Button>
+                <Button style={{ marginLeft: 8 }}>重置</Button>
+                <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                  收起 <Icon type="up" />
+                </a>
+              </span>
+            </div>
+          </Col>
+        </Row>
+      </Form>
+    );
+  }
+
   handleTabChange = (key) => {
     const { dispatch } = this.props;
     switch (key) {
@@ -26,9 +265,11 @@ class SummaryBook extends PureComponent {
       default:
         break;
     }
-  }
+  };
 
   render() {
+    const { book: { loading, summary } } = this.props;
+
     const tabList = [
       {
         key: 'general',
@@ -51,39 +292,76 @@ class SummaryBook extends PureComponent {
 
     const columns = [
       {
-        key: 'date',
-        title: '日期',
-      }, {
-        key: 'voucherId',
-        title: '凭证号',
+        key: 'subjectId',
+        dataIndex: 'subjectId',
+        title: '科目编码',
       }, {
         key: 'subjectName',
-        title: '科目',
+        dataIndex: 'subjectName',
+        title: '科目名称',
       }, {
-        key: 'abstract',
-        title: '摘要',
+        title: '期初余额',
+        children: [
+          {
+            key: 'beginDebit',
+            dataIndex: 'beginDebit',
+            title: '借方',
+          }, {
+            key: 'beginCredit',
+            dataIndex: 'beginCredit',
+            title: '贷方',
+          },
+        ]
       }, {
-        key: 'debit',
-        title: '借方金额',
+        title: '本期发生额',
+        children: [
+          {
+            key: 'currentDebit',
+            dataIndex: 'currentDebit',
+            title: '借方',
+          }, {
+            key: 'currentCredit',
+            dataIndex: 'currentCredit',
+            title: '贷方',
+          },
+        ]
       }, {
-        key: 'credit',
-        title: '贷方金额',
-      }, {
-        key: 'direction',
-        title: '方向',
-      }, {
-        key: 'balance',
-        title: '余额',
+        title: '期末余额',
+        children: [
+          {
+            key: 'endDebit',
+            dataIndex: 'endDebit',
+            title: '借方',
+          }, {
+            key: 'endCredit',
+            dataIndex: 'endCredit',
+            title: '贷方',
+          },
+        ]
       }
     ];
 
     return (
       <PageHeaderLayout
-        title="账簿-科目汇总表"
+        title="账簿-总账"
         tabList={tabList}
         onTabChange={this.handleTabChange}
       >
-        <Table columns={columns} />
+        <Card bordered={false}>
+          <div className={styles.voucher}>
+            <div className={styles.voucherForm}>
+              {this.renderForm()}
+            </div>
+            <div className={styles.voucherOperator}>
+            </div>
+          </div>
+          <Table
+            loading={loading}
+            columns={columns}
+            dataSource={summary}
+            pagination={false}
+          />
+        </Card>
       </PageHeaderLayout>
     );
   }
