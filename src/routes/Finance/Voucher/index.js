@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Row, Col, Form, Input, Select, Icon, Button, InputNumber, Card, Modal, message } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import NewVoucher from './NewVoucher';
-import TableForm from '../../Forms/TableForm';
 import SubjectSelector from '../../../components/Selector/SubjectSelector';
 
 import styles from './index.less';
@@ -12,6 +11,43 @@ const FormItem = Form.Item;
 const { Option } = Select;
 // const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const period = [[<Option value="0">全部期间</Option>], [<Option value="1">2017年第8期</Option>], [<Option value="2">2017年第9期</Option>]];
+
+const myData = {
+  "company_id":1,
+  "voucher_id":"记-12",
+  "date":"2016-02-02",
+  "remark":"测试数据",
+  "voucher_maker":"company2admin",
+  "itemList":[
+    {
+      "company_id":1,
+      "voucher_id":"记-12",
+      "lines":1,
+      "abstracts":"支付工资",
+      "subjectId":"2211",
+      "debitAmount": 2500000.0,
+      "creditAmount":0.0,
+      "supportOneList":[],
+      "supportTwoList":[]
+    },{
+
+      "company_id":1,
+      "voucher_id":"记-12",
+      "lines":2,
+      "abstracts":"支付工资",
+      "subjectId":"1002",
+      "debitAmount":0.0,
+      "creditAmount":2500000.0,
+      "supportOneList":[],
+      "supportTwoList":[]
+    }
+  ],
+  "totalVo":{
+    "chineseTotal":"",
+    "debitAmount":0.0,
+    "creditAmount":0.0
+  }
+};
 
 const tableData = [{
   key: '1',
@@ -52,6 +88,23 @@ class Voucher extends PureComponent {
     });
   };
 
+  handleAdd = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        const { newVoucher } = values;
+        const { company_id, voucher_id, date, remark, voucher_maker, data } = newVoucher;
+        const my_voucher = { company_id, voucher_id, date, remark, voucher_maker, data };
+        message.success('YES!');
+        console.log(my_voucher);
+        this.props.dispatch({
+          type: 'voucher/',
+          payload: my_voucher,
+        });
+      }
+    });
+  };
+
   renderForm() {
     return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
@@ -76,7 +129,7 @@ class Voucher extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod')(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {period}
                     </Select>
@@ -119,7 +172,7 @@ class Voucher extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod')(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {period}
                     </Select>
@@ -142,7 +195,7 @@ class Voucher extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startNumber')(
+                  {getFieldDecorator('endNumber')(
                     <InputNumber min={0} placeholder="结束字号" style={{ width: '100%' }} />
                   )}
                 </FormItem>
@@ -201,7 +254,9 @@ class Voucher extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="科目" style={{ marginLeft: 28 }}>
-              {getFieldDecorator('subject')(
+              {getFieldDecorator('subject', {
+                initialValue: ['1', '1001'],
+              })(
                 <SubjectSelector />
               )}
             </FormItem>
@@ -266,12 +321,19 @@ class Voucher extends PureComponent {
         <Modal
           title="新增凭证"
           visible={modalVisible}
-          // onOk={this.handleAdd}
+          onOk={(e) => this.handleAdd(e)}
           onCancel={() => this.handleModalVisible()}
           width={1200}
         >
           {getFieldDecorator('newVoucher', {
-            initialValue: []
+            initialValue: {
+              company_id: 1,
+              voucher_id: '记-123',
+              date: '2016-02-02',
+              remark: '测试数据',
+              voucher_maker: 'company1admin',
+              data: [],
+            }
           })(<NewVoucher/>)}
         </Modal>
       </PageHeaderLayout>

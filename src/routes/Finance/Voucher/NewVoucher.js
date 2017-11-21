@@ -1,95 +1,109 @@
 import React, { PureComponent } from 'react';
-import { Table, Button, Input, InputNumber, message, Divider } from 'antd';
+import { Table, Button, Input, message, Popconfirm, Divider, InputNumber } from 'antd';
 import styles from './NewVoucher.less';
 
 import subjectSelector from '../../../components/Selector/SubjectSelector';
-
-const EditableCell = ({ editable, value, onChange }) => (
-  <div>
-    {editable
-      ? <Input style={{ margin: '-5px 0' }} value={value} onChange={e => onChange(e.target.value)} />
-      : value
-    }
-  </div>
-);
 
 class NewVoucher extends PureComponent {
   constructor(props) {
     super(props);
 
+    const { company_id, voucher_id, date, remark, voucher_maker, data } = this.props.value;
     this.state = {
-      data: [],
+      company_id: company_id,
+      voucher_id: voucher_id,
+      voucher_maker: voucher_maker,
+      date: date,
+      remark: remark,
+      data: data,
     };
+    console.log(this.state.voucher_maker);
   }
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
-      this.setState({
-        data: nextProps.value,
-      });
+      if ('value' in nextProps) {
+        const value = nextProps.value;
+        this.setState(value);
+      }
     }
   }
-
-  getRowByKey(key) {
-    return this.state.data.filter(item => item.key === key)[0];
+  getRowBylines(lines) {
+    return this.state.data.filter(item => item.lines === lines)[0];
   }
-  index = 0;
+  index = 1;
   cacheOriginData = {};
-  handleSubmit = (e) => {
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   this.props.form.validateFieldsAndScroll((err, values) => {
+  //     if (!err) {
+  //       this.props.dispatch({
+  //         type: 'form/submit',
+  //         payload: values,
+  //       });
+  //     }
+  //   });
+  // }
+  toggleEditable(e, lines) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        this.props.dispatch({
-          type: 'form/submit',
-          payload: values,
-        });
-      }
-    });
-  }
-  toggleEditable(e, key) {
-    e.preventDefault();
-    const target = this.getRowByKey(key);
+    const target = this.getRowBylines(lines);
     if (target) {
       // 进入编辑状态时保存原始数据
       if (!target.editable) {
-        this.cacheOriginData[key] = { ...target };
+        this.cacheOriginData[lines] = { ...target };
       }
       target.editable = !target.editable;
       this.setState({ data: [...this.state.data] });
     }
   }
-  remove(key) {
-    const newData = this.state.data.filter(item => item.key !== key);
+  remove(lines) {
+    const newData = this.state.data.filter(item => item.lines !== lines);
     this.setState({ data: newData });
-    this.props.onChange(newData);
+    // this.props.onChange(newData);
+    this.triggerChange(newData);
   }
+
+  triggerChange = (changedValue) => {
+    // Should provide an event to pass value to Form.
+    const onChange = this.props.onChange;
+    if (onChange) {
+      onChange(Object.assign({}, this.state, changedValue));
+    }
+  };
+
   newMember = () => {
     const newData = [...this.state.data];
     newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
-      abstract: '',
-      subject: '',
-      debit: '',
-      credit: '',
+      lines: this.index,
+      company_id: 1,
+      voucher_id: "记-123",
+      abstracts: '',
+      subjects: '',
+      debitAmount: 0,
+      creditAmount: 0,
+      supportOneList: [],
+      supportTwoList: [],
       editable: true,
       isNew: true,
     });
     this.index += 1;
     this.setState({ data: newData });
-  }
-  handleKeyPress(e, key) {
-    if (e.key === 'Enter') {
-      this.saveRow(e, key);
+  };
+  handlelinesPress(e, lines) {
+    if (e.lines === 'Enter') {
+      this.saveRow(e, lines);
     }
   }
-  handleFieldChange(e, fieldName, key) {
+  handleFieldChange(e, fieldName, lines) {
+    console.log(e.target.value);
     const newData = [...this.state.data];
-    const target = this.getRowByKey(key);
+    const target = this.getRowBylines(lines);
     if (target) {
       target[fieldName] = e.target.value;
       this.setState({ data: newData });
     }
+    e.target.focus();
   }
-  saveRow(e, key) {
+  saveRow(e, lines) {
     e.persist();
     // save field when blur input
     setTimeout(() => {
@@ -101,44 +115,45 @@ class NewVoucher extends PureComponent {
         this.clickedCancel = false;
         return;
       }
-      const target = this.getRowByKey(key);
+      const target = this.getRowBylines(lines);
       // if (!target.workId || !target.name || !target.department) {
       //   message.error('请填写完整成员信息。');
       //   e.target.focus();
       //   return;
       // }
-      e.target.focus();
       delete target.isNew;
-      this.toggleEditable(e, key);
-      this.props.onChange(this.state.data);
+      this.toggleEditable(e, lines);
+      // this.props.onChange(this.state.data);
+      this.triggerChange(this.state.data);
     }, 10);
   }
-  cancel(e, key) {
+
+  cancel(e, lines) {
     this.clickedCancel = true;
     e.preventDefault();
-    const target = this.getRowByKey(key);
-    if (this.cacheOriginData[key]) {
-      Object.assign(target, this.cacheOriginData[key]);
+    const target = this.getRowBylines(lines);
+    if (this.cacheOriginData[lines]) {
+      Object.assign(target, this.cacheOriginData[lines]);
       target.editable = false;
-      delete this.cacheOriginData[key];
+      delete this.cacheOriginData[lines];
     }
     this.setState({ data: [...this.state.data] });
   }
   render() {
     const columns = [{
       title: '摘要',
-      dataIndex: 'abstract',
-      key: 'abstract',
+      dataIndex: 'abstracts',
+      lines: 'abstracts',
       width: '20%',
-      onClick: (e) => {this.toggleEditable(e, 'abstract')},
       render: (text, record) => {
         if (record.editable) {
           return (
             <Input
               value={text}
-              onChange={e => this.handleFieldChange(e, 'abstract', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
-              onKeyPress={e => this.handleKeyPress(e, record.key)}
+              autoFocus
+              onChange={e => this.handleFieldChange(e, 'abstracts', record.lines)}
+              onBlur={e => this.saveRow(e, record.lines)}
+              onKeyPress={e => this.handlelinesPress(e, record.lines)}
               placeholder="摘要"
             />
           );
@@ -148,16 +163,16 @@ class NewVoucher extends PureComponent {
     }, {
       title: '科目',
       dataIndex: 'subject',
-      key: 'subject',
+      lines: 'subject',
       width: '20%',
       render: (text, record) => {
         if (record.editable) {
           return (
             <Input
               value={text}
-              onChange={e => this.handleFieldChange(e, 'subject', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
-              onKeyPress={e => this.handleKeyPress(e, record.key)}
+              onChange={e => this.handleFieldChange(e, 'subject', record.lines)}
+              onBlur={e => this.saveRow(e, record.lines)}
+              onKeyPress={e => this.handlelinesPress(e, record.lines)}
               placeholder="科目"
             />
           );
@@ -166,18 +181,20 @@ class NewVoucher extends PureComponent {
       },
     }, {
       title: '借方金额',
-      dataIndex: 'debit',
-      key: 'debit',
+      dataIndex: 'debitAmount',
+      lines: 'debitAmount',
       width: '20%',
       render: (text, record) => {
         if (record.editable) {
           return (
-            <Input
+            <InputNumber
               value={text}
-              onChange={e => this.handleFieldChange(e, 'debit', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
-              onKeyPress={e => this.handleKeyPress(e, record.key)}
-              placeholder="借方金额"
+              style={{ width: '100%' }}
+              onChange={e => this.handleFieldChange(e, 'debitAmount', record.lines)}
+              onBlur={e => this.saveRow(e, record.lines)}
+              onKeyPress={e => this.handlelinesPress(e, record.lines)}
+              formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              parser={value => value.replace(/\$\s?|(,*)/g, '')}
             />
           );
         }
@@ -185,20 +202,18 @@ class NewVoucher extends PureComponent {
       },
     }, {
       title: '贷方金额',
-      dataIndex: 'credit',
-      key: 'credit',
+      dataIndex: 'creditAmount',
+      lines: 'creditAmount',
       width: '20%',
       render: (text, record) => {
         if (record.editable) {
           return (
-            <InputNumber
+            <Input
               value={text}
-              onChange={e => this.handleFieldChange(e, 'credit', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
-              onKeyPress={e => this.handleKeyPress(e, record.key)}
-              formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
-              placeholder="借方金额"
+              onChange={e => this.handleFieldChange(e, 'creditAmount', record.lines)}
+              onBlur={e => this.saveRow(e, record.lines)}
+              onKeyPress={e => this.handlelinesPress(e, record.lines)}
+              placeholder="贷方金额"
             />
           );
         }
@@ -206,7 +221,7 @@ class NewVoucher extends PureComponent {
       },
     }, {
       title: '操作',
-      key: 'action',
+      lines: 'action',
       render: (text, record) => {
         if (record.editable) {
           if (record.isNew) {
@@ -214,7 +229,9 @@ class NewVoucher extends PureComponent {
               <span>
                 <a>保存</a>
                 <Divider type="vertical" />
-                <a onClick={() => this.remove(record.key)}>删除</a>
+                <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.lines)}>
+                  <a>删除</a>
+                </Popconfirm>
               </span>
             );
           }
@@ -222,15 +239,17 @@ class NewVoucher extends PureComponent {
             <span>
               <a>保存</a>
               <Divider type="vertical" />
-              <a onClick={e => this.cancel(e, record.key)}>取消</a>
+              <a onClick={e => this.cancel(e, record.lines)}>取消</a>
             </span>
           );
         }
         return (
           <span>
-            <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
+            <a onClick={e => this.toggleEditable(e, record.lines)}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={() => this.remove(record.key)}>删除</a>
+            <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.lines)}>
+              <a>删除</a>
+            </Popconfirm>
           </span>
         );
       },
@@ -252,7 +271,7 @@ class NewVoucher extends PureComponent {
           onClick={this.newMember}
           icon="plus"
         >
-          新增记录
+          新增成员
         </Button>
       </div>
     );

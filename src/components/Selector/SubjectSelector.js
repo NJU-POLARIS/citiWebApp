@@ -270,7 +270,7 @@ class SubjectSelector extends PureComponent {
   render() {
     return (
       <Cascader
-        defaultValue={this.state.value}
+        defaultValue={this.props.value}
         options={subjects}
         placeholder="选择科目"
         showSearch

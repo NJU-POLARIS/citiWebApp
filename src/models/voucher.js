@@ -11,9 +11,41 @@ export default {
     deleteStatus: [],
     vouchers: [],
     singleVoucher: [],
+    latestVid: 0,
   },
 
   effects: {
+    *fetchLatestVid({ payload }, { call, put }) {
+      const response = yield call(voucherService.latestVoucherNumber, payload);
+      yield put({
+        type: 'changeLoading',
+        payload: true,
+      });
+      yield put({
+        type: 'saveVid',
+        payload: response,
+      });
+      yield put({
+        type: 'changeLoading',
+        payload: false,
+      });
+    },
+    *fetchAllVoucher({ payload }, { call, put }) {
+      const response = yield call(voucherService.queryAllVoucher, payload);
+      yield put({
+        type: 'changeLoading',
+        payload: true,
+      });
+      yield put({
+        type: 'saveVouchers',
+        payload: response,
+      });
+      yield put({
+        type: 'changeLoading',
+        payload: false,
+      });
+    },
+
     *searchVoucher({ payload }, { call, put }) {
       const response = yield call(voucherService.searchVoucher, payload);
       yield put({
@@ -95,6 +127,12 @@ export default {
   },
 
   reducers: {
+    saveVid(state, action) {
+      return {
+        ...state,
+        latestVid: action.payload,
+      }
+    },
     saveVouchers(state, action) {
       return {
         ...state,
