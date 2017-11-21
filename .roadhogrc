@@ -15,7 +15,7 @@
   },
     "proxy": {
       "/api": {
-        "target": "http://localhost:8080/api/",
+        "target": "http://119.29.225.102:8080/api/",
         "changeOrigin": true,
         "pathRewrite": { "^/api" : "" }
       }
