@@ -1,17 +1,12 @@
 /**
- * Created by YZ on 2017/11/20.
+ * Created by YZ on 2017/11/21.
  */
 import * as financingService from '../services/financing';
 
 export default {
-  namespace: 'receiveFinancing',
+  namespace: 'moveFinancing',
   state: {
-    companyId: null,
-    companyName: null,
-    net: null,
-    mortgage: null,
-    receiveCompanies: null,
-    stockNet: null,
+
   },
   reducers: {
     saveReceive(state, { payload: { companyId, others: {companyName, net, mortgage } } }) {
@@ -41,18 +36,6 @@ export default {
         receiveCompanies,
       };
     },
-    /**
-     * 动产质押融资的库存净额
-     * @param state
-     * @param stockNet
-     * @returns {{stockNet: *}}
-     */
-    fillStockNet(state, {payload: stockNet}){
-      return {
-        ...state,
-        stockNet,
-      };
-    },
   },
   effects: {
     *applyForReceive({payload: { companyId, others: {companyName, net, mortgage } }}, {call, put}){
@@ -73,17 +56,6 @@ export default {
       const data = yield call(financingService.getNet, payload);
       yield put({
         type: 'fillNet',
-        payload: data,
-      });
-    },
-    *fetchStockNet({payload}, {call, put}) {
-      yield put({
-        type: 'fillStockNet',
-        payload: null,
-      });
-      const data = yield call(financingService.getStockNet, payload);
-      yield put({
-        type: 'fillStockNet',
         payload: data,
       });
     },
@@ -118,16 +90,6 @@ export default {
           type: 'fetchCompanies',
           payload: {
             companyId: 1,
-          },
-        });
-        dispatch({
-          type: 'fetchStockNet',
-          payload: {
-            companyId: 1,
-            twotime: {
-              start: '2017-10',
-              end: '2017-11',
-            }
           },
         });
       });

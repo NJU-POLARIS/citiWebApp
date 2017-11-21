@@ -4,12 +4,14 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import styles from './form.less';
+import {connect} from 'dva';
 
 const Option = Select.Option;
 
 @Form.create()
 class debtFinancing extends React.Component {
   render() {
+    const {stockNet} = this.props;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -31,7 +33,7 @@ class debtFinancing extends React.Component {
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="库存净额">
-          <Input/>
+          <Input value={stockNet} disabled={true} />
         </Form.Item>
         <Form.Item {...formItemLayout} label="库存质押额">
           {getFieldDecorator('debtAmount', {
@@ -60,4 +62,10 @@ class debtFinancing extends React.Component {
     );
   }
 }
-export default debtFinancing;
+debtFinancing.propTypes={};
+function mapStateToProps(state){
+  return {
+    stockNet: state.receiveFinancing.stockNet,
+  };
+}
+export default connect(mapStateToProps)(debtFinancing);

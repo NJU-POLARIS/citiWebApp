@@ -9,7 +9,7 @@ import request from '../utils/request';
  * @returns {Object}
  */
 export function applyForFinancing(param) {
-  const { companyId } = param;
+  const { companyId, others} = param;
   console.log(param);
   return request(`/api/supplychains/financing/receivables/${JSON.stringify(companyId)}`, {
     method: 'POST',
@@ -18,8 +18,18 @@ export function applyForFinancing(param) {
 }
 export function getNet(param){
   const { companyId, twotime } = param;
-  console.log(`/api/supplychains/financing/receivables/net/${JSON.stringify(companyId)}?${stringify(twotime)}`);
+  // console.log(`/api/supplychains/financing/receivables/net/${JSON.stringify(companyId)}?${stringify(twotime)}`);
   return request(`/api/supplychains/financing/receivables/net/${JSON.stringify(companyId)}?${stringify(twotime)}`);
+}
+
+/**
+ * 获得库存净额
+ * @param param
+ * @returns {Object}
+ */
+export function getStockNet(param){
+  const { companyId, twotime } = param;
+  return request(`/api/supplychains/financing/inventory/net/${JSON.stringify(companyId)}?${stringify(twotime)}`);
 }
 
 /**
@@ -29,8 +39,26 @@ export function getNet(param){
  */
 export function getCompanyObjects(param){
   const { companyId } = param;
-  console.log(`/api/supplychains/financing/receivables/${JSON.stringify(companyId)}`);
+  // console.log(`/api/supplychains/financing/receivables/${JSON.stringify(companyId)}`);
   return request(`/api/supplychains/financing/receivables/${JSON.stringify(companyId)}`);
 }
+export function getStockTypes(){
 
+}
+
+/**
+ * 保兑仓融资--货物来源
+ * @param param
+ */
+export function getProductSource(param) {
+
+}
+
+/**
+ * 保兑仓融资--计划购买货物
+ * @param param
+ */
+export function planToBuy(param){
+
+}
 

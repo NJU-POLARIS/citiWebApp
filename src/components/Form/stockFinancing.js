@@ -4,12 +4,14 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import styles from './form.less';
+import {connect} from 'dva';
 
 const Option = Select.Option;
 
 @Form.create()
 class stockFinancing extends React.Component {
   render() {
+    const {productSource} = this.props;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -62,7 +64,7 @@ class stockFinancing extends React.Component {
           }}
           label=""
         >
-          <Button type="primary">
+          <Button type="primary" htmlType="submit">
             申请
           </Button>
         </Form.Item>
@@ -70,4 +72,10 @@ class stockFinancing extends React.Component {
     );
   }
 }
-export default stockFinancing;
+stockFinancing.propTypes={};
+function mapStateToProps(state) {
+  return {
+    productSource: state.receiveFinancing.productSource,
+  };
+}
+export default connect(mapStateToProps)(stockFinancing);

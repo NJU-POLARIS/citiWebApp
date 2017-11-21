@@ -13,8 +13,32 @@ const Option = Select.Option;
 @Form.create()
 class getpaidFinancing extends Component {
   handleSubmit = (e) => {
-
+    const {dispatch} =this.props;
+    dispatch({
+      type: "receiveFinancing/saveReceive",
+      payload: {
+        companyId: cid,
+        others: {
+          companyName: companyName,
+          net: net,
+          mortgage: mortgage,
+        }
+      },
+    });
   }
+
+  handleChange(value) {
+    companyName= value;
+  }
+
+  handleInputChange=(e)=>{
+    const {dispatch} = this.props;
+    dispatch({
+      type: "receiveFinancing/saveMortgage",
+      payload: e.target.value,
+    });
+  }
+
   render() {
     const { cid, companyName, net, mortgage, receiveCompanies } = this.props;
     const { getFieldDecorator } = this.props.form;
@@ -43,7 +67,7 @@ class getpaidFinancing extends Component {
           {getFieldDecorator('getpaidObject', {
             rules: [{required: true, message: '请选择公司名称'}],
           })(
-            <Select placeholder="选择公司名称">
+            <Select placeholder="选择公司名称" onChange={this.handleChange}>
               {companyList}
             </Select>
           )}
@@ -58,7 +82,7 @@ class getpaidFinancing extends Component {
               {pattern: /^(\d+)((?:\.\d+)?)$/, message: '请输入合法金额数字'},
             ],
           })(
-            <Input prefix="¥" placeholder="请输入金额"/>
+            <Input prefix="¥" placeholder="请输入金额" onChange={this.handleInputChange}/>
           )}
         </Form.Item>
         <Form.Item
@@ -70,7 +94,7 @@ class getpaidFinancing extends Component {
           }}
           label=""
         >
-          <Button type="primary">
+          <Button type="primary" htmlType="submit">
             申请
           </Button>
         </Form.Item>
