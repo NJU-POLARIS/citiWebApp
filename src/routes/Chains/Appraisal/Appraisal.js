@@ -4,7 +4,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Tabs, Radio, Divider, Select, List, Progress, Row, Col } from 'antd';
+import { Tabs, Radio, Divider, Select, List, Progress, Row, Col, Card } from 'antd';
 import {MiniArea, ChartCard } from '../../../components/Charts';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import DescriptionList from '../../../components/DescriptionList';
@@ -20,13 +20,13 @@ const { Description } = DescriptionList;
 export default class Appraisal extends PureComponent {
   render() {
     const list=[{
-      title: "盈利--总资产报酬率",
+      title: "盈利--资产报酬率",
       num: 98,
     }, {
       title: "盈利--销售利润率",
       num: 58,
     }, {
-      title: "运营--总资产周转率",
+      title: "运营--资产周转率",
       num: 78,
     }, {
       title: "运营--存货周转率",
@@ -86,6 +86,7 @@ export default class Appraisal extends PureComponent {
       >
         <Tabs defaultActiveKey="1">
           <TabPane tab="成员绩效评价" key="1">
+            <Card bordered={false}>
             <RadioGroup defaultValue="supplier" className={styles.rg}>
               <RadioButton value="supplier">供应商</RadioButton>
               <RadioButton value="producer">生产商</RadioButton>
@@ -112,9 +113,11 @@ export default class Appraisal extends PureComponent {
                 </List.Item>
               )}
             />
+            </Card>
           </TabPane>
 
           <TabPane tab="协调绩效评价" key="2">
+            <Card bordered={false}>
             <RadioGroup defaultValue="supply_producer" className={styles.rg1}>
               <RadioButton value="supply_producer">供应商与生产商</RadioButton>
               <RadioButton value="producer_distributor">生产商与分销商</RadioButton>
@@ -160,9 +163,11 @@ export default class Appraisal extends PureComponent {
                 </ChartCard>
               </Col>
             </Row>
+            </Card>
           </TabPane>
 
           <TabPane tab="整体绩效评价" key="3">
+            <Card bordered={false}>
             <Select className={styles.select} style={{ width: 200 }} placeholder="请选择一条供应链">
               <Option value="a&b&c">a&b&c</Option>
             </Select>
@@ -241,6 +246,7 @@ export default class Appraisal extends PureComponent {
                 </ChartCard>
               </Col>
             </Row>
+            </Card>
           </TabPane>
 
         </Tabs>

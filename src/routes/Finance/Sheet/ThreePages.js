@@ -4,7 +4,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Tabs } from 'antd';
+import { Tabs, Card } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import BalanceSheetTable from '../../../components/Table/BalanceSheetTable';
 import TableOperation from '../../../components/Table/TableOperation';
@@ -20,16 +20,22 @@ function ThreePages ({ balancesheetData, profitData, cashflowData }) {
     >
       <Tabs defaultActiveKey="1">
         <TabPane tab="资产负债表" key="1">
-          <TableOperation/>
-          <BalanceSheetTable data={ balancesheetData } />
+          <Card bordered={false}>
+            <TableOperation/>
+            <BalanceSheetTable data={ balancesheetData } />
+          </Card>
         </TabPane>
         <TabPane tab="利润表" key="2">
+          <Card bordered={false}>
           <TableOperation/>
           <ProfitTable data={ profitData }/>
+          </Card>
         </TabPane>
         <TabPane tab="现金流量表" key="3">
+          <Card bordered={false}>
           <TableOperation/>
           <CashFlowTable data={ cashflowData }/>
+          </Card>
         </TabPane>
       </Tabs>
     </PageHeaderLayout>
