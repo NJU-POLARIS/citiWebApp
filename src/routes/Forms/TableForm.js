@@ -33,8 +33,7 @@ export default class TableForm extends PureComponent {
       }
     });
   }
-  toggleEditable(e, key) {
-    e.preventDefault();
+  toggleEditable(key) {
     const target = this.getRowByKey(key);
     if (target) {
       // 进入编辑状态时保存原始数据
@@ -43,6 +42,7 @@ export default class TableForm extends PureComponent {
       }
       target.editable = !target.editable;
       this.setState({ data: [...this.state.data] });
+      console.log(this.state);
     }
   }
   remove(key) {

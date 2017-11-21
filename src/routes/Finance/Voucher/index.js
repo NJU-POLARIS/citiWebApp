@@ -76,10 +76,14 @@ class Voucher extends PureComponent {
     expandForm: false,
   };
 
-  handleModalVisible = (flag) => {
+  showModal = () => {
     this.setState({
-      modalVisible: !!flag,
+      modalVisible: true,
     });
+  };
+
+  handleCancel = () => {
+    this.setState({ modalVisible: false });
   };
 
   toggleForm = () => {
@@ -97,10 +101,10 @@ class Voucher extends PureComponent {
         const my_voucher = { company_id, voucher_id, date, remark, voucher_maker, data };
         message.success('YES!');
         console.log(my_voucher);
-        this.props.dispatch({
-          type: 'voucher/',
-          payload: my_voucher,
-        });
+        // this.props.dispatch({
+        //   type: 'voucher/',
+        //   payload: my_voucher,
+        // });
       }
     });
   };
@@ -305,7 +309,15 @@ class Voucher extends PureComponent {
 
   render() {
     const { modalVisible } = this.state;
-    const { getFieldDecorator } = this.props.form;
+    const values = {
+      company_id: 1,
+      voucher_id: '记-123',
+      date: '2016-02-02',
+      remark: '测试数据',
+      voucher_maker: 'company1admin',
+      data: [],
+      totalVo: { chineseTotal: '零元零角零分', debitAmount: 0, creditAmount: 0 },
+    };
     return (
       <PageHeaderLayout title="查询凭证">
         <Card bordered={false}>
@@ -314,28 +326,16 @@ class Voucher extends PureComponent {
               {this.renderForm()}
             </div>
             <div className={styles.voucherOperator}>
-              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>新增凭证</Button>
+              <Button icon="plus" type="primary" onClick={this.showModal}>新增凭证</Button>
             </div>
           </div>
         </Card>
-        <Modal
+        <NewVoucher
+          onCancel={this.handleCancel}
           title="新增凭证"
           visible={modalVisible}
-          onOk={(e) => this.handleAdd(e)}
-          onCancel={() => this.handleModalVisible()}
-          width={1200}
-        >
-          {getFieldDecorator('newVoucher', {
-            initialValue: {
-              company_id: 1,
-              voucher_id: '记-123',
-              date: '2016-02-02',
-              remark: '测试数据',
-              voucher_maker: 'company1admin',
-              data: [],
-            }
-          })(<NewVoucher/>)}
-        </Modal>
+          value={values}
+        />
       </PageHeaderLayout>
     );
   }
