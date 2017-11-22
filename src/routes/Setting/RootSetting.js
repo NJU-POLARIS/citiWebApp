@@ -5,23 +5,9 @@ import { connect } from 'dva';
 import { Form, Table, Input, Icon, Button, Popconfirm, Menu } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableTable from '../Setting/RootTable';
+import BasicLayout from '../../layouts/BasicLayout';
 
 const FormItem = Form.Item;
-let dataSource = [{
-  info: '产品',
-  root: '木材',
-  key: 1,
-}, {
-  info: 'kk',
-  root: 'normal',
-  key: 2,
-}];
-
-
-@connect(state => ({
-  rule: state.rule,
-}))
-@Form.create()
 
 class RootSetting extends React.Component {
   state = {
@@ -33,18 +19,35 @@ class RootSetting extends React.Component {
     });
   }
   render() {
+    // const { currentUser } = BasicLayout.props;
+    // console.log(currentUser.userName);
+    const dataSource = [{
+      info: 'company1admin',
+      root: 'admin',
+      key: 1,
+    }, {
+      info: 'company1normal1',
+      root: 'normal',
+      key: 2,
+    }];
     return (
       <PageHeaderLayout title="权限设置">
-        <EditableTable />
+        <EditableTable data={dataSource} />
       </PageHeaderLayout>
     );
   }
 }
 
-function getData() {
-  return (
-    dataSource
-  );
-}
-export { RootSetting, getData };
+// export function getData() {
+//   return (
+//     dataSource
+//   );
+// }
+export default connect(state => ({
+  currentUser: state.login.currentUser,
+  collapsed: state.global.collapsed,
+  fetchingNotices: state.global.fetchingNotices,
+  notices: state.global.notices,
+  register: state.register,
+}))(RootSetting);
 

@@ -9,21 +9,102 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const InputGroup = Input.Group;
 const { MonthPicker } = DatePicker;
-
+// "工业","建筑业","交通运输仓储及邮政业","批发和零售贸易业","住宿和餐饮业","房地产业","社会服务业","农林牧渔业"
+// "煤炭工业","石油石化工业","冶金工业","建材工业"
 const options = [{
   value: '工业',
   label: '工业',
   children: [{
-    value: '钢铁',
-    label: '钢铁',
+    value: '煤炭工业',
+    label: '煤炭工业',
+
+  }, {
+    value: '石油石化工业',
+    label: '石油石化工业',
+
+  }, {
+    value: '冶金工业',
+    label: '冶金工业',
+
+  }, {
+    value: '建材工业',
+    label: '建材工业',
 
   }],
 }, {
-  value: '服务业',
-  label: '服务业',
+  value: '建筑业',
+  label: '建筑业',
   children: [{
-    value: '餐饮',
-    label: '餐饮',
+    value: '房屋和土木工程建筑业',
+    label: '房屋和土木工程建筑业',
+
+  }, {
+    value: '建筑安装业',
+    label: '建筑安装业',
+
+  }],
+}, {
+  value: '交通运输仓储及邮政业',
+  label: '交通运输仓储及邮政业',
+  children: [{
+    value: '道路运输',
+    label: '道路运输',
+
+  }, {
+    value: '水上运输',
+    label: '水上运输',
+
+  }, {
+    value: '仓储业',
+    label: '仓储业',
+
+  }],
+}, {
+  value: '批发和零售贸易业',
+  label: '批发和零售贸易业',
+  children: [{
+    value: '商业贸易',
+    label: '商业贸易',
+
+  }, {
+    value: '物资贸易',
+    label: '物资贸易',
+
+  }, {
+    value: '粮食业',
+    label: '粮食业',
+
+  }],
+}, {
+  value: '住宿和餐饮业',
+  label: '住宿和餐饮业',
+  children: [{
+    value: '住宿业',
+    label: '住宿业',
+
+  }],
+}, {
+  value: '房地产业',
+  label: '房地产业',
+  children: [{
+    value: '房地产开发',
+    label: '房地产开发',
+
+  }],
+}, {
+  value: '社会服务业',
+  label: '社会服务业',
+  children: [{
+    value: '大旅游',
+    label: '大旅游',
+
+  }],
+}, {
+  value: '农林牧渔业',
+  label: '农林牧渔业',
+  children: [{
+    value: '农业',
+    label: '农业',
 
   }],
 }];
@@ -60,7 +141,7 @@ export default class Register extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.register.status === 'ok') {
+    if (nextProps.register.status === 'pass') {
       this.props.dispatch(routerRedux.push('/user/register-result'));
     }
   }
@@ -85,10 +166,27 @@ export default class Register extends Component {
     e.preventDefault();
     this.props.form.validateFields({ force: true },
       (err, values) => {
+        const { Time, industry, scaleArray, supplyChain } = values;
+        const timestamp = Date.parse(Time);
+        const firsIndustry = industry[0];
+        const seconIndustry = industry[1];
+        const scaleonly = scaleArray[0];
+        const supplyIndex = supplyChain[0];
+        const allValue = {
+          ...values,
+          firstIndustry: firsIndustry,
+          secondIndustry: seconIndustry,
+          activeTime: timestamp,
+          type: 'ADMIN',
+          scale: scaleonly,
+          supplyChainIndex: supplyIndex,
+
+        }
+        console.log(allValue);
         if (!err) {
           this.props.dispatch({
             type: 'register/submit',
-            payload: values,
+            payload: allValue,
           });
         }
       }
@@ -174,11 +272,9 @@ export default class Register extends Component {
 
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('account', {
+            {getFieldDecorator('userName', {
               rules: [{
                 required: true, message: '请输入要注册的账户！',
-              }, {
-                type: 'email', message: '该账户已存在！',
               }],
             })(
               <Input size="large" placeholder="账户" />
@@ -226,7 +322,7 @@ export default class Register extends Component {
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('name', {
+            {getFieldDecorator('companyName', {
               rules: [{
                 required: true, message: '请输入单位名称！',
               }],
@@ -237,7 +333,7 @@ export default class Register extends Component {
 
           </FormItem>
           <FormItem>
-            {getFieldDecorator('address', {
+            {getFieldDecorator('location', {
               rules: [{
                 required: true, message: '请输入单位地址！',
               }],
@@ -271,7 +367,7 @@ export default class Register extends Component {
                 )}
               </FormItem>
               <FormItem style={{ width: '35%' }}>
-                {getFieldDecorator('scale', {
+                {getFieldDecorator('scaleArray', {
                   rules: [{
                     required: true, message: '请选择规模！',
                   }],
@@ -311,7 +407,7 @@ export default class Register extends Component {
           </FormItem>
 
           <FormItem >
-            {getFieldDecorator('vouchertime', {
+            {getFieldDecorator('Time', {
               rules: [{
                 required: true, message: '请选择账套启用年月！',
               }],

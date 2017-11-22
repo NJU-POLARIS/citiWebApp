@@ -7,7 +7,6 @@ function checkStatus(response) {
   }
   notification.error({
     message: `请求错误 ${response.status}: ${response.url}`,
-    description: response.statusText,
   });
   const error = new Error(response.statusText);
   error.response = response;
@@ -42,13 +41,11 @@ export default function request(url, options) {
       if (error.code) {
         notification.error({
           message: error.name,
-          description: error.message,
         });
       }
       if ('stack' in error && 'message' in error) {
         notification.error({
           message: `请求错误: ${url}`,
-          description: error.message,
         });
       }
       return error;

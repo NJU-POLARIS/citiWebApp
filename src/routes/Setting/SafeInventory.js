@@ -7,11 +7,7 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableTable from '../Setting/InventoryTable';
 
 const FormItem = Form.Item;
-let dataSource = [{
-  product: '产品',
-  name: '木材',
-  Inventory: '20',
-}];
+
 
 
 @connect(state => ({
@@ -28,22 +24,33 @@ class SafetyInventory extends React.Component {
       current: e.key,
     });
   }
+  getData = () => {
+    this.props.dispatch({
+      type: 'safeInventory/getInventory',
+      payload: {
+        companyId: 1,
+      },
+    });
+    return this.props.safeInventory;
+  }
   render() {
+    this.getData();
+    const dataSource = [{
+      product: '产品',
+      name: '木材',
+      Inventory: '20吨',
+    }];
     return (
       <PageHeaderLayout title="安全库存量设置">
-        <Button icon="file-text">打印</Button>
-        <Button icon="export" style={{ margin: '10px' }}>导出</Button>
-        <Button icon="reload" onClick="">初始化</Button>
-        <EditableTable />
+        <EditableTable data={dataSource} />
       </PageHeaderLayout>
     );
   }
 }
 
-function getData() {
-  return (
-    dataSource
-  );
-}
-export { SafetyInventory, getData };
+export default connect(state => ({
+  currentUser: state.login.currentUser,
+  register: state.register,
+  safeInventory: state.safeInventory,
+}))(SafetyInventory);
 

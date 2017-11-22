@@ -14,8 +14,8 @@ import Appraisal from '../routes/Chains/Appraisal/Appraisal';
 
 import { InitialSetting } from '../routes/Setting/InitialSetting';
 import DataManagement from '../routes/Setting/DataManagement';
-import { SafetyInventory } from '../routes/Setting/SafeInventory';
-import { RootSetting } from '../routes/Setting/RootSetting';
+import SafetyInventory from '../routes/Setting/SafeInventory';
+import RootSetting from '../routes/Setting/RootSetting';
 import Institutions from '../routes/FinancialInstitutions/Institutions';
 
 import Demo from '../routes/Demo';

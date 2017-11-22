@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp,react/no-unused-state */
-import React from 'react';
+import React, { TableCell } from 'react';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 import styles from './EditTable.less';
 import { subjects5, subjects4, other, subjects3, subjects2, subjects1 } from '../../utils/persistence';
@@ -73,6 +73,7 @@ class EditableTable extends React.Component {
     }, {
       title: '期初余额',
       dataIndex: 'initialbalance',
+      key: 'initialbalance',
       width: '10%',
       render: (text, record) => {
         return (
@@ -85,6 +86,7 @@ class EditableTable extends React.Component {
     }, {
       title: '借方累计',
       dataIndex: 'lend',
+      key: 'lend',
       width: '10%',
       render: (text, record) => (
         <EditableCell
@@ -95,6 +97,7 @@ class EditableTable extends React.Component {
     }, {
       title: '贷方累计',
       dataIndex: 'credit',
+      key: 'credit',
       width: '10%',
       render: (text, record) => (
         <EditableCell
@@ -105,11 +108,15 @@ class EditableTable extends React.Component {
     }, {
       title: '发生额累计',
       dataIndex: 'sum',
+      key: 'sum',
       width: '10%',
+      value: 0,
     }, {
       title: '年初余额',
       dataIndex: 'outcome',
+      key: 'outcome',
       width: '10%',
+      value: 0,
     },
     ];
     this.state = {
@@ -145,6 +152,17 @@ class EditableTable extends React.Component {
         break;
     }
   };
+  calChange = (key, dataIndex) => {
+    return (value) => {
+      const dataSource = [...this.state.dataSource];
+      const findlend = dataSource.find(item => item.key === 'lend');
+      const findCredit = dataSource.find(item => item.key === 'credit');
+      if (findCredit && findlend) {
+        findCredit[dataIndex] = value;
+        this.setState({ dataSource });
+      }
+    };
+  }
   handleInitial = () => {
   }
   render() {

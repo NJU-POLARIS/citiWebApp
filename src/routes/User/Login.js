@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unused-state */
+/* eslint-disable react/no-unused-state,object-shorthand */
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux, Link } from 'dva/router';
@@ -18,8 +18,35 @@ export default class Login extends Component {
     type: 'account',
   }
 
+  // componentDidMount() {
+  //   const { currentUser } = this.props.login;
+  //   const { companyId } = currentUser;
+  //   console.log(24);
+  //   console.log(companyId);
+  //   const response = this.props.dispatch({
+  //     type: 'account/getInfo',
+  //     payload: {
+  //       companyId: companyId,
+  //     },
+  //   });
+  //   const { currentCompany } = response;
+  //   console.log(33);
+  //   console.log(currentCompany.companyName);
+  //   this.props.dispatch({
+  //     type: 'user/fetchCurrent',
+  //     payload: {
+  //       userName: this.props.currentUser.userName,
+  //     },
+  //   });
+  //   console.log(this.props.currentUser.userName);
+  // }
+  // 控制跳转
   componentWillReceiveProps(nextProps) {
-    if (nextProps.login.status === 'ok') {
+    if ((nextProps.login.type === 'NORMAL') && this.state.type === 'account') {
+      this.props.dispatch(routerRedux.push('/'));
+    } else if ((nextProps.login.type === 'FINANCE') && this.state.type === 'finance') {
+      this.props.dispatch(routerRedux.push('/'));
+    } else if ((nextProps.login.type === 'ADMIN') && this.state.type === 'account') {
       this.props.dispatch(routerRedux.push('/'));
     }
   }
@@ -28,22 +55,11 @@ export default class Login extends Component {
     clearInterval(this.interval);
   }
 
+
   onSwitch = (key) => {
     this.setState({
       type: key,
     });
-  }
-
-  onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
-      }
-    }, 1000);
   }
 
   handleSubmit = (e) => {
@@ -53,7 +69,7 @@ export default class Login extends Component {
       (err, values) => {
         if (!err) {
           this.props.dispatch({
-            type: `login/${type}Submit`,
+            type: 'login/accountSubmit',
             payload: values,
           });
         }
@@ -82,15 +98,17 @@ export default class Login extends Component {
           <Tabs animated={false} className={styles.tabs} activeKey={type} onChange={this.onSwitch}>
             <TabPane tab="企业入口" key="account">
               {
-                login.status === 'error' &&
-                login.type === 'account' &&
-                login.submitting === false &&
+                (login.status === 500) &&
                 this.renderMessage('账户或密码不正确')
+              }
+              {
+                (login.type === 'FINANCE') &&
+                this.renderMessage('请选择金融机构入口')
               }
               <FormItem>
                 {getFieldDecorator('userName', {
                   rules: [{
-                    required: type === 'account', message: '请输入账户名！',
+                    required: true, message: '请输入账户名！',
                   }],
                 })(
                   <Input
@@ -103,7 +121,7 @@ export default class Login extends Component {
               <FormItem>
                 {getFieldDecorator('password', {
                   rules: [{
-                    required: type === 'account', message: '请输入密码！',
+                    required: true, message: '请输入密码！',
                   }],
                 })(
                   <Input
@@ -115,17 +133,21 @@ export default class Login extends Component {
                 )}
               </FormItem>
             </TabPane>
-            <TabPane tab="金融机构入口" key="Finance">
+            <TabPane tab="金融机构入口" key="finance">
               {
                 login.status === 'error' &&
-                login.type === 'Finance' &&
+                login.type === 'finance' &&
                 login.submitting === false &&
                 this.renderMessage('账户或密码不正确')
+              }
+              {
+                (login.type === 'ADMIN' || login.type === 'NORMAL') &&
+                this.renderMessage('请选择企业入口')
               }
               <FormItem>
                 {getFieldDecorator('userName', {
                   rules: [{
-                    required: type === 'Finance', message: '请输入账户名！',
+                    required: true, message: '请输入账户名！',
                   }],
                 })(
                   <Input
@@ -138,7 +160,7 @@ export default class Login extends Component {
               <FormItem>
                 {getFieldDecorator('password', {
                   rules: [{
-                    required: type === 'Finance', message: '请输入密码！',
+                    required: true, message: '请输入密码！',
                   }],
                 })(
                   <Input

@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp */
+/* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp,react/sort-comp */
 import React from 'react';
+import { connect } from 'dva';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 import styles from './EditTable.less';
 import { getData } from './RootSetting';
@@ -62,21 +63,9 @@ class EditableTable extends React.Component {
       title: '用户信息',
       dataIndex: 'info',
       width: '30%',
-      render: (text, record) => (
-        <EditableCell
-          value={text}
-          onChange={this.onCellChange(record.key, 'info')}
-        />
-      ),
     }, {
       title: '权限',
       dataIndex: 'root',
-      render: (text, record) => (
-        <EditableCell
-          value={text}
-          onChange={this.onCellChange(record.key, 'root')}
-        />
-      ),
     }, {
       title: '操作',
       dataIndex: 'operation',
@@ -93,10 +82,14 @@ class EditableTable extends React.Component {
     }];
 
     this.state = {
-      dataSource: getData(),
+      dataSource: this.getData(),
       count: 2,
     };
   }
+  getData = () => {
+    const { data } = this.props;
+    return data;
+  };
   onCellChange = (key, dataIndex) => {
     return (value) => {
       const dataSource = [...this.state.dataSource];
@@ -115,10 +108,21 @@ class EditableTable extends React.Component {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
+      root: 'normal',
+      info: `company1normal${count}`,
     };
     this.setState({
       dataSource: [...dataSource, newData],
       count: count + 1,
+    });
+    // 需要改变参数
+    const param = {
+      userName: newData.info,
+      companyId: 1,
+    }
+    this.props.dispatch({
+      type: 'register/normalSubmit',
+      payload: param,
     });
   }
   render() {
@@ -132,4 +136,7 @@ class EditableTable extends React.Component {
     );
   }
 }
-export default EditableTable;
+export default connect(state => ({
+  currentUser: state.login.currentUser,
+  register: state.register,
+}))(EditableTable);

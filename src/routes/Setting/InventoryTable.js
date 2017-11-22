@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp */
+/* eslint-disable no-unused-vars,prefer-destructuring,react/no-multi-comp,react/sort-comp */
 import React from 'react';
+import { connect } from 'dva';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 import styles from './EditTable.less';
 import { getData } from './SafeInventory';
@@ -102,10 +103,14 @@ class EditableTable extends React.Component {
     }];
 
     this.state = {
-      dataSource: getData(),
+      dataSource: this.getData(),
       count: 2,
     };
   }
+  getData = () => {
+    const { data } = this.props;
+    return data;
+  };
   onCellChange = (key, dataIndex) => {
     return (value) => {
       const dataSource = [...this.state.dataSource];
@@ -136,9 +141,13 @@ class EditableTable extends React.Component {
     return (
       <div>
         <Button icon="plus" className="editable-add-btn" onClick={this.handleAdd}>添加</Button>
+        <Button icon="save" onClick="">保存</Button>
         <Table bordered dataSource={dataSource} columns={columns} />
       </div>
     );
   }
 }
-export default EditableTable;
+export default connect(state => ({
+  currentUser: state.login.currentUser,
+  register: state.register,
+}))(EditableTable);
