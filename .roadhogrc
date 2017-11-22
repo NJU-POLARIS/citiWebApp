@@ -13,13 +13,13 @@
       ]
     }
   },
-    "proxy": {
-      "/api": {
-        "target": "http://119.29.225.102:8080/api/",
-        "changeOrigin": true,
-        "pathRewrite": { "^/api" : "" }
-      }
-    },
+  "proxy": {
+    "/api": {
+      "target": "http://119.29.225.202:8080/api/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api" : "" }
+    }
+  },
   "externals": {
     "g2": "G2",
     "g-cloud": "Cloud",

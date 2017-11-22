@@ -118,18 +118,18 @@ class Voucher extends PureComponent {
         this.props.dispatch({
           type: 'voucher/searchVoucher',
           payload: {
-            compantId: 1,
+            companyId: 1,
             startPeriod: startPeriod,
             endPeriod: endPeriod,
-            character: character,
-            maker: voucher_maker,
-            abstracts: abstracts,
-            subjectId: subjectId[1].toString(),
-            lowPrice: lowPrice,
-            highPrice: highPrice,
-            lowVoucherNumber: lowVoucherNumber,
-            highVoucherNumber: highVoucherNumber,
-            sortOrder: sortOrder,
+            // character: character || '全部',
+            // maker: voucher_maker || '全部',
+            // abstracts: abstracts || '',
+            // subjectId: subjectId[1].toString() || '',
+            // lowPrice: lowPrice || -1,
+            // highPrice: highPrice || -1,
+            // lowVoucherNumber: lowVoucherNumber || -1,
+            // highVoucherNumber: highVoucherNumber || -1,
+            // sortOrder: sortOrder || 0,
           },
         });
       }
@@ -364,7 +364,7 @@ class Voucher extends PureComponent {
 
   render() {
     const { modalVisible } = this.state;
-    const { voucher: { vouchers }} = this.props;
+    const { voucher: { vouchers, loading }} = this.props;
     const values = {
       company_id: 1,
       voucher_id: '记-123',
@@ -425,6 +425,7 @@ class Voucher extends PureComponent {
             </div>
           </div>
           <Table
+            loading={loading}
             columns={columns}
             dataSource={vouchers}
             pagination={false}
