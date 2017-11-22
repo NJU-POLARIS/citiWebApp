@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'dva';
 import { Modal, Row, Col, Table, Button, Input, message, DatePicker, Popconfirm, Divider, Icon, Cascader, InputNumber, Form, Select } from 'antd';
 import styles from './NewVoucher.less';
+import digitUppercase from '../../../utils/upperChinese';
 
 import SupportOne from './SupportOne';
 import SupportTwo from './SupportTwo';
-
 
 const subjects = [{
   "children": [
@@ -255,6 +256,10 @@ const displayRender = (labels, selectedOptions) => labels.map((label, i) => {
 const FormItem = Form.Item;
 const { Option } = Select;
 
+
+@connect(state => ({
+  voucher: state.voucher,
+}))
 @Form.create()
 class NewVoucher extends PureComponent {
   constructor(props) {
@@ -283,8 +288,33 @@ class NewVoucher extends PureComponent {
 
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        const { company_id, data, totalVo } = this.state;
+        const { voucherTag, voucherNumber, date, voucher_maker, remark } = values;
+        const voucher_id = voucherTag + '-' + voucherNumber;
+        // console.log(company_id, voucher_id, voucher_maker, date, remark, data, totalVo);
+        if (totalVo.debitAmount !== totalVo.creditAmount) {
+          message.error("借贷不平衡！")
+        }else {
+          this.props.dispatch({
+            type: 'voucher/commitVoucher',
+            payload: {
+              company_id: company_id,
+              voucher_id: voucher_id,
+              voucher_maker: voucher_maker,
+              date: date,
+              remark: remark,
+              data: data,
+              totalVo: totalVo,
+            },
+          });
+        }
 
+      }
+    });
   };
 
   componentDidMount() {
@@ -303,19 +333,10 @@ class NewVoucher extends PureComponent {
   getRowBylines(lines) {
     return this.state.data.filter(item => item.lines === lines)[0];
   }
+
   index = 0;
   cacheOriginData = {};
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.form.validateFieldsAndScroll((err, values) => {
-  //     if (!err) {
-  //       this.props.dispatch({
-  //         type: 'form/submit',
-  //         payload: values,
-  //       });
-  //     }
-  //   });
-  // }
+
   toggleEditable(lines) {
     const target = this.getRowBylines(lines);
     if (target) {
@@ -332,12 +353,15 @@ class NewVoucher extends PureComponent {
     const newData = this.state.data.filter(item => item.lines !== lines);
     this.setState({ data: newData });
     this.props.onChange(newData);
+    this.updateTotal();
   }
 
   updateTotal()  {
     const newTotal = {...this.state.totalVo};
     const newData = [...this.state.data];
 
+    newTotal.debitAmount = 0;
+    newTotal.creditAmount = 0;
     if (newData) {
       for (let item of newData) {
         newTotal.debitAmount += item.debitAmount;
@@ -345,6 +369,7 @@ class NewVoucher extends PureComponent {
       }
       this.index += 1;
     }
+    newTotal.chineseTotal = digitUppercase(newTotal.debitAmount);
     this.setState({ totalVo: newTotal });
   };
 
@@ -387,9 +412,9 @@ class NewVoucher extends PureComponent {
     if (target) {
       target[fieldName] = e;
       this.setState({ data: newData });
-      console.log(this.state.data);
+      // console.log(this.state.data);
+      this.updateTotal();
     }
-    this.updateTotal();
   }
 
   handleFieldChange(e, fieldName, lines) {
@@ -580,13 +605,16 @@ class NewVoucher extends PureComponent {
         if (record.editable) {
           return (
             <InputNumber
+              min={0}
               value={text}
+              precision={2}
+              step={0.1}
               style={{ width: '100%' }}
               onChange={e => this.handleNumberChange(e, 'debitAmount', record.lines)}
               onBlur={e => this.saveRow(e, record.lines)}
               onKeyPress={e => this.handlelinesPress(e, record.lines)}
               formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
+              parser={value => value.replace(/\s?|(,*)/g, '')}
             />
           );
         }
@@ -601,13 +629,16 @@ class NewVoucher extends PureComponent {
         if (record.editable) {
           return (
             <InputNumber
+              min={0}
               value={text}
+              precision={2}
+              step={0.1}
               style={{ width: '100%' }}
               onChange={e => this.handleNumberChange(e, 'creditAmount', record.lines)}
               onBlur={e => this.saveRow(e, record.lines)}
               onKeyPress={e => this.handlelinesPress(e, record.lines)}
               formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
+              parser={value => value.replace(/\s?|(,*)/g, '')}
             />
           );
         }
@@ -674,10 +705,10 @@ class NewVoucher extends PureComponent {
         title={this.state.title}
         onCancel={() => {
           this.props.onCancel();
-          this.handleReset();
+          // this.handleReset();
         }}
-        onOk={this.handleSubmit()}
-        width={1400}
+        onOk={(e) => this.handleSubmit(e)}
+        width={1200}
       >
         <div className={styles.voucher}>
           <div className={styles.voucherForm}>
