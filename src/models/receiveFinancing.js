@@ -12,6 +12,13 @@ export default {
     mortgage: null,
     receiveCompanies: null,
     stockNet: null,
+
+    moveStockTypes: null,
+    moveCompanyId: null,
+    moveStockType: null,
+    moveNet: null,
+    movePledge: null,
+    stockTypes: null,
   },
   reducers: {
     saveReceive(state, { payload: { companyId, others: {companyName, net, mortgage } } }) {
@@ -47,10 +54,25 @@ export default {
      * @param stockNet
      * @returns {{stockNet: *}}
      */
-    fillStockNet(state, {payload: stockNet}){
+    fillStockNet(state, {payload: moveNet}){
       return {
         ...state,
-        stockNet,
+        moveNet,
+      };
+    },
+    fillStockTypes(state, { payload: stockTypes}){
+      return {
+        ...state,
+        stockTypes,
+      };
+    },
+    saveMove(state, { payload: { companyId, others: {type, net, pledge} } }) {
+      return {
+        ...state,
+        moveCompanyId: companyId,
+        moveStockType: type,
+        moveNet: net,
+        movePledge: pledge,
       };
     },
   },
@@ -76,17 +98,6 @@ export default {
         payload: data,
       });
     },
-    *fetchStockNet({payload}, {call, put}) {
-      yield put({
-        type: 'fillStockNet',
-        payload: null,
-      });
-      const data = yield call(financingService.getStockNet, payload);
-      yield put({
-        type: 'fillStockNet',
-        payload: data,
-      });
-    },
     *fetchCompanies({payload}, {call, put}) {
       yield put({
         type: 'fillReceiveCompanies',
@@ -98,7 +109,41 @@ export default {
         payload: data,
       });
     },
-
+    /**
+     * move
+     */
+      *applyForMove({payload: {companyId, others: {type, net, pledge} }},{call, put}){
+      yield call(financingService.applyForMove, payload);
+      yield put({
+        type: 'saveMove',
+        moveCompanyId: companyId,
+        moveStockType: type,
+        moveNet: net,
+        movePledge: pledge,
+      });
+    },
+    *fetchStockNet({payload}, {call, put}) {
+      yield put({
+        type: 'fillStockNet',
+        payload: null,
+      });
+      const data = yield call(financingService.getStockNet, payload);
+      yield put({
+        type: 'fillStockNet',
+        payload: data,
+      });
+    },
+    *fetchStocktypes({payload}, {call,put}){
+      yield put({
+        type: 'fillStockTypes',
+        payload: null,
+      });
+      const data = yield call(financingService.getStockTypes, payload);
+      yield put({
+        type: 'fillStockTypes',
+        payload: data,
+      });
+    },
 
   },
   subscriptions: {
@@ -128,6 +173,12 @@ export default {
               start: '2017-10',
               end: '2017-11',
             }
+          },
+        });
+        dispatch({
+          type: 'fetchStockTypes',
+          payload: {
+            companyId: 1,
           },
         });
       });

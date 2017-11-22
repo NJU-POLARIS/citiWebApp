@@ -5,14 +5,39 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import styles from './form.less';
 import {connect} from 'dva';
+import {getStockTypes} from "../../services/financing";
 
 const Option = Select.Option;
 
 @Form.create()
+  /**
+   * 动产质押融资
+   */
 class debtFinancing extends React.Component {
+  handleSubmit=(e) => {
+    e.preventDefault();
+    this.props.form.validateFields({ force: true },
+      (err, values) => {
+        if(!err) {
+          this.props.dispatch({
+            type: 'moveFinancing/applyForMove',
+            payload: values,
+          });
+        }
+      }
+    );
+  }
   render() {
-    const {stockNet} = this.props;
+    const { net, form, stockTypes, type, pledge } = this.props;
     const { getFieldDecorator } = this.props.form;
+
+    const stockList = [];
+    if(stockTypes){
+      for(let i=0;i<stockTypes.length;i++){
+        stockList.push(<Option key={stockTypes.get(i)}>{stockTypes.get(i)}</Option>);
+      }
+    }
+
     const formItemLayout = {
       labelCol: {
         span: 8,
@@ -22,18 +47,18 @@ class debtFinancing extends React.Component {
       },
     };
     return (
-      <Form layout="horizontal" className={styles.debtFinancing}>
+      <Form layout="horizontal" className={styles.debtFinancing} onSubmit={this.handleSubmit}>
         <Form.Item {...formItemLayout} label="库存种类">
           {getFieldDecorator('type', {
             rules: [{required: true, message: '请选择原材料或商品名称'}],
           })(
             <Select placeholder="选择库存名称">
-              <Option value="白菜">白菜</Option>
+              {stockList}
             </Select>
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="库存净额">
-          <Input value={stockNet} disabled={true} />
+          <Input value={net} disabled={true} />
         </Form.Item>
         <Form.Item {...formItemLayout} label="库存质押额">
           {getFieldDecorator('debtAmount', {
@@ -54,7 +79,7 @@ class debtFinancing extends React.Component {
           }}
           label=""
         >
-          <Button type="primary">
+          <Button type="primary" htmlType="submit">
             申请
           </Button>
         </Form.Item>
@@ -65,7 +90,8 @@ class debtFinancing extends React.Component {
 debtFinancing.propTypes={};
 function mapStateToProps(state){
   return {
-    stockNet: state.receiveFinancing.stockNet,
+    stockTypes: state.receiveFinancing.stockTypes,
+    net: state.receiveFinancing.net,
   };
 }
 export default connect(mapStateToProps)(debtFinancing);

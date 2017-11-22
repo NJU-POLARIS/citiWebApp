@@ -11,20 +11,22 @@ import { routerRedux } from 'dva/router';
 const Option = Select.Option;
 
 @Form.create()
+/**
+ * 应收账款融资
+ */
 class getpaidFinancing extends Component {
   handleSubmit = (e) => {
-    const {dispatch} =this.props;
-    dispatch({
-      type: "receiveFinancing/saveReceive",
-      payload: {
-        companyId: cid,
-        others: {
-          companyName: companyName,
-          net: net,
-          mortgage: mortgage,
+    e.preventDefault();
+    this.props.form.validateFields({ force: true },
+      (err, values) => {
+        if(!err) {
+          this.props.dispatch({
+            type: 'receiveFinancing/applyForReceive',
+            payload: values,
+          });
         }
-      },
-    });
+      }
+    );
   }
 
   handleChange(value) {
@@ -40,7 +42,7 @@ class getpaidFinancing extends Component {
   }
 
   render() {
-    const { cid, companyName, net, mortgage, receiveCompanies } = this.props;
+    const { cid, companyName, net, mortgage, receiveCompanies, form } = this.props;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
