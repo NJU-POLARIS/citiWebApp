@@ -4,7 +4,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Tabs } from 'antd';
+import { Tabs, Card } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import GetpaidForm from '../../../components/Form/getpaidFinancing';
 import DebtForm from '../../../components/Form/debtFinancing';

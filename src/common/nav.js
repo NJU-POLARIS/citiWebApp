@@ -124,7 +124,7 @@ export const getNavData = app => [
           icon: 'like-o',
           path: 'appraisal',
           isHide: false,
-          component: dynamicWrapper(app, [], import('../routes/Chains/Appraisal/Appraisal')),
+          component: dynamicWrapper(app, ['appraisal'], import('../routes/Chains/Appraisal/Appraisal')),
         }, {
           name: '金融机构',
           path: 'fi',

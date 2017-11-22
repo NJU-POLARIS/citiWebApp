@@ -10,7 +10,7 @@ class CashFlowTable extends Component {
   render() {
     const { data } = this.props;
     const cashflowData= [];
-    if(data){
+    if(data&& data.length!=0){
       cashflowData.push({ project: "一、经营活动产生的现金流量", row: null, year_price: null, period_price: null });
       for(let i=0;i<data.length;i++){
         if(i===6){
