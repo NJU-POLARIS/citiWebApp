@@ -22,13 +22,10 @@ class RootSetting extends React.Component {
     // const { currentUser } = BasicLayout.props;
     // console.log(currentUser.userName);
     const dataSource = [{
-      info: 'company1admin',
-      root: 'admin',
+      info: `${this.props.currentUser.userName}`,
+      root: `${this.props.currentUser.type}`,
       key: 1,
-    }, {
-      info: 'company1normal1',
-      root: 'normal',
-      key: 2,
+      companyId: `${this.props.currentUser.companyId}`,
     }];
     return (
       <PageHeaderLayout title="权限设置">

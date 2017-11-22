@@ -80,11 +80,11 @@ class EditableTable extends React.Component {
       ),
     }, {
       title: '库存量',
-      dataIndex: 'Inventory',
+      dataIndex: 'inventory',
       render: (text, record) => (
         <EditableCell
           value={text}
-          onChange={this.onCellChange(record.key, 'Inventory')}
+          onChange={this.onCellChange(record.key, 'inventory')}
         />
       ),
     }, {
@@ -135,13 +135,44 @@ class EditableTable extends React.Component {
       count: count + 1,
     });
   }
+  handleSave = () => {
+    const dataSource = [...this.state.dataSource];
+    console.log(dataSource);
+    // for (const item in dataSource) {
+    //   const params = {
+    //     companyId: this.props.account.currentCompany.companyId,
+    //     name: item.name,
+    //     inventory: item.inventory,
+    //   };
+    //   this.props.dispatch({
+    //     type: 'safeInventory/changeInventory',
+    //     payload: params,
+    //
+    //   });
+    // }
+    // dataSource.map((o, i) => {
+    //   const params = {
+    //     companyId: this.props.account.currentCompany.companyId,
+    //     name: o.name,
+    //     inventory: o.inventory,
+    //   }
+    //   this.props.dispatch({
+    //     type: 'safeInventory/changeInventory',
+    //     payload: params,
+    //
+    //   })
+    //
+    //   return null;
+    // });
+    alert('保存成功！');
+  }
   render() {
     const { dataSource } = this.state;
     const columns = this.columns;
     return (
       <div>
         <Button icon="plus" className="editable-add-btn" onClick={this.handleAdd}>添加</Button>
-        <Button icon="save" onClick="">保存</Button>
+        <Button icon="save" onClick={this.handleSave}>保存</Button>
         <Table bordered dataSource={dataSource} columns={columns} />
       </div>
     );
@@ -150,4 +181,6 @@ class EditableTable extends React.Component {
 export default connect(state => ({
   currentUser: state.login.currentUser,
   register: state.register,
+  account: state.account,
+  safeInventory: state.safeInventory,
 }))(EditableTable);

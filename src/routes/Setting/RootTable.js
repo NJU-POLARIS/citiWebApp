@@ -83,7 +83,7 @@ class EditableTable extends React.Component {
 
     this.state = {
       dataSource: this.getData(),
-      count: 2,
+      count: 1,
     };
   }
   getData = () => {
@@ -106,10 +106,11 @@ class EditableTable extends React.Component {
   }
   handleAdd = () => {
     const { count, dataSource } = this.state;
+    const Id = this.props.data[0].companyId;
     const newData = {
       key: count,
       root: 'normal',
-      info: `company1normal${count}`,
+      info: `company${Id}normal${count}`,
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -130,7 +131,7 @@ class EditableTable extends React.Component {
     const columns = this.columns;
     return (
       <div>
-        <Button icon="plus" className="editable-add-btn" onClick={this.handleAdd}>添加</Button>
+        <Button icon="plus" onClick={this.handleAdd}>添加</Button>
         <Table bordered dataSource={dataSource} columns={columns} />
       </div>
     );

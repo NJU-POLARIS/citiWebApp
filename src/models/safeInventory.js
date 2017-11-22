@@ -5,6 +5,7 @@ export default {
   namespace: 'safeInventory',
 
   state: {
+    changeInventory: 'no',
     submitting: false,
     status: false,
     // 库存量信息
@@ -35,6 +36,10 @@ export default {
         payload: true,
       });
       yield call(saveInventory, payload);
+      yield put({
+        type: 'changeStatus',
+        payload: 'ok',
+      })
 
       yield put({
         type: 'changeSubmitting',
@@ -44,6 +49,12 @@ export default {
   },
 
   reducers: {
+    changeStatus(state, { payload }) {
+      return {
+        ...state,
+        changeInventory: payload,
+      };
+    },
     get(state, { payload }) {
       return {
         ...state,

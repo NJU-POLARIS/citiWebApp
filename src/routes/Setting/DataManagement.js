@@ -142,23 +142,14 @@ export default class DataManagement extends React.Component {
     currentUser: this.props.currentUser,
     currentCompany: undefined,
   }
-  // componentWillMount() {
-  //   const { currentUser } = this.props;
-  //   const { companyId } = currentUser;
-  //   console.log(68);
-  //   console.log(companyId);
-  //   const response = this.props.dispatch({
-  //     type: 'account/getInfo',
-  //     payload: {
-  //       companyId: companyId,
-  //     },
-  //   });
-  //   const { currentCompany } = response;
-  //   console.log(currentCompany.companyName);
-  //   this.state.setState({
-  //     currentCompany: currentCompany,
-  //   });
-  // }
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'account/getInfo',
+      payload: {
+        companyId: this.props.currentUser.companyId,
+      },
+    });
+  }
   getPasswordStatus = () => {
     const { form } = this.props;
     const value = form.getFieldValue('newPassword');
@@ -242,19 +233,26 @@ export default class DataManagement extends React.Component {
       }
     );
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.passwordStatus === 'ok') {
+      this.props.dispatch(routerRedux.push('/user/login'));
+    }
+  }
   changeCompanyInfo = (e) => {
     e.preventDefault();
     this.props.form.validateFields(['name', 'address', 'scale', 'supplyChain', 'industry', 'time'], { force: true },
       (err, values) => {
         const { scale, supplyChain, industry, time } = values;
         const allValue = {
+          companyId: this.props.currentUser.companyId,
+          companyName: values.name,
           activeTime: Date.parse(time),
           scale: scale[0],
           firstIndustry: industry[0],
           secondIndustry: industry[1],
           location: values.address,
-          email: '123@456.com',
-          supplyChainIndex: supplyChain,
+          email: this.props.account.currentCompany.email,
+          supplyChainIndex: supplyChain[0],
         };
         console.log(allValue);
         if (!err) {
@@ -263,24 +261,40 @@ export default class DataManagement extends React.Component {
             payload: allValue,
           });
         }
+        alert('修改成功！');
+      }
+    );
+  }
+  changeMail = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields(['email'], { force: true },
+      (err, values) => {
+        const { email } = values;
+        const allValue = {
+          companyId: this.props.currentUser.companyId,
+          companyName: this.props.account.currentCompany.companyName,
+          activeTime: this.props.account.currentCompany.activeTime,
+          scale: this.props.account.currentCompany.scale,
+          firstIndustry: this.props.account.currentCompany.firstIndustry,
+          secondIndustry: this.props.account.currentCompany.secondIndustry,
+          location: this.props.account.currentCompany.location,
+          email: email,
+          supplyChainIndex: this.props.account.currentCompany.supplyChainIndex,
+        };
+        console.log(allValue);
+        if (!err) {
+          this.props.dispatch({
+            type: 'account/changeInfo',
+            payload: allValue,
+          });
+        }
+        alert('修改成功！');
       }
     );
   }
   render() {
+    console.log(this.props);
     const { currentUser, form, register, account } = this.props;
-    // if (typeof account.currentCompany !== 'undefined') {
-    //   // Now we know that foo is defined, we are good to go.
-    //   const { currentCompany } = account;
-    // }
-    console.log(275);
-    console.log(currentUser.companyName);
-    // const currentCompany = this.props.dispatch({
-    //   type: 'account/getInfo',
-    //   payload: {
-    //     companyId: currentUser.companyId,
-    //   },
-    // });
-    // console.log(currentCompany.companyName);
     const { getFieldDecorator } = form;
     return (
       <PageHeaderLayout title="个人设置">
@@ -297,10 +311,10 @@ export default class DataManagement extends React.Component {
                       <FormItem style={{ width: '50%' }}>
                         {getFieldDecorator('name', {
                         rules: [{
-                          required: false,
+                          required: true, message: '请输入单位名称',
                         }],
                       })(
-                        <Input size="small" placeholder=" " />
+                        <Input size="small" placeholder={this.props.account.currentCompany.companyName} />
                       )}
                       </FormItem>
                     </InputGroup>
@@ -313,10 +327,10 @@ export default class DataManagement extends React.Component {
                       <FormItem style={{ width: '50%' }}>
                         {getFieldDecorator('address', {
                           rules: [{
-                            required: false,
+                            required: true, message: '请输入单位地址',
                           }],
                         })(
-                          <Input size="small" placeholder=" " />
+                          <Input size="small" placeholder={this.props.account.currentCompany.location} />
                         )}
                       </FormItem>
                     </InputGroup>
@@ -329,10 +343,10 @@ export default class DataManagement extends React.Component {
                       <FormItem style={{ width: '50%' }}>
                         {getFieldDecorator('time', {
                           rules: [{
-                            required: false,
+                            required: true, message: '请输入账套年月',
                           }],
                         })(
-                          <DatePicker placeholder="账套启用年月" />
+                          <DatePicker placeholder={this.props.account.currentCompany.activeTime} />
                         )}
                       </FormItem>
                     </InputGroup>
@@ -346,7 +360,7 @@ export default class DataManagement extends React.Component {
                             required: true, message: '请选择规模！',
                           }],
                         })(
-                          <Cascader options={scale} placeholder=" " />
+                          <Cascader options={scale} placeholder={this.props.account.currentCompany.scale} />
                         )}
                       </FormItem>
                       <FormItem style={{ width: '20%' }}>
@@ -355,7 +369,7 @@ export default class DataManagement extends React.Component {
                             required: true, message: '请选择供应链！',
                           }],
                         })(
-                          <Cascader options={supplyChain} placeholder=" " />
+                          <Cascader options={supplyChain} placeholder={this.props.account.currentCompany.supplyChainIndex} />
                         )}
                       </FormItem>
                       <FormItem style={{ width: '30%' }}>
@@ -364,7 +378,7 @@ export default class DataManagement extends React.Component {
                             required: true, message: '请选择行业！',
                           }],
                         })(
-                          <Cascader options={options} placeholder=" " />
+                          <Cascader options={options} placeholder={this.props.account.currentCompany.secondIndustry} />
                         )}
 
                       </FormItem>
@@ -486,7 +500,7 @@ export default class DataManagement extends React.Component {
             </TabPane>
             <TabPane key="email" tab={<span><Icon type="mail" />修改邮箱</span>} >
               <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
-                <Form>
+                <Form onSubmit={this.changeMail}>
                   <FormItem>
                     <InputGroup size="small" className={styles.mobileGroup} compact>
                       <FormItem style={{ width: '20%' }}>
@@ -501,14 +515,7 @@ export default class DataManagement extends React.Component {
                           },
                           ],
                         })(
-                          <Select
-                            mode="combobox"
-                            style={{ width: 238 }}
-                            onChange={this.handleChange}
-                            filterOption={false}
-                          >
-                            {this.state.options}
-                          </Select>
+                          <Input size="small" placeholder={this.props.account.currentCompany.email} />
                         )}
                       </FormItem>
                     </InputGroup>

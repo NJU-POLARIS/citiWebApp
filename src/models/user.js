@@ -41,8 +41,8 @@ export default {
       yield put({
         type: 'saveNewPassword',
         payload: 'ok',
-      })
-    }
+      });
+    },
   },
 
   reducers: {

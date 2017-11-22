@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars,react/no-unused-state,prefer-const */
+/* eslint-disable no-unused-vars,react/no-unused-state,prefer-const,react/sort-comp */
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { connect } from 'dva';
@@ -8,17 +8,14 @@ import EditableTable from '../Setting/InventoryTable';
 
 const FormItem = Form.Item;
 
-
-
-@connect(state => ({
-  rule: state.rule,
-}))
-@Form.create()
-
 class SafetyInventory extends React.Component {
   state = {
     current: 'debt',
   }
+  componentWillMount = () => {
+    this.getData();
+  }
+
   handleClick = (e) => {
     this.setState({
       current: e.key,
@@ -28,21 +25,16 @@ class SafetyInventory extends React.Component {
     this.props.dispatch({
       type: 'safeInventory/getInventory',
       payload: {
-        companyId: 1,
+        companyId: this.props.currentUser.companyId,
       },
     });
-    return this.props.safeInventory;
   }
   render() {
-    this.getData();
-    const dataSource = [{
-      product: '产品',
-      name: '木材',
-      Inventory: '20吨',
-    }];
+    console.log(this.props);
+    const { safeInvent } = this.props.safeInventory;
     return (
       <PageHeaderLayout title="安全库存量设置">
-        <EditableTable data={dataSource} />
+        <EditableTable data={safeInvent} />
       </PageHeaderLayout>
     );
   }
