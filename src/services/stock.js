@@ -10,10 +10,14 @@ export function fetchMaterialMonitor(param) {
 }
 export function fetchMaterialSafeRelation(param){
   console.log("hhhh"+`/api/inventory/relation/safe/material?${stringify(param)}`);
-  return request(`api/inventory/relation/safe/material?${stringify(param)}`)
+  return request(`api/inventory/relation/safe/material?${stringify(param)}`);
 }
-export function fetchProductMonitor(param) {
 
+export function fetchProductMonitor(param) {
+  return request(`/api/inventory/stock/product?${stringify(param)}`);
+}
+export function fetchProductSafeRelation(param){
+  return request(`api/inventory/relation/safe/product?${stringify(param)}`)
 }
 export function fetchStockTime(param) {
 
