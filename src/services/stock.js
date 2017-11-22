@@ -4,8 +4,13 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
 
-export function fetchRawMaterialMonitor(param) {
-
+export function fetchMaterialMonitor(param) {
+  // console.log("hhhh"+`/api/inventory/stock/material?${stringify(param)}`);
+  return request(`/api/inventory/stock/material?${stringify(param)}`);
+}
+export function fetchMaterialSafeRelation(param){
+  console.log("hhhh"+`/api/inventory/relation/safe/material?${stringify(param)}`);
+  return request(`api/inventory/relation/safe/material?${stringify(param)}`)
 }
 export function fetchProductMonitor(param) {
 

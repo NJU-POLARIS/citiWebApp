@@ -37,7 +37,7 @@ export default {
         payload: null,
       });
       const data = yield call(tableService.fetchBalanceSheet, payload);
-      console.log(data);
+      console.log("fetch"+data);
       yield put({
         type: 'fillBalanceSheet',
         payload: data,

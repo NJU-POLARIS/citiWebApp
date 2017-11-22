@@ -17,8 +17,10 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Description } = DescriptionList;
 
-export default class Appraisal extends PureComponent {
+class Appraisal extends PureComponent {
   render() {
+    const {upChains} = this.props;
+    console.log("data:"+upChains);
     const list=[{
       title: "盈利--资产报酬率",
       num: 98,
@@ -169,7 +171,7 @@ export default class Appraisal extends PureComponent {
           <TabPane tab="整体绩效评价" key="3">
             <Card bordered={false}>
             <Select className={styles.select} style={{ width: 200 }} placeholder="请选择一条供应链">
-              <Option value="a&b&c">a&b&c</Option>
+              <Option value="a&b">a&b</Option>
             </Select>
             <br />
             <Row gutter={48}>
@@ -256,3 +258,10 @@ export default class Appraisal extends PureComponent {
     );
   }
 }
+Appraisal.propTypes={};
+function mapStateToProps(state) {
+  return {
+    upChains: state.appraisal.upChains,
+  };
+}
+export default connect(mapStateToProps)(Appraisal);

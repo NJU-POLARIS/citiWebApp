@@ -9,10 +9,10 @@ import styles from './BalanceSheetTable.css';
 class BalanceSheetTable extends Component {
   render() {
     const { data } = this.props;
-    console.log(data);
+    // console.log(data);
     const data1=[],data2=[];
     const data1_children=[];
-    if(data) {
+    if(data!=null && data.length!=0) {
       data1.push({property1: "流动资产", row1: null, end_balance1: null, begin_balance1: null});
       for (let i = 0; i < 30; i++) {
         if(9<=i && i<=12){
