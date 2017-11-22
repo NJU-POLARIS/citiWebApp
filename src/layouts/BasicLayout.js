@@ -364,21 +364,17 @@ class BasicLayout extends React.PureComponent {
             </Switch>
             <GlobalFooter
               links={[{
-                title: 'Pro 首页',
+                title: 'Chains 首页',
                 href: 'http://pro.ant.design',
                 blankTarget: true,
               }, {
                 title: 'GitHub',
                 href: 'https://github.com/ant-design/ant-design-pro',
                 blankTarget: true,
-              }, {
-                title: 'Ant Design',
-                href: 'http://ant.design',
-                blankTarget: true,
               }]}
               copyright={
                 <div>
-                  Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品
+                  Copyright <Icon type="copyright" /> citi2017 NJU Polaris
                 </div>
               }
             />

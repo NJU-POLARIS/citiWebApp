@@ -19,7 +19,7 @@ const EditableCell = ({ editable, value, onChange }) => (
   </div>
 );
 
-class EditableTable extends React.Component {
+export default class EditableTable extends React.Component {
   constructor(props) {
     super(props);
     this.columns = [{
@@ -108,5 +108,3 @@ class EditableTable extends React.Component {
     return <Table bordered dataSource={this.state.data} columns={this.columns} />;
   }
 }
-
-export default EditableTable;

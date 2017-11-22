@@ -4,6 +4,7 @@ import { Modal, Row, Col, Table, Button, Input, message, DatePicker, Popconfirm,
 import styles from './NewVoucher.less';
 import digitUppercase from '../../../utils/upperChinese';
 
+import EditableTable from './EditableTable';
 import SupportOne from './SupportOne';
 import SupportTwo from './SupportTwo';
 
@@ -737,6 +738,7 @@ class NewVoucher extends PureComponent {
         >
           新增成员
         </Button>
+        <EditableTable />
         {this.renderSupport()}
       </Modal>
     );

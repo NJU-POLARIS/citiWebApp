@@ -31,6 +31,7 @@ export async function queryAllVoucher(params) {
 }
 
 export async function searchVoucher(params) {
+  console.log(params);
   return request(`/api/vouchers/search?${stringify(params)}`);
 }
 
