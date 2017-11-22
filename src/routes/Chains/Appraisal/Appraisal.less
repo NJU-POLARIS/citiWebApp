@@ -1,4 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
 
 .title {
   color: @heading-color;
@@ -21,7 +22,36 @@
 .select {
   margin-top: 3%;
   margin-left: 39%;
+  margin-bottom: 3%;
 }
 .se1 {
   margin-left: 0%;
+}
+.listContent {
+  font-size: 0;
+  & > div {
+    color: @text-color-secondary;
+    //display: inline-block;
+    font-size: @font-size-base;
+    //margin-left: 40px;
+    & > span {
+      line-height: 20px;
+    }
+    & > p {
+      margin-top: 20px;
+      line-height: 22px;
+    }
+  }
+  & > div:last-child {
+    position: relative;
+    width: 388px;
+    //margin-left: -60%;
+  }
+}
+.meta {
+  //position: relative;
+  //margin-left: 26%;
+}
+.list {
+  margin-top: 20px;
 }
