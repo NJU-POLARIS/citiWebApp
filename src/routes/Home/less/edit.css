@@ -1,0 +1,4 @@
+
+@media screen and (min-width: 768px) {
+#nav_0_0-menu .ant-menu-item-active,#nav_0_0-menu.ant-menu-horizontal > .ant-menu-item-selected { border-style: none }
+}
