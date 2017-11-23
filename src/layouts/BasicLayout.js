@@ -241,11 +241,11 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
-    const { currentUser, collapsed, fetchingNotices, getRouteData } = this.props;
+    const { login, currentUser, collapsed, fetchingNotices, getRouteData } = this.props;
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        <Menu.Item disabled><Icon type="user" /></Menu.Item>
+        <Menu.Item disabled><Icon type="user" />{login.currentUser.type}</Menu.Item>
         <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
@@ -353,8 +353,9 @@ class BasicLayout extends React.PureComponent {
 }
 
 export default connect(state => ({
-  currentUser: state.user.currentUser,
+  currentUser: state.login.currentUser,
   collapsed: state.global.collapsed,
   fetchingNotices: state.global.fetchingNotices,
   notices: state.global.notices,
+  login: state.login,
 }))(BasicLayout);

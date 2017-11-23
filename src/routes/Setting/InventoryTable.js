@@ -65,7 +65,7 @@ class EditableTable extends React.Component {
       width: '30%',
       render: (text, record) => (
         <EditableCell
-          value={text}
+          value="原材料"
           onChange={this.onCellChange(record.key, 'product')}
         />
       ),
@@ -137,33 +137,21 @@ class EditableTable extends React.Component {
   }
   handleSave = () => {
     const dataSource = [...this.state.dataSource];
+    const { currentUser } = this.props;
     console.log(dataSource);
-    // for (const item in dataSource) {
-    //   const params = {
-    //     companyId: this.props.account.currentCompany.companyId,
-    //     name: item.name,
-    //     inventory: item.inventory,
-    //   };
-    //   this.props.dispatch({
-    //     type: 'safeInventory/changeInventory',
-    //     payload: params,
-    //
-    //   });
-    // }
-    // dataSource.map((o, i) => {
-    //   const params = {
-    //     companyId: this.props.account.currentCompany.companyId,
-    //     name: o.name,
-    //     inventory: o.inventory,
-    //   }
-    //   this.props.dispatch({
-    //     type: 'safeInventory/changeInventory',
-    //     payload: params,
-    //
-    //   })
-    //
-    //   return null;
-    // });
+    for (let i = 0; i < dataSource.length; i++) {
+      const params = {
+        companyId: currentUser.companyId,
+        name: dataSource[i].name,
+        inventory: dataSource[i].inventory,
+      };
+      console.log(params);
+      this.props.dispatch({
+        type: 'safeInventory/changeInventory',
+        payload: params,
+
+      });
+    }
     alert('保存成功！');
   }
   render() {
