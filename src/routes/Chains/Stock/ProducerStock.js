@@ -11,7 +11,7 @@ import styles from './SupplierStock.less';
 
 const TabPane = Tabs.TabPane;
 
-function ProducerStock ({ materialCharData, materialTableData, productCharData, productTableData}) {
+function ProducerStock ({ dispatch, materialCharData, materialTableData, productCharData, productTableData}) {
   const columns_1 = [{
     title: '原材料种类',
     dataIndex: 'raw_material',
@@ -46,6 +46,23 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
     dataIndex: 'return_ratio',
     key: 'return_ratio',
   }];
+
+  function handleChange(value,dateString) {
+    dispatch({
+      type: 'stock/fetchMaterialMonitor',
+      payload: {
+        phase: dateString,
+      }
+    });
+  }
+  function handleChange2(e,st) {
+    dispatch({
+      type: 'stock/fetchProductMonitor',
+      payload: {
+        phase: st,
+      }
+    });
+  }
   const tableData1=[];
   const chartData1=[];
   const tableData2=[];
@@ -100,7 +117,7 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
       <Tabs defaultActiveKey="1">
         <TabPane tab="原材料库存实时监控" key="1">
           <b>截止日期：</b>
-          <DatePicker/>
+          <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange}/>
           <br/>
           <br/>
           <Table columns={columns_1} dataSource={tableData1} className={styles.t1}/>
@@ -109,7 +126,7 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
         <TabPane tab="原材料安全库存量" key="2">
           <Card bordered={false}>
             <b>截止日期：</b>
-            <DatePicker/>
+            <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange}/>
             <br/>
             <br/>
             <StackBarChart data={ chartData1 }/>
@@ -118,7 +135,7 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
 
         <TabPane tab="产品库存实时监控" key="3">
           <b>截止日期：</b>
-          <DatePicker/>
+          <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange2}/>
           <br/>
           <br/>
           <Table columns={columns_2} dataSource={tableData2} className={styles.t1}/>
@@ -127,7 +144,7 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
         <TabPane tab="产品安全库存量" key="4">
           <Card bordered={false}>
             <b>截止日期：</b>
-            <DatePicker/>
+            <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange2}/>
             <br/>
             <br/>
             <StackBarChart data={ chartData2 }/>
@@ -142,9 +159,9 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
 ProducerStock.propTypes={};
 function mapStateToProps(state) {
   return {
-    materialCharData: state.stock.materialSafeRelation,
+    materialCharData: state.stock.materialMonitor,
     materialTableData: state.stock.materialMonitor,
-    productCharData: state.stock.productSafeRelation,
+    productCharData: state.stock.productMonitor,
     productTableData: state.stock.productMonitor,
   };
 }

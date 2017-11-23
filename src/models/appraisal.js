@@ -6,141 +6,110 @@ import * as appraisalService from '../services/appraisal';
 export default {
   namespace: 'appraisal',
   state: {
-    companyId: null,
-    spOntimeData: null,
-    spProfitData: null,
-    spReturnData: null,
-    spNeedData: null,
-    pdOntimeData: null,
-    pdProfitData: null,
-    pdReturnData: null,
-    pdNeedData: null,
-    upChains: null,
-    midChains: null,
-    downChains: null,
+    m1:null,
+    m1profit: null,
+    m1operate: null,
+    m1develop: null,
+    m1debt: null,
+    m2d1: null,
+    m2d2: null,
+    m2d3: null,
+    m3: null,
+
   },
   reducers: {
-    //get id from name
-    saveId(state, { payload: companyId}) {
+    fillm1profit(state, {payload: m1profit}) {
       return {
         ...state,
-        companyId,
+        m1profit,
       };
     },
-    drawspOntime(state, { payload: spOntimeData}) {
+    fillm1operate(state, {payload: m1operate}) {
       return {
         ...state,
-        spOntimeData,
+        m1operate,
       };
     },
-    saveUpChains(state, { payload: upChains}) {
+    fillm1develop(state, {payload: m1develop}) {
       return {
         ...state,
-        upChains,
+        m1develop,
       };
     },
-    saveMidChains(state, { payload: midChains}) {
+    fillm1debt(state, {payload: m1debt}) {
       return {
         ...state,
-        midChains,
+        m1debt,
       };
     },
-    saveDownChains(state, { payload: downChains}) {
+    fillm2d1(state, {payload: m2d1}) {
       return {
         ...state,
-        downChains,
+        m2d1,
       };
     },
-
+    fillm2d2(state, {payload: m2d2}) {
+      return {
+        ...state,
+        m2d2,
+      };
+    },
+    fillm2d3(state, {payload: m2d3}) {
+      return {
+        ...state,
+        m2d3,
+      };
+    },
+    fillm3(state, {payload: m3}) {
+      return {
+        ...state,
+        m3,
+      };
+    },
+    fillm1(state, {payload: m1}) {
+      return {
+        ...state,
+        m1,
+      };
+    },
   },
   effects: {
-    *fetchId({payload}, {call, put}) {
+    *fetchm1({ payload }, { call, put }) {
+      const data = yield call(appraisalService.getModule1,payload);
       yield put({
-        type: 'saveId',
-        payload: null,
-      });
-      const data= yield call(appraisalService.fetchId, payload);
-      yield put({
-        type: 'saveId',
+        type: 'fillm1',
         payload: data,
       });
     },
-    *fetchspOntime({ payload }, { call, put }) {
+    *fetchm2d1({ payload }, { call, put }) {
+      const data = yield call(appraisalService.getModule2Data1,payload);
       yield put({
-        type: 'drawspOntime',
-        payload: null,
-      });
-      const data = yield call(appraisalService.fetchSP_ontime, payload);
-      yield put({
-        type: 'drawspOntime',
+        type: 'fillm2d1',
         payload: data,
       });
     },
-
-    //得到up供应链
-    *fetchUpChains({payload}, {call, put}) {
+    *fetchm2d2({ payload }, { call, put }) {
+      const data = yield call(appraisalService.getModule2Data2,payload);
       yield put({
-        type: 'saveUpChains',
-        payload: null,
-      });
-      // const id=yield call(appraisalService.fetchId, payload);
-      const data=yield call(appraisalService.fetchUpstreamChains, payload);
-      console.log(data);
-      yield put({
-        type: 'saveUpChains',
+        type: 'fillm2d2',
         payload: data,
       });
     },
-    //得到mid供应链
-    *fetchMidChains({payload}, {call, put}) {
+    *fetchm2d3({ payload }, { call, put }) {
+      const data = yield call(appraisalService.getModule2Data3,payload);
       yield put({
-        type: 'saveMidChains',
-        payload: null,
-      });
-      const data=yield call(appraisalService.fetchMidstreamChains, payload);
-      yield put({
-        type: 'saveMidChains',
+        type: 'fillm2d3',
         payload: data,
       });
     },
-    //得到down供应链
-    *fetchDownChains({payload}, {call, put}) {
+    *fetchm3({ payload }, { call, put }) {
+      const data = yield call(appraisalService.getModule3,payload);
       yield put({
-        type: 'saveDownChains',
-        payload: null,
-      });
-      const data=yield call(appraisalService.fetchDownstreamChains, payload);
-      yield put({
-        type: 'saveDownChains',
+        type: 'fillm3',
         payload: data,
       });
     },
-
   },
   subscriptions: {
-    setup({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
-        dispatch({
-          type: 'fetchspOntime',
-          payload: {
-              supplierId: 1,
-              manufacturerId: 2,
-              time: '2017-10',
-          },
-        });
-        dispatch({
-          type: 'fetchId',
-          payload: {
-            companyName: 'TestChain1',
-          },
-        });
-        dispatch({
-          type: 'fetchUpChains',
-          payload: {
-            upstreamId: 4,
-          },
-        });
-      });
-    },
   },
 };

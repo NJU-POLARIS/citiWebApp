@@ -112,7 +112,7 @@ export const getNavData = app => [
           icon: 'shopping-cart',
           path: 'stock',
           isHide: false,
-          component: dynamicWrapper(app, ['stock'], import('../routes/Chains/Stock/SupplierStock')),
+          component: dynamicWrapper(app, ['stock'], import('../routes/Chains/Stock/ProducerStock')),
         }, {
           name: '融资服务',
           icon: 'bank',

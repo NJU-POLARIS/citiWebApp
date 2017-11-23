@@ -6,17 +6,18 @@ import request from '../utils/request';
 
 export function fetchMaterialMonitor(param) {
   // console.log("hhhh"+`/api/inventory/stock/material?${stringify(param)}`);
-  return request(`/api/inventory/stock/material?${stringify(param)}`);
+  return request(`/api/data/stock/material?${stringify(param)}`);
 }
 export function fetchMaterialSafeRelation(param) {
-  return request(`api/inventory/relation/safe/material?${stringify(param)}`);
+  console.log(`api/data/relation/safe/material?${stringify(param)}`);
+  return request(`api/data/relation/safe/material?${stringify(param)}`);
 }
 
 export function fetchProductMonitor(param) {
-  return request(`/api/inventory/stock/product?${stringify(param)}`);
+  return request(`/api/data/stock/product?${stringify(param)}`);
 }
 export function fetchProductSafeRelation(param){
-  return request(`api/inventory/relation/safe/product?${stringify(param)}`)
+  return request(`api/data/relation/safe/product?${stringify(param)}`)
 }
 export function fetchStockTime(param) {
 

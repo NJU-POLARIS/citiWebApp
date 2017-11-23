@@ -48,18 +48,17 @@ export default {
 
   },
   effects: {
-    *fetchMaterialSafeRelation({ payload }, { call, put }) {
-      yield put({
-        type: 'drawMaterialSafeRelation',
-        payload: null,
-      });
-      const data = yield call(stockService.fetchMaterialSafeRelation, payload);
-      console.log(data);
-      yield put({
-        type: 'drawMaterialSafeRelation',
-        payload: data,
-      });
-    },
+    // *fetchMaterialSafeRelation({ payload }, { call, put }) {
+    //   yield put({
+    //     type: 'drawMaterialSafeRelation',
+    //     payload: null,
+    //   });
+    //   const data = yield call(stockService.fetchMaterialSafeRelation, payload);
+    //   yield put({
+    //     type: 'drawMaterialSafeRelation',
+    //     payload: data,
+    //   });
+    // },
     *fetchMaterialMonitor({ payload }, { call, put }) {
       yield put({
         type: 'fillMaterialMonitor',
@@ -72,17 +71,17 @@ export default {
         payload: data,
       });
     },
-    *fetchProductSafeRelation({ payload }, {call, put }){
-      yield put({
-        type: 'drawProductSafeRelation',
-        payload: null,
-      });
-      const data = yield call(stockService.fetchProductSafeRelation, payload);
-      yield put({
-        type: 'drawProductSafeRelation',
-        payload: data,
-      });
-    },
+    // *fetchProductSafeRelation({ payload }, {call, put }){
+    //   yield put({
+    //     type: 'drawProductSafeRelation',
+    //     payload: null,
+    //   });
+    //   const data = yield call(stockService.fetchProductSafeRelation, payload);
+    //   yield put({
+    //     type: 'drawProductSafeRelation',
+    //     payload: data,
+    //   });
+    // },
     *fetchProductMonitor({ payload }, {call, put }) {
       yield put({
         type: 'fillProductMonitor',
@@ -98,30 +97,28 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
-        dispatch({
-          type: 'fetchMaterialSafeRelation',
-          payload: {
-            companyId: 1,
-          },
-        });
+        // dispatch({
+        //   type: 'fetchMaterialSafeRelation',
+        //   payload: {
+        //     phase: '2016-11-11',
+        //   },
+        // });
         dispatch({
           type: 'fetchMaterialMonitor',
           payload: {
-            companyId: 1,
-            time: Date.parse('2017-11-11'),
+            phase: '2017-11-11',
           },
         });
-        dispatch({
-          type: 'fetchProductSafeRelation',
-          payload: {
-            companyId: 2,
-          },
-        });
+        // dispatch({
+        //   type: 'fetchProductSafeRelation',
+        //   payload: {
+        //     phase: '2016-11-11',
+        //   },
+        // });
         dispatch({
           type: 'fetchProductMonitor',
           payload: {
-            companyId: 2,
-            time: Date.parse('2017-11-11'),
+            phase: '2017-11-11',
           },
         });
       });
