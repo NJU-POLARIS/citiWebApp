@@ -12,26 +12,14 @@ const dataSource = subjects1;
 const TabPane = Tabs.TabPane;
 
 
-@connect(state => ({
-  rule: state.rule,
-}))
-@Form.create()
-
-class InitialSetting extends React.Component {
-  state = {
-    current: 'balance',
-  }
+export default class InitialSetting extends React.Component {
   handleClick = (e) => {
-    this.setState({
-      current: e.key,
-    });
+
   }
   render() {
     return (
       <PageHeaderLayout title="期初设置">
-        <Button icon="file-text">打印</Button>
-        <Button icon="export" style={{ margin: '10px' }}>导出</Button>
-        <Button icon="reload" onClick="">初始化</Button>
+        <Button icon="save" onClick={this.handleClick()}>初始化</Button>
         <Tabs>
           <TabPane key="balance" tab={<span><Icon type="wallet" />资产</span>} >
             <EditableTable identi="balance" />
@@ -66,6 +54,5 @@ function getData() {
   return (
     dataSource
   );
-}
-export { InitialSetting, getData };
+};
 

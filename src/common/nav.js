@@ -250,7 +250,7 @@ export const getNavData = app => [
             name: '期初设置',
             path: 'InitialSetting',
             isHide: false,
-            component: dynamicWrapper(app, [], import('../routes/Setting/InitialSetting')),
+            component: dynamicWrapper(app, ['user'], import('../routes/Setting/InitialSetting')),
           },
           {
             name: '安全库存量设置',
