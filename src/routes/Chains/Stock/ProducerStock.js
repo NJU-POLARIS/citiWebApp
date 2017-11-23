@@ -108,6 +108,9 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
 
         <TabPane tab="原材料安全库存量" key="2">
           <Card bordered={false}>
+            <b>截止日期：</b>
+            <DatePicker/>
+            <br/>
             <br/>
             <StackBarChart data={ chartData1 }/>
           </Card>
@@ -123,6 +126,9 @@ function ProducerStock ({ materialCharData, materialTableData, productCharData, 
 
         <TabPane tab="产品安全库存量" key="4">
           <Card bordered={false}>
+            <b>截止日期：</b>
+            <DatePicker/>
+            <br/>
             <br/>
             <StackBarChart data={ chartData2 }/>
           </Card>

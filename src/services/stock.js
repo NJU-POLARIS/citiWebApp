@@ -8,8 +8,7 @@ export function fetchMaterialMonitor(param) {
   // console.log("hhhh"+`/api/inventory/stock/material?${stringify(param)}`);
   return request(`/api/inventory/stock/material?${stringify(param)}`);
 }
-export function fetchMaterialSafeRelation(param){
-  console.log("hhhh"+`/api/inventory/relation/safe/material?${stringify(param)}`);
+export function fetchMaterialSafeRelation(param) {
   return request(`api/inventory/relation/safe/material?${stringify(param)}`);
 }
 
