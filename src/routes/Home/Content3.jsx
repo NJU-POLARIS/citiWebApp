@@ -64,7 +64,7 @@ class Content extends React.Component {
             id={`${props.id}-title`}
             reverseDelay={100}
           >
-             踏上云端，链动未来
+            踏上云端，链动未来
           </TweenOne>
           <TweenOne
             key="p"

@@ -115,6 +115,29 @@ class Warning extends PureComponent {
                   percent={87}
                 />
               </div>
+              <div style={{ marginTop: 24, marginBottom: 24, marginLeft: 24 }}>
+                <Gauge
+                  format={(val) => {
+                    switch (parseInt(val, 10)) {
+                      case 20:
+                        return '高度风险';
+                      case 40:
+                        return '中高风险';
+                      case 60:
+                        return '中度风险';
+                      case 80:
+                        return '中低风险';
+                      case 100:
+                        return '低度风险';
+                      default:
+                        return '';
+                    }
+                  }}
+                  title="评分"
+                  height={400}
+                  percent={87}
+                />
+              </div>
             </Col>
             <Col xl={8} lg={12} md={12} sm={24} xs={24}>
 

@@ -21,17 +21,18 @@ class Banner2 extends React.Component {
   };
 
   render() {
+
     const props = { ...this.props };
     const isMode = props.isMode;
     delete props.isMode;
     const follow = !isMode ? {
-        delay: 1000,
-        minMove: 0.1,
-        data: [
-          { id: 'bg$0', value: 15, bgPosition: '50%', type: ['backgroundPositionX'] },
-          { id: `${props.id}-wrapperBlock0`, value: -15, type: 'x' },
-        ],
-      } : null;
+      delay: 1000,
+      minMove: 0.1,
+      data: [
+        { id: 'bg$0', value: 15, bgPosition: '50%', type: ['backgroundPositionX'] },
+        { id: `${props.id}-wrapperBlock0`, value: -15, type: 'x' },
+      ],
+    } : null;
     const childrenToRender = (<Element
       key="0"
       prefixCls="banner-user-elem"
@@ -54,7 +55,7 @@ class Banner2 extends React.Component {
             key="logo"
             id={`${props.id}-titleBlock0`}
           >
-            CHAINS
+            Chains
           </span>
         <p
           key="content"
@@ -102,4 +103,3 @@ class Banner2 extends React.Component {
 }
 
 export default Banner2;
-

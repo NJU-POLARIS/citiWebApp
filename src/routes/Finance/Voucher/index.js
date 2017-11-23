@@ -13,40 +13,40 @@ const { Option } = Select;
 const periods = [[<Option value="0">全部期间</Option>], [<Option value="1">2017年第8期</Option>], [<Option value="2">2017年第9期</Option>]];
 
 const myData = {
-  "company_id":1,
-  "voucher_id":"记-12",
-  "date":"2016-02-02",
-  "remark":"测试数据",
-  "voucher_maker":"company2admin",
-  "itemList":[
+  company_id: 1,
+  voucher_id: '记-12',
+  date: '2016-02-02',
+  remark: '测试数据',
+  voucher_maker: 'company2admin',
+  itemList: [
     {
-      "company_id":1,
-      "voucher_id":"记-12",
-      "lines":1,
-      "abstracts":"支付工资",
-      "subjectId":"2211",
-      "debitAmount": 2500000.0,
-      "creditAmount":0.0,
-      "supportOneList":[],
-      "supportTwoList":[]
-    },{
+      company_id: 1,
+      voucher_id: '记-12',
+      lines: 1,
+      abstracts: '支付工资',
+      subjectId: '2211',
+      debitAmount: 2500000.0,
+      creditAmount: 0.0,
+      supportOneList: [],
+      supportTwoList: [],
+    }, {
 
-      "company_id":1,
-      "voucher_id":"记-12",
-      "lines":2,
-      "abstracts":"支付工资",
-      "subjectId":"1002",
-      "debitAmount":0.0,
-      "creditAmount":2500000.0,
-      "supportOneList":[],
-      "supportTwoList":[]
-    }
+      company_id: 1,
+      voucher_id: '记-12',
+      lines: 2,
+      abstracts: '支付工资',
+      subjectId: '1002',
+      debitAmount: 0.0,
+      creditAmount: 2500000.0,
+      supportOneList: [],
+      supportTwoList: [],
+    },
   ],
-  "totalVo":{
-    "chineseTotal":"",
-    "debitAmount":0.0,
-    "creditAmount":0.0
-  }
+  totalVo: {
+    chineseTotal: '',
+    debitAmount: 0.0,
+    creditAmount: 0.0,
+  },
 };
 
 const tableData = [{
@@ -119,8 +119,8 @@ class Voucher extends PureComponent {
           type: 'voucher/searchVoucher',
           payload: {
             companyId: 1,
-            startPeriod: startPeriod,
-            endPeriod: endPeriod,
+            startPeriod,
+            endPeriod,
             // character: character || '全部',
             // maker: voucher_maker || '全部',
             // abstracts: abstracts || '',
@@ -142,12 +142,11 @@ class Voucher extends PureComponent {
   renderSimpleForm() {
     const options = [];
     const { voucher: { period } } = this.props;
-    for (let item of period) {
+    for (const item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
     const first = period.map((item, i) => {
-      if (i === period.length - 1)
-        return item;
+      if (i === period.length - 1) { return item; }
     }).toString();
 
     const { getFieldDecorator } = this.props.form;
@@ -185,7 +184,7 @@ class Voucher extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
-              <Button type="primary" htmlType="submit" onClick={(e) => this.handleSearch(e)}>查询</Button>
+              <Button type="primary" htmlType="submit" onClick={e => this.handleSearch(e)}>查询</Button>
               <Button style={{ marginLeft: 8 }}>重置</Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
                 展开 <Icon type="down" />
@@ -200,12 +199,11 @@ class Voucher extends PureComponent {
     const { getFieldDecorator } = this.props.form;
     const options = [];
     const { voucher: { period } } = this.props;
-    for (let item of period) {
+    for (const item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
     const first = period.map((item, i) => {
-      if (i === period.length - 1)
-        return item;
+      if (i === period.length - 1) { return item; }
     }).toString();
 
     return (
@@ -322,12 +320,12 @@ class Voucher extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="制单人" style={{ marginLeft: 14 }}>
-            {getFieldDecorator('voucher_maker')(
-              <Select placeholder="请选择" style={{ width: '100%' }}>
-                {periods}
-              </Select>
+              {getFieldDecorator('voucher_maker')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
+                  {periods}
+                </Select>
             )}
-          </FormItem>
+            </FormItem>
           </Col>
         </Row>
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
@@ -351,7 +349,7 @@ class Voucher extends PureComponent {
         </Row>
         <div style={{ overflow: 'hidden' }}>
           <span style={{ float: 'right', marginBottom: 24 }}>
-            <Button type="primary" htmlType="submit" onClick={(e) => this.handleSearch(e)}>查询</Button>
+            <Button type="primary" htmlType="submit" onClick={e => this.handleSearch(e)}>查询</Button>
             <Button style={{ marginLeft: 8 }}>重置</Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
               收起 <Icon type="up" />
@@ -364,7 +362,7 @@ class Voucher extends PureComponent {
 
   render() {
     const { modalVisible } = this.state;
-    const { voucher: { vouchers, loading }} = this.props;
+    const { voucher: { vouchers, loading } } = this.props;
     const values = {
       company_id: 1,
       voucher_id: '记-123',
@@ -393,8 +391,8 @@ class Voucher extends PureComponent {
               <a>编辑</a>
             </span>
           );
-        }
-      }
+        },
+      },
     ];
 
     const nestColumns = [
@@ -410,7 +408,7 @@ class Voucher extends PureComponent {
       }, {
         title: '贷方金额',
         dataIndex: 'creditAmount',
-      }
+      },
     ];
 
     return (
@@ -429,7 +427,7 @@ class Voucher extends PureComponent {
             columns={columns}
             dataSource={vouchers}
             pagination={false}
-            expandedRowRender={record => {
+            expandedRowRender={(record) => {
               const { itemList, totalVo } = record;
               const nestData = [
                 ...itemList,
@@ -438,11 +436,11 @@ class Voucher extends PureComponent {
                   subjectId: totalVo.chineseTotal,
                   debitAmount: totalVo.debitAmount,
                   creditAmount: totalVo.creditAmount,
-                }
+                },
               ];
 
               return (
-                <Table dataSource={nestData} columns={nestColumns} pagination={false}/>
+                <Table dataSource={nestData} columns={nestColumns} pagination={false} />
               );
             }}
           />

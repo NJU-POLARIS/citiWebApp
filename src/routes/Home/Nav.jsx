@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PropTypes } from 'react';
 import TweenOne from 'rc-tween-one';
 import { Menu } from 'antd';
 
@@ -23,7 +22,7 @@ class Header extends React.Component {
     const props = { ...this.props };
     const isMode = props.isMode;
     delete props.isMode;
-    const navData = { menu1: '444', menu2: '555', menu3: '登录', menu4: '注册' };;
+    const navData = { menu1: '登录', menu2: '注册'};
     const navChildren = Object.keys(navData)
       .map((key, i) => (<Item key={i}>{navData[key]}</Item>));
     return (<TweenOne
@@ -56,7 +55,6 @@ class Header extends React.Component {
           className={`${this.props.className}-phone-nav-text`}
         >
           <Menu
-            defaultSelectedKeys={['0']}
             mode="inline"
             theme="dark"
           >
@@ -68,7 +66,7 @@ class Header extends React.Component {
         animation={{ x: 30, type: 'from', ease: 'easeOutQuad' }}
       >
         <Menu
-          mode="horizontal" defaultSelectedKeys={['0']}
+          mode="horizontal"
           id={`${this.props.id}-menu`}
         >
           {navChildren}
@@ -78,11 +76,11 @@ class Header extends React.Component {
   }
 }
 
-Header.propTypes = {
-  className: PropTypes.string,
-  dataSource: PropTypes.object,
-  id: PropTypes.string,
-};
+// Header.propTypes = {
+//   className: PropTypes.string,
+//   dataSource: PropTypes.object,
+//   id: PropTypes.string,
+// };
 
 Header.defaultProps = {
   className: 'header0',
