@@ -235,6 +235,38 @@ export const getNavData = app => [
         ],
       },
       {
+        name: '设置',
+        path: 'setting',
+        icon: 'setting',
+        isHide: false,
+        children: [
+          {
+            name: '个人设置',
+            path: 'DataManagement',
+            isHide: false,
+            component: dynamicWrapper(app, ['account', 'user'], import('../routes/Setting/DataManagement')),
+          },
+          {
+            name: '期初设置',
+            path: 'InitialSetting',
+            isHide: false,
+            component: dynamicWrapper(app, [], import('../routes/Setting/InitialSetting')),
+          },
+          {
+            name: '安全库存量设置',
+            path: 'SafeInventory',
+            isHide: false,
+            component: dynamicWrapper(app, ['safeInventory'], import('../routes/Setting/SafeInventory')),
+          },
+          {
+            name: '权限设置',
+            path: 'RootSetting',
+            isHide: false,
+            component: dynamicWrapper(app, ['register'], import('../routes/Setting/RootSetting')),
+          },
+        ],
+      },
+      {
         name: '结果',
         path: 'result',
         icon: 'check-circle-o',

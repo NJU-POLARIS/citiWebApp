@@ -1,7 +1,8 @@
+/* eslint-disable react/no-unused-state,object-shorthand */
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux, Link } from 'dva/router';
-import { Form, Input, Tabs, Button, Icon, Checkbox, Row, Col, Alert } from 'antd';
+import { Form, Input, Tabs, Button, Icon, Alert } from 'antd';
 import styles from './Login.less';
 
 const FormItem = Form.Item;
@@ -17,8 +18,35 @@ export default class Login extends Component {
     type: 'account',
   }
 
+  // componentDidMount() {
+  //   const { currentUser } = this.props.login;
+  //   const { companyId } = currentUser;
+  //   console.log(24);
+  //   console.log(companyId);
+  //   const response = this.props.dispatch({
+  //     type: 'account/getInfo',
+  //     payload: {
+  //       companyId: companyId,
+  //     },
+  //   });
+  //   const { currentCompany } = response;
+  //   console.log(33);
+  //   console.log(currentCompany.companyName);
+  //   this.props.dispatch({
+  //     type: 'user/fetchCurrent',
+  //     payload: {
+  //       userName: this.props.currentUser.userName,
+  //     },
+  //   });
+  //   console.log(this.props.currentUser.userName);
+  // }
+  // 控制跳转
   componentWillReceiveProps(nextProps) {
-    if (nextProps.login.status === 'ok') {
+    if ((nextProps.login.type === 'NORMAL') && this.state.type === 'account') {
+      this.props.dispatch(routerRedux.push('/'));
+    } else if ((nextProps.login.type === 'FINANCE') && this.state.type === 'finance') {
+      this.props.dispatch(routerRedux.push('/'));
+    } else if ((nextProps.login.type === 'ADMIN') && this.state.type === 'account') {
       this.props.dispatch(routerRedux.push('/'));
     }
   }
@@ -27,22 +55,11 @@ export default class Login extends Component {
     clearInterval(this.interval);
   }
 
+
   onSwitch = (key) => {
     this.setState({
       type: key,
     });
-  }
-
-  onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
-      }
-    }, 1000);
   }
 
   handleSubmit = (e) => {
@@ -52,7 +69,7 @@ export default class Login extends Component {
       (err, values) => {
         if (!err) {
           this.props.dispatch({
-            type: `login/${type}Submit`,
+            type: 'login/accountSubmit',
             payload: values,
           });
         }
@@ -74,116 +91,100 @@ export default class Login extends Component {
   render() {
     const { form, login } = this.props;
     const { getFieldDecorator } = form;
-    const { count, type } = this.state;
+    const { type } = this.state;
     return (
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit}>
           <Tabs animated={false} className={styles.tabs} activeKey={type} onChange={this.onSwitch}>
-            <TabPane tab="账户密码登录" key="account">
+            <TabPane tab="企业入口" key="account">
               {
-                login.status === 'error' &&
-                login.type === 'account' &&
-                login.submitting === false &&
-                this.renderMessage('账户或密码错误')
+                (login.status === 500) &&
+                this.renderMessage('账户或密码不正确')
+              }
+              {
+                (login.type === 'FINANCE') &&
+                this.renderMessage('请选择金融机构入口')
               }
               <FormItem>
                 {getFieldDecorator('userName', {
                   rules: [{
-                    required: type === 'account', message: '请输入账户名！',
+                    required: true, message: '请输入账户名！',
                   }],
                 })(
                   <Input
                     size="large"
                     prefix={<Icon type="user" className={styles.prefixIcon} />}
-                    placeholder="admin"
+                    placeholder="请输入账户名"
                   />
                 )}
               </FormItem>
               <FormItem>
                 {getFieldDecorator('password', {
                   rules: [{
-                    required: type === 'account', message: '请输入密码！',
+                    required: true, message: '请输入密码！',
                   }],
                 })(
                   <Input
                     size="large"
                     prefix={<Icon type="lock" className={styles.prefixIcon} />}
                     type="password"
-                    placeholder="888888"
+                    placeholder="请输入密码"
                   />
                 )}
               </FormItem>
             </TabPane>
-            <TabPane tab="手机号登录" key="mobile">
+            <TabPane tab="金融机构入口" key="finance">
               {
                 login.status === 'error' &&
-                login.type === 'mobile' &&
+                login.type === 'finance' &&
                 login.submitting === false &&
-                this.renderMessage('验证码错误')
+                this.renderMessage('账户或密码不正确')
+              }
+              {
+                (login.type === 'ADMIN' || login.type === 'NORMAL') &&
+                this.renderMessage('请选择企业入口')
               }
               <FormItem>
-                {getFieldDecorator('mobile', {
+                {getFieldDecorator('userName', {
                   rules: [{
-                    required: type === 'mobile', message: '请输入手机号！',
-                  }, {
-                    pattern: /^1\d{10}$/, message: '手机号格式错误！',
+                    required: true, message: '请输入账户名！',
                   }],
                 })(
                   <Input
                     size="large"
-                    prefix={<Icon type="mobile" className={styles.prefixIcon} />}
-                    placeholder="手机号"
+                    prefix={<Icon type="user" className={styles.prefixIcon} />}
+                    placeholder="请输入账户名"
                   />
                 )}
               </FormItem>
               <FormItem>
-                <Row gutter={8}>
-                  <Col span={16}>
-                    {getFieldDecorator('captcha', {
-                      rules: [{
-                        required: type === 'mobile', message: '请输入验证码！',
-                      }],
-                    })(
-                      <Input
-                        size="large"
-                        prefix={<Icon type="mail" className={styles.prefixIcon} />}
-                        placeholder="验证码"
-                      />
-                    )}
-                  </Col>
-                  <Col span={8}>
-                    <Button
-                      disabled={count}
-                      className={styles.getCaptcha}
-                      size="large"
-                      onClick={this.onGetCaptcha}
-                    >
-                      {count ? `${count} s` : '获取验证码'}
-                    </Button>
-                  </Col>
-                </Row>
+                {getFieldDecorator('password', {
+                  rules: [{
+                    required: true, message: '请输入密码！',
+                  }],
+                })(
+                  <Input
+                    size="large"
+                    prefix={<Icon type="lock" className={styles.prefixIcon} />}
+                    type="password"
+                    placeholder="请输入密码"
+                  />
+                )}
               </FormItem>
             </TabPane>
+
           </Tabs>
           <FormItem className={styles.additional}>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-              initialValue: true,
-            })(
-              <Checkbox className={styles.autoLogin}>自动登录</Checkbox>
-            )}
-            <a className={styles.forgot} href="">忘记密码</a>
+
             <Button size="large" loading={login.submitting} className={styles.submit} type="primary" htmlType="submit">
               登录
             </Button>
           </FormItem>
         </Form>
         <div className={styles.other}>
-          其他登录方式
+
           {/* 需要加到 Icon 中 */}
-          <span className={styles.iconAlipay} />
-          <span className={styles.iconTaobao} />
-          <span className={styles.iconWeibo} />
+
           <Link className={styles.register} to="/user/register">注册账户</Link>
         </div>
       </div>
