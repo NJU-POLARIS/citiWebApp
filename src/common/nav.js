@@ -24,14 +24,14 @@ export const getNavData = app => [
         children: [
           {
             name: '预警',
-            icon: 'warning',
+            // icon: 'warning',
             path: 'warning',
             isHide: false,
             component: dynamicWrapper(app, ['warning'], import('../routes/Finance/Warning')),
           },
           {
             name: '凭证',
-            icon: 'credit-card',
+            // icon: 'credit-card',
             path: 'voucher',
             isHide: false,
             component: dynamicWrapper(app, ['voucher'], import('../routes/Finance/Voucher')),
@@ -39,7 +39,7 @@ export const getNavData = app => [
           {
             name: '账簿',
             path: 'book',
-            icon: 'book',
+            // icon: 'book',
             isHide: false,
             component: dynamicWrapper(app, ['voucher', 'book'], import('../routes/Finance/Book/GeneralBook')),
           },
@@ -63,7 +63,7 @@ export const getNavData = app => [
           },
           {
             name: '报表',
-            icon: 'file-text',
+            // icon: 'file-text',
             path: 'tables',
             isHide: false,
             component: dynamicWrapper(app, ['tables'], import('../routes/Finance/Sheet/ThreePages')),
@@ -77,32 +77,32 @@ export const getNavData = app => [
         isHide: false,
         children: [{
           name: '现金管理',
-          icon: 'pay-circle-o',
+          // icon: 'pay-circle-o',
           path: 'cash',
           isHide: false,
           component: dynamicWrapper(app, ['cash'], import('../routes/Chains/Cash')),
         }, {
           name: '库存管理',
-          icon: 'shopping-cart',
+          // icon: 'shopping-cart',
           path: 'stock',
           isHide: false,
           component: dynamicWrapper(app, ['stock'], import('../routes/Chains/Stock/ProducerStock')),
         }, {
           name: '融资服务',
-          icon: 'bank',
+          // icon: 'bank',
           path: 'financing',
           isHide: false,
           component: dynamicWrapper(app, ['receiveFinancing'], import('../routes/Chains/Financing/Financing')),
         }, {
           name: '绩效评价',
-          icon: 'like-o',
+          // icon: 'like-o',
           path: 'appraisal',
           isHide: false,
           component: dynamicWrapper(app, ['appraisal'], import('../routes/Chains/Appraisal/Appraisal')),
         }, {
           name: '金融机构',
           path: 'fi',
-          isHide: false,
+          isHide: true,
           component: dynamicWrapper(app, [], import('../routes/FinancialInstitutions/Institutions')),
         }],
       },
@@ -168,7 +168,7 @@ export const getNavData = app => [
           {
             name: '注册结果',
             path: 'register-result',
-            isHide: false,
+            isHide: true,
             component: dynamicWrapper(app, [], import('../routes/User/RegisterResult')),
           },
         ],
