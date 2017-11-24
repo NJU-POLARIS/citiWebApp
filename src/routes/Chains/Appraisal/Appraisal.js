@@ -4,18 +4,22 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Tabs, Radio, Divider, Select, List, Progress, Row, Col, Card } from 'antd';
+import { Tabs, Radio, Divider, Select, List, Progress, Row, Col, Card, DatePicker } from 'antd';
 import {MiniArea, ChartCard } from '../../../components/Charts';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import DescriptionList from '../../../components/DescriptionList';
 import LineChart from '../../../components/Charts/Line/LineChart';
 import styles from './Appraisal.less';
+import moment from 'moment';
+
 
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Description } = DescriptionList;
+const { MonthPicker } = DatePicker;
+const monthFormat='YYYY/MM';
 
 class Appraisal extends PureComponent {
   render() {
@@ -1132,6 +1136,9 @@ class Appraisal extends PureComponent {
         <Tabs defaultActiveKey="1">
           <TabPane tab="成员绩效评价" key="1">
             <Card bordered={false}>
+              <MonthPicker defaultValue={moment('2016/12',monthFormat)} format={monthFormat} />
+              <br/>
+
             <RadioGroup defaultValue="supplier" className={styles.rg}>
               <RadioButton value="supplier">供应商</RadioButton>
               <RadioButton value="producer">生产商</RadioButton>
