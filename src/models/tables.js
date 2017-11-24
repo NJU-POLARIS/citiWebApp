@@ -73,21 +73,21 @@ export default {
           type: 'fetchBalanceSheet',
           payload: {
             companyID: 1,
-            phase: { phase: '2017-10' },
+            phase: { phase: '2016-12' },
           },
         });
         dispatch({
           type: 'fetchProfit',
           payload: {
             companyID: 1,
-            phase: { phase: '2017-10' },
+            phase: { phase: '2016-12' },
           },
         });
         dispatch({
           type: 'fetchCashflow',
           payload: {
             companyID: 1,
-            phase: { phase: '2017-10' },
+            phase: { phase: '2016-12' },
           },
         });
         // console.log(pathname.split('/'));
