@@ -28,7 +28,7 @@ class BalanceBook extends PureComponent {
       payload: {
         companyId: 1,
         startPeriod: '2016年第1期',
-        endPeriod: '2016年第4期',
+        endPeriod: '2016年第1期',
         startSubjectId: '1001',
         endSubjectId: '8001',
         lowLevel: 1,
@@ -260,10 +260,6 @@ class BalanceBook extends PureComponent {
       {
         key: 'general',
         tab: '总账',
-      },
-      {
-        key: 'detail',
-        tab: '明细账',
       },
       {
         key: 'balance',

@@ -21,12 +21,44 @@ export default class Institutions extends PureComponent {
   state = {
     selectedRows: [],
     formValues: {},
+    data: [{
+      key: '1',
+      no: 'companyB1',
+      status: '0',
+      amount: '￥ 1,200,000'
+    }, {
+      key: '3',
+      no: 'companyB1',
+      status: '1',
+      amount: '￥ 3,000,000'
+    }, {
+      key: '2',
+      no: 'companyA1',
+      status: '2',
+      amount: '￥ 2,000,000',
+    }],
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'rule/fetch',
+      type: 'institutions/queryList',
+      payload: [{
+        key: '1',
+        no: 'companyB1',
+        status: '0',
+        amount: '￥ 1,200,000'
+      }, {
+        key: '3',
+        no: 'companyB1',
+        status: '1',
+        amount: '￥ 3,000,000'
+      }, {
+        key: '2',
+        no: 'companyA1',
+        status: '2',
+        amount: '￥ 2,000,000',
+      }],
     });
   }
 
@@ -84,14 +116,58 @@ export default class Institutions extends PureComponent {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
 
+      const { no } = fieldsValue;
+      switch(no) {
+        case 'all':
+          const n0 = [{
+            key: '1',
+            no: 'companyB1',
+            status: '0',
+            amount: '￥ 1,200,000'
+          }, {
+            key: '3',
+            no: 'companyB1',
+            status: '1',
+            amount: '￥ 3,000,000'
+          }, {
+            key: '2',
+            no: 'companyA1',
+            status: '2',
+            amount: '￥ 2,000,000',
+          }];
+          this.setState({ data: [...n0] });
+          break;
+        case 'companyB1':
+          const n1 = [{
+            key: '1',
+            no: 'companyB1',
+            status: '0',
+            amount: '￥ 1,200,000'
+          }, {
+            key: '3',
+            no: 'companyB1',
+            status: '1',
+            amount: '￥ 3,000,000'
+          },];
+          this.setState({ data: [...n1] });
+          break;
+        case 'companyA1':
+          const n2 = [{
+            key: '2',
+            no: 'companyA1',
+            status: '2',
+            amount: '￥ 2,000,000',
+          }];
+          this.setState({ data: [...n2] });
+          break;
+        default:
+          this.setState({ data: [] });
+          break;
+      }
       const values = {
         ...fieldsValue,
         updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),
       };
-
-      this.setState({
-        formValues: values,
-      });
 
       dispatch({
         type: 'rule/fetch',
@@ -114,8 +190,7 @@ export default class Institutions extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
-              <Button type="primary" htmlType="submit">查询</Button>
-              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
+              <Button type="primary" htmlType="submit" onClick={e => this.handleSearch(e)}>查询</Button>
               <Button style={{ marginLeft: 8 }} onClick={(e) => this.handleLogOut(e)}>登出</Button>
             </span>
           </Col>
@@ -123,6 +198,8 @@ export default class Institutions extends PureComponent {
       </Form>
     );
   }
+
+
 
   render() {
     const t_data = [{
@@ -142,8 +219,8 @@ export default class Institutions extends PureComponent {
       amount: '￥ 2,000,000',
     }];
     const { selectedRows } = this.state;
+    const { institutions } = this.state;
     return (
-
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>
@@ -151,7 +228,7 @@ export default class Institutions extends PureComponent {
             </div>
             <Instable
               selectedRows={selectedRows}
-              data={t_data}
+              data={this.state.data}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleTableChange}
             />

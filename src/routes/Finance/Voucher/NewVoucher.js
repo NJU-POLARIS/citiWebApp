@@ -296,7 +296,7 @@ class NewVoucher extends PureComponent {
         const { company_id, data, totalVo } = this.state;
         const { voucherTag, voucherNumber, date, voucher_maker, remark } = values;
         const voucher_id = voucherTag + '-' + voucherNumber;
-        // console.log(company_id, voucher_id, voucher_maker, date, remark, data, totalVo);
+        console.log(company_id, voucher_id, voucher_maker, date, remark, data, totalVo);
         if (totalVo.debitAmount !== totalVo.creditAmount) {
           message.error("借贷不平衡！")
         }else {
@@ -312,6 +312,8 @@ class NewVoucher extends PureComponent {
               totalVo: totalVo,
             },
           });
+          message.success("添加成功！");
+          this.props.onCancel();
         }
 
       }
@@ -421,7 +423,6 @@ class NewVoucher extends PureComponent {
   handleFieldChange(e, fieldName, lines) {
     const newData = [...this.state.data];
     const target = this.getRowBylines(lines);
-    console.log(e);
     if (target) {
       target[fieldName] = e.target.value;
       this.setState({ data: newData });
@@ -556,7 +557,6 @@ class NewVoucher extends PureComponent {
   render() {
     const sumData = [];
     sumData.push({summary: '合计', ...this.state.totalVo});
-    console.log(sumData);
 
     const columns = [{
       title: '摘要',
@@ -736,9 +736,8 @@ class NewVoucher extends PureComponent {
           onClick={this.newMember}
           icon="plus"
         >
-          新增成员
+          添加纪录
         </Button>
-        <EditableTable />
         {this.renderSupport()}
       </Modal>
     );

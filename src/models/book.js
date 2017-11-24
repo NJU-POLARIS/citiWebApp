@@ -62,25 +62,25 @@ export default {
     saveGeneral(state, action) {
       return {
         ...state,
-        general: action.payload,
+        general: [...action.payload],
       };
     },
     saveBalance(state, action) {
       return {
         ...state,
-        balance: action.payload,
+        balance: [...action.payload],
       };
     },
     saveSummary(state, action) {
       return {
         ...state,
-        summary: action.payload,
+        summary: [...action.payload],
       };
     },
     changeLoading(state, action) {
       return {
         ...state,
-        loading: action.payload,
+        loading: [...action.payload],
       };
     },
   },
