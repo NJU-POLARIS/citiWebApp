@@ -23,13 +23,6 @@ export const getNavData = app => [
         isHide: false,
         children: [
           {
-            name: '预警',
-            // icon: 'warning',
-            path: 'warning',
-            isHide: false,
-            component: dynamicWrapper(app, ['warning'], import('../routes/Finance/Warning')),
-          },
-          {
             name: '凭证',
             // icon: 'credit-card',
             path: 'voucher',
@@ -67,6 +60,13 @@ export const getNavData = app => [
             path: 'tables',
             isHide: false,
             component: dynamicWrapper(app, ['tables'], import('../routes/Finance/Sheet/ThreePages')),
+          },
+          {
+            name: '预警',
+            // icon: 'warning',
+            path: 'warning',
+            isHide: false,
+            component: dynamicWrapper(app, ['warning'], import('../routes/Finance/Warning')),
           },
         ],
       },

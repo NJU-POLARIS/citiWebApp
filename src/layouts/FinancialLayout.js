@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin, Button } from 'antd';
+import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Link, Route, Redirect, Switch } from 'dva/router';
@@ -65,10 +65,12 @@ class FinancialLayout extends React.PureComponent {
     const { location } = this.props;
     return { location };
   }
-  onMenuClick = () => {
-    this.props.dispatch({
-      type: 'login/logout',
-    });
+  onMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      this.props.dispatch({
+        type: 'login/logout',
+      });
+    }
   }
   onCollapse = (collapsed) => {
     this.props.dispatch({
@@ -94,8 +96,13 @@ class FinancialLayout extends React.PureComponent {
               <div
                 className={styles.triggeer}
               />
-              <div style={{ float: 'right' }}>
-                <Button onClick={this.onMenuClick}>登出</Button>
+              <div className={styles.right}>
+                <Dropdown overlay={menu}>
+                  <span className={`${styles.action} ${styles.account}`}>
+                    <Avatar size="small" className={styles.avatar} src="https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png" />
+                    {currentUser.userName}
+                   </span>
+                </Dropdown>
               </div>
             </Header>
             {
@@ -112,6 +119,7 @@ class FinancialLayout extends React.PureComponent {
             }
           </div>
       </DocumentTitle>
+
     );
   }
 }

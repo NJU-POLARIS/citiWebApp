@@ -70,151 +70,151 @@ class Appraisal extends PureComponent {
       const B1C2=[0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,1.0,0.0];
 
       lineData1A1B2 = [{
+        date: "2016-01",
+        value: 0,
+      }, {
+        date: "2016-02",
+        value: 1,
+      }, {
+        date: "2016-03",
+        value: 0,
+      }, {
+        date: "2016-04",
+        value: 1,
+      }, {
+        date: "2016-05",
+        value: 1,
+      }, {
+        date: "2016-06",
+        value: 0,
+      }, {
+        date: "2016-07",
+        value: 0,
+      }, {
+        date: "2016-08",
+        value: 0,
+      }, {
+        date: "2016-09",
+        value: 0,
+      }, {
+        date: "2016-10",
+        value: 0,
+      }, {
         date: "2016-11",
         value: 0,
       }, {
         date: "2016-12",
-        value: 1,
-      }, {
-        date: "2017-01",
-        value: 0,
-      }, {
-        date: "2017-02",
-        value: 1,
-      }, {
-        date: "2017-03",
-        value: 1,
-      }, {
-        date: "2017-04",
-        value: 0,
-      }, {
-        date: "2017-05",
-        value: 0,
-      }, {
-        date: "2017-06",
-        value: 0,
-      }, {
-        date: "2017-07",
-        value: 0,
-      }, {
-        date: "2017-08",
-        value: 0,
-      }, {
-        date: "2017-09",
-        value: 0,
-      }, {
-        date: "2017-10",
         value: 0,
       }];
       lineData1A2B1 = [{
+        date: "2016-01",
+        value: 0,
+      }, {
+        date: "2016-02",
+        value: 0,
+      }, {
+        date: "2016-03",
+        value: 0,
+      }, {
+        date: "2016-04",
+        value: 0,
+      }, {
+        date: "2016-05",
+        value: 1,
+      }, {
+        date: "2016-06",
+        value: 0,
+      }, {
+        date: "2016-07",
+        value: 0,
+      }, {
+        date: "2016-08",
+        value: 1,
+      }, {
+        date: "2016-09",
+        value: 0,
+      }, {
+        date: "2016-10",
+        value: 0,
+      }, {
         date: "2016-11",
         value: 0,
       }, {
         date: "2016-12",
-        value: 0,
-      }, {
-        date: "2017-01",
-        value: 0,
-      }, {
-        date: "2017-02",
-        value: 0,
-      }, {
-        date: "2017-03",
-        value: 1,
-      }, {
-        date: "2017-04",
-        value: 0,
-      }, {
-        date: "2017-05",
-        value: 0,
-      }, {
-        date: "2017-06",
-        value: 1,
-      }, {
-        date: "2017-07",
-        value: 0,
-      }, {
-        date: "2017-08",
-        value: 0,
-      }, {
-        date: "2017-09",
-        value: 0,
-      }, {
-        date: "2017-10",
         value: 0,
       }];
       lineData1B1C1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C1[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C1[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C1[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C1[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C1[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C1[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C1[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C1[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C1[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C1[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C1[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C1[11],
       }];
        lineData1B1C2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C2[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C2[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C2[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C2[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C2[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C2[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C2[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C2[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C2[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C2[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C2[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C2[11],
       }];
 
@@ -225,151 +225,151 @@ class Appraisal extends PureComponent {
       const B1C2=m2d1[3];
 
      lineData1A1B2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: A1B2[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: A1B2[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: A1B2[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: A1B2[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: A1B2[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: A1B2[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: A1B2[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: A1B2[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: A1B2[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: A1B2[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: A1B2[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: A1B2[11],
       }];
        lineData1A2B1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: A2B1[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: A2B1[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: A2B1[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: A2B1[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: A2B1[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: A2B1[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: A2B1[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: A2B1[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: A2B1[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: A2B1[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: A2B1[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: A2B1[11],
       }];
      lineData1B1C1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C1[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C1[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C1[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C1[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C1[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C1[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C1[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C1[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C1[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C1[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C1[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C1[11],
       }];
        lineData1B1C2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C2[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C2[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C2[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C2[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C2[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C2[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C2[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C2[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C2[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C2[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C2[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C2[11],
       }];
     }
@@ -380,151 +380,151 @@ class Appraisal extends PureComponent {
       const B1C22=[0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,0.0];
 
        lineData2A1B2 = [{
+        date: "2016-01",
+        value: 0,
+      }, {
+        date: "2016-02",
+        value: 0.48,
+      }, {
+        date: "2016-03",
+        value: 0,
+      }, {
+        date: "2016-04",
+        value: 0.48,
+      }, {
+        date: "2016-05",
+        value: 0.48,
+      }, {
+        date: "2016-06",
+        value: 0,
+      }, {
+        date: "2016-07",
+        value: 0.66,
+      }, {
+        date: "2016-08",
+        value: 0.66,
+      }, {
+        date: "2016-09",
+        value: 0,
+      }, {
+        date: "2016-10",
+        value: 0,
+      }, {
         date: "2016-11",
         value: 0,
       }, {
         date: "2016-12",
-        value: 0.48,
-      }, {
-        date: "2017-01",
-        value: 0,
-      }, {
-        date: "2017-02",
-        value: 0.48,
-      }, {
-        date: "2017-03",
-        value: 0.48,
-      }, {
-        date: "2017-04",
-        value: 0,
-      }, {
-        date: "2017-05",
-        value: 0.66,
-      }, {
-        date: "2017-06",
-        value: 0.66,
-      }, {
-        date: "2017-07",
-        value: 0,
-      }, {
-        date: "2017-08",
-        value: 0,
-      }, {
-        date: "2017-09",
-        value: 0,
-      }, {
-        date: "2017-10",
         value: 0,
       }];
        lineData2A2B1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: A2B12[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: A2B12[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: A2B12[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: A2B12[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: A2B12[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: A2B12[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: A2B12[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: A2B12[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: A2B12[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: A2B12[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: A2B12[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: A2B12[11],
       }];
        lineData1B1C1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C12[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C12[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C12[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C12[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C12[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C12[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C12[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C12[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C12[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C12[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C12[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C12[11],
       }];
        lineData2B1C2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C22[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C22[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C22[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C22[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C22[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C22[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C22[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C22[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C22[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C22[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C22[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C22[11],
       }];
     // }
@@ -535,151 +535,151 @@ class Appraisal extends PureComponent {
       const B1C23=[0.0,0.0,0.0,0.0,0.011904762,0.0,0.071428571,0.0,0.013513514,-0.018867925,0.0,0.0];
 
        lineData3A1B2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: A1B23[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: A1B23[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: A1B23[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: A1B23[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: A1B23[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: A1B23[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: A1B23[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: A1B23[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: A1B23[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: A1B23[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: A1B23[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: A1B23[11],
       }];
       lineData3A2B1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: A2B13[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: A2B13[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: A2B13[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: A2B13[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: A2B13[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: A2B13[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: A2B13[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: A2B13[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: A2B13[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: A2B13[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: A2B13[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: A2B13[11],
       }];
        lineData3B1C1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C13[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C13[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C13[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C13[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C13[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C13[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C13[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C13[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C13[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C13[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C13[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C13[11],
       }];
       lineData3B1C2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: B1C23[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: B1C23[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: B1C23[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: B1C23[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: B1C23[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: B1C23[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: B1C23[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: B1C23[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: B1C23[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: B1C23[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: B1C23[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: B1C23[11],
       }];
     // }
@@ -696,411 +696,411 @@ class Appraisal extends PureComponent {
       const tt9=[1.0,0.4,0.0,0.244186047,0.269662921,1.0,0.0,0.0,0.242424242,1.0,0.0,0.0];
       const tt10=[0.0,8.536585366,-0.767263427,5.164835165,0.017825312,-0.840630473,4.065934066,-0.629067245,2.923976608,-0.87928465,0.0,0.12345679];
        t1 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt1[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt1[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt1[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt1[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt1[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt1[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt1[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt1[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt1[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt1[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt1[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt1[11],
       }];
      t2 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt2[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt2[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt2[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt2[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt2[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt2[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt2[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt2[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt2[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt2[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt2[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt2[11],
       }];
       t3 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt3[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt3[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt3[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt3[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt3[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt3[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt3[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt3[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt3[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt3[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt3[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt3[11],
       }];
        t4 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt4[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt4[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt4[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt4[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt4[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt4[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt4[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt4[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt4[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt4[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt4[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt4[11],
       }];
       t5 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt5[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt5[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt5[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt5[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt5[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt5[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt5[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt5[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt5[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt5[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt5[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt5[11],
       }];
        t6 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt1[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt6[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt6[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt6[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt6[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt6[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt6[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt6[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt6[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt6[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt6[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt6[11],
       }];
        t7 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt7[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt7[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt7[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt7[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt7[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt7[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt7[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt7[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt7[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt7[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt7[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt7[11],
       }];
       t8 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt8[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt8[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt8[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt8[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt8[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt8[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt8[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt8[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt8[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt8[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt8[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt8[11],
       }];
        t9 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt9[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt9[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt9[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt9[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt9[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt9[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt9[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt9[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt9[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt9[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt9[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt9[11],
       }];
        t10 = [{
-        date: "2016-11",
+        date: "2016-01",
         value: tt10[0],
       }, {
-        date: "2016-12",
+        date: "2016-02",
         value: tt10[1],
       }, {
-        date: "2017-01",
+        date: "2016-03",
         value: tt10[2],
       }, {
-        date: "2017-02",
+        date: "2016-04",
         value: tt10[3],
       }, {
-        date: "2017-03",
+        date: "2016-05",
         value: tt10[4],
       }, {
-        date: "2017-04",
+        date: "2016-06",
         value: tt10[5],
       }, {
-        date: "2017-05",
+        date: "2016-07",
         value: tt10[6],
       }, {
-        date: "2017-06",
+        date: "2016-08",
         value: tt10[7],
       }, {
-        date: "2017-07",
+        date: "2016-09",
         value: tt10[8],
       }, {
-        date: "2017-08",
+        date: "2016-10",
         value: tt10[9],
       }, {
-        date: "2017-09",
+        date: "2016-11",
         value: tt10[10],
       }, {
-        date: "2017-10",
+        date: "2016-12",
         value: tt10[11],
       }];
     // }
     const z=[{
+      date: "2016-01",
+      value: 0,
+    }, {
+      date: "2016-02",
+      value: 0,
+    }, {
+      date: "2016-03",
+      value: 0,
+    }, {
+      date: "2016-04",
+      value: 0,
+    }, {
+      date: "2016-05",
+      value: 0,
+    }, {
+      date: "2016-06",
+      value: 0,
+    }, {
+      date: "2016-07",
+      value: 0,
+    }, {
+      date: "2016-08",
+      value: 0,
+    }, {
+      date: "2016-09",
+      value: 0,
+    }, {
+      date: "2016-10",
+      value: 0,
+    }, {
       date: "2016-11",
       value: 0,
     }, {
       date: "2016-12",
-      value: 0,
-    }, {
-      date: "2017-01",
-      value: 0,
-    }, {
-      date: "2017-02",
-      value: 0,
-    }, {
-      date: "2017-03",
-      value: 0,
-    }, {
-      date: "2017-04",
-      value: 0,
-    }, {
-      date: "2017-05",
-      value: 0,
-    }, {
-      date: "2017-06",
-      value: 0,
-    }, {
-      date: "2017-07",
-      value: 0,
-    }, {
-      date: "2017-08",
-      value: 0,
-    }, {
-      date: "2017-09",
-      value: 0,
-    }, {
-      date: "2017-10",
       value: 0,
     }];
     const topCol = {
