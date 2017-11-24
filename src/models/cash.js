@@ -30,7 +30,7 @@ export default {
     saveCashMessage(state, action) {
       return {
         ...state,
-        warningMessage: action.payload,
+        cashMessage: action.payload,
       };
     },
     changeLoading(state, action) {

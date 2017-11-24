@@ -99,12 +99,7 @@ export const getNavData = app => [
           path: 'appraisal',
           isHide: false,
           component: dynamicWrapper(app, ['appraisal'], import('../routes/Chains/Appraisal/Appraisal')),
-        }, {
-          name: '金融机构',
-          path: 'fi',
-          isHide: true,
-          component: dynamicWrapper(app, [], import('../routes/FinancialInstitutions/Institutions')),
-        }],
+        }, ],
       },
       {
         name: '设置',
@@ -189,4 +184,19 @@ export const getNavData = app => [
       },
     ],
   },
+  {
+    component: dynamicWrapper(app, ['user'], import('../layouts/FinancialLayout')),
+    layout: 'FinancialLayout',
+    name: 'Chains', // for breadcrumb
+    path: '/financing',
+    isHide: true,
+    children: [
+      {
+        name: '金融机构',
+        path: 'financing',
+        isHide: false,
+        component: dynamicWrapper(app, [], import('../routes/FinancialInstitutions/Institutions')),
+      }
+    ],
+  }
 ];

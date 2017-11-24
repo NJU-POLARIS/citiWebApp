@@ -136,7 +136,7 @@ export default class Institutions extends PureComponent {
     }];
     const { selectedRows } = this.state;
     return (
-      <PageHeaderLayout title="金融机构">
+
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>
@@ -150,7 +150,7 @@ export default class Institutions extends PureComponent {
             />
           </div>
         </Card>
-      </PageHeaderLayout>
+
     );
   }
 }

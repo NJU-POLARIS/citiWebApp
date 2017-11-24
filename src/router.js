@@ -42,6 +42,7 @@ function RouterConfig({ history, app }) {
   const HomeLayout = getLayout(navData, 'HomeLayout').component;
   const UserLayout = getLayout(navData, 'UserLayout').component;
   const BasicLayout = getLayout(navData, 'BasicLayout').component;
+  const FinancialLayout = getLayout(navData, 'FinancialLayout').component;
 
   const passProps = {
     app,
@@ -57,6 +58,7 @@ function RouterConfig({ history, app }) {
         <Switch>
           <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
           <Route path="/finance" render={props => <BasicLayout {...props} {...passProps} />} />
+          <Route path="/financing" render={props => <FinancialLayout {...props} {...passProps} />} />
           <Route path="/" render={props => <HomeLayout {...props} {...passProps} />} />
         </Switch>
       </Router>

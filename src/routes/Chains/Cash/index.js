@@ -31,6 +31,7 @@ class Cash extends PureComponent {
 
   render() {
     const { cash: { cashMessage, loading }} = this.props;
+    console.log(cashMessage);
     return (
       <PageHeaderLayout
         title="现金池"

@@ -6,7 +6,7 @@ import ReactEcharts from 'echarts-for-react';
 
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import numeral from 'numeral';
-import { Row, Col, Card, Tooltip, Icon, Tag, Select, Spin } from 'antd';
+import { Row, Col, Card, Tooltip, Icon, Tag, Select, Spin, Form } from 'antd';
 
 import { Pie, WaterWave, Gauge, TagCloud, ChartCard, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, TimelineChart } from '../../../components/Charts';
 import NumberInfo from '../../../components/NumberInfo';
@@ -18,15 +18,17 @@ const getDiscription = (value) => {
 
 const { Option } = Select;
 
+@connect(state => ({
+  warning: state.warning,
+}))
+@Form.create()
 class Warning extends PureComponent {
   componentDidMount() {
-    console.log(this.props);
-    const { dispatch } = this.props;
-    dispatch(
+    this.props.dispatch(
       {
         type: 'warning/queryWarning',
         payload: {
-          phase: '2016-01',
+          phase: '2016-12',
         },
       }
     );
@@ -110,7 +112,7 @@ class Warning extends PureComponent {
                 bordered={false}
                 title="预警评分"
                 action={<Tooltip title="评分"><Icon type="info-circle-o" /></Tooltip>}
-                total="低度风险"
+                total={getDiscription(warningMessage[4])}
                 contentHeight={597}
               >
                 <ReactEcharts
@@ -130,7 +132,7 @@ class Warning extends PureComponent {
                   contentHeight={46}
                   footer={<div />}
                 >
-                  <MiniProgress percent={warningMessage[0]} strokeWidth={8} target={10} color="#13C2C2" />
+                  <MiniProgress percent={warningMessage[0] * 10} strokeWidth={8} target={10} color="#13C2C2" />
                 </ChartCard>
               </Row>
               <Row gutter={12} style={{ marginBottom: 20 }}>
@@ -142,7 +144,7 @@ class Warning extends PureComponent {
                   contentHeight={46}
                   footer={<div />}
                 >
-                  <MiniProgress percent={warningMessage[1]} strokeWidth={8} target={10} color="#13C2C2" />
+                  <MiniProgress percent={warningMessage[1] * 10} strokeWidth={8} target={10} color="#13C2C2" />
                 </ChartCard>
               </Row>
               <Row gutter={12} style={{ marginBottom: 20 }}>
@@ -154,7 +156,7 @@ class Warning extends PureComponent {
                   contentHeight={46}
                   footer={<div />}
                 >
-                  <MiniProgress percent={warningMessage[2]} strokeWidth={8} target={10} color="#13C2C2" />
+                  <MiniProgress percent={warningMessage[2] * 10} strokeWidth={8} target={10} color="#13C2C2" />
                 </ChartCard>
               </Row>
               <Row gutter={12} style={{ marginBottom: 20 }}>
@@ -166,7 +168,7 @@ class Warning extends PureComponent {
                   contentHeight={46}
                   footer={<div />}
                 >
-                  <MiniProgress percent={warningMessage[3]} strokeWidth={8} target={10} color="#13C2C2" />
+                  <MiniProgress percent={warningMessage[3] * 10} strokeWidth={8} target={10} color="#13C2C2" />
                 </ChartCard>
               </Row>
             </Col>
@@ -177,12 +179,13 @@ class Warning extends PureComponent {
   }
 }
 
-Warning.propTypes={
-  dispatch: PropTypes.func,
-};
-function mapStateToProps(state) {
-  return {
-    warning: state.warning,
-  };
-}
-export default connect(mapStateToProps)(Warning);
+// Warning.propTypes={
+//   dispatch: PropTypes.func,
+// };
+// function mapStateToProps(state) {
+//   return {
+//     warning: state.warning,
+//   };
+// }
+// export default connect(mapStateToProps)(Warning);
+export default Warning;
