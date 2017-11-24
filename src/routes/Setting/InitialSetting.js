@@ -19,7 +19,7 @@ export default class InitialSetting extends React.Component {
   render() {
     return (
       <PageHeaderLayout title="期初设置">
-        <Button icon="save" onClick={this.handleClick()}>初始化</Button>
+        <Button icon="save" onClick={this.handleClick()}>保存</Button>
         <Tabs>
           <TabPane key="balance" tab={<span><Icon type="wallet" />资产</span>} >
             <EditableTable identi="balance" />

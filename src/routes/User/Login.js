@@ -44,7 +44,7 @@ export default class Login extends Component {
   componentWillReceiveProps(nextProps) {
     if ((nextProps.login.type === 'NORMAL') && this.state.type === 'account') {
       this.props.dispatch(routerRedux.push('/finance/warning'));
-    } else if ((nextProps.login.type === 'FINANCE') && this.state.type === 'finance') {
+    } else if ((nextProps.login.type === 'FINANCIAL') && this.state.type === 'finance') {
       this.props.dispatch(routerRedux.push('/finance/warning'));
     } else if ((nextProps.login.type === 'ADMIN') && this.state.type === 'account') {
       this.props.dispatch(routerRedux.push('/finance/warning'));
