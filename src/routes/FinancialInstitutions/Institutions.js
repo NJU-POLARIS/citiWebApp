@@ -120,16 +120,19 @@ export default class Institutions extends PureComponent {
   render() {
     const t_data = [{
       key: '1',
-      no: '南京大学',
+      no: 'companyB1',
       status: '0',
-    }, {
-      key: '2',
-      no: '南京',
-      status: '2',
+      amount: '￥ 1,200,000'
     }, {
       key: '3',
-      no: '南京大学',
+      no: 'companyB1',
       status: '1',
+      amount: '￥ 3,000,000'
+    }, {
+      key: '2',
+      no: 'companyA1',
+      status: '2',
+      amount: '￥ 2,000,000',
     }];
     const { selectedRows } = this.state;
     return (

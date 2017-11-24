@@ -1,4 +1,4 @@
-import { fetchWarningMessage } from "../services/warning";
+import { fetchWarningMessage } from '../services/warning';
 
 export default {
   namespace: 'warning',
@@ -9,7 +9,7 @@ export default {
   },
 
   effects: {
-    *queryWarning({payload}, {call, put}) {
+    *queryWarning({ payload }, { call, put }) {
       const response = yield call(fetchWarningMessage, payload);
       yield put({
         type: 'changeLoading',
@@ -39,6 +39,6 @@ export default {
         loading: action.payload,
       };
     },
-  }
+  },
 
 };

@@ -6,7 +6,7 @@
   .@{banner2} {
     width: 100%;
     // 如果在第一屏且导航位置为 relative, 一屏为 height: calc(100vh - 64px);
-    height: 100vh;
+    height: calc(~"100vh - 64px");
     position: relative;
     border-color: #666;
     background: #fff;
@@ -34,7 +34,7 @@
       background-size: cover;
     }
     .bg0 {
-      background: url("https://zos.alipayobjects.com/rmsportal/bXNBIyzSLHaycUGDzwLG.jpg") center;
+      background: url("../../../assets/cover.jpg") center;
       // scrollParallax
       transform: translateY(-100px);
       height: calc(~"100% + 200px");

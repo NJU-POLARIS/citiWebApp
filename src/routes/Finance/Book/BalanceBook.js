@@ -27,12 +27,12 @@ class BalanceBook extends PureComponent {
       type: 'book/fetchBalance',
       payload: {
         companyId: 1,
-        startPeriod: '2017年第10期',
-        endPeriod: '2017年第10期',
+        startPeriod: '2016年第1期',
+        endPeriod: '2016年第4期',
         startSubjectId: '1001',
         endSubjectId: '8001',
         lowLevel: 1,
-        highLevel: 1,
+        highLevel: 3,
       },
     });
   }
@@ -47,12 +47,12 @@ class BalanceBook extends PureComponent {
           type: 'book/fetchBalance',
           payload: {
             companyId: 1,
-            startPeriod: startPeriod,
-            endPeriod: endPeriod,
+            startPeriod,
+            endPeriod,
             startSubjectId: startSubject.value.slice(1).slice(1).toString(),
             endSubjectId: endSubject.value.slice(1).slice(1).toString(),
-            lowLevel: lowLevel,
-            highLevel: highLevel,
+            lowLevel,
+            highLevel,
           },
         });
       }
@@ -76,13 +76,10 @@ class BalanceBook extends PureComponent {
   renderSimpleForm() {
     const options = [];
     const { voucher: { period } } = this.props;
-    for (let item of period) {
+    for (const item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
-    const first = period.map((item, i) => {
-      if (i === period.length - 1)
-        return item;
-    }).toString();
+
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline">
@@ -91,9 +88,7 @@ class BalanceBook extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('startPeriod')(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -105,9 +100,7 @@ class BalanceBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -133,13 +126,10 @@ class BalanceBook extends PureComponent {
   renderAdvancedForm() {
     const options = [];
     const { voucher: { period } } = this.props;
-    for (let item of period) {
+    for (const item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
-    const first = period.map((item, i) => {
-      if (i === period.length - 1)
-        return item;
-    }).toString();
+
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline">
@@ -148,9 +138,7 @@ class BalanceBook extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('startPeriod')(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -162,9 +150,7 @@ class BalanceBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -182,7 +168,7 @@ class BalanceBook extends PureComponent {
                   {getFieldDecorator('startSubject', {
                     initialValue: {
                       value: ['1', '1001'],
-                    }
+                    },
                   })(
                     <SubjectSelector />
                   )}
@@ -197,7 +183,7 @@ class BalanceBook extends PureComponent {
                     {
                       initialValue: {
                         value: ['6', '8001'],
-                      }
+                      },
                     }
                   )(
                     <SubjectSelector />
@@ -211,7 +197,7 @@ class BalanceBook extends PureComponent {
               <Col span={11}>
                 <FormItem>
                   {getFieldDecorator('lowLevel', {
-                    initialValue: 1
+                    initialValue: 1,
                   })(
                     <InputNumber min={0} placeholder="起始级别" style={{ width: '100%' }} />
                   )}
@@ -223,7 +209,7 @@ class BalanceBook extends PureComponent {
               <Col span={11}>
                 <FormItem>
                   {getFieldDecorator('highLevel', {
-                    initialValue: 1
+                    initialValue: 3,
                   })(
                     <InputNumber min={0} placeholder="结束级别" style={{ width: '100%' }} />
                   )}
@@ -311,7 +297,7 @@ class BalanceBook extends PureComponent {
             dataIndex: 'beginCredit',
             title: '贷方',
           },
-        ]
+        ],
       }, {
         title: '本期发生额',
         children: [
@@ -324,7 +310,7 @@ class BalanceBook extends PureComponent {
             dataIndex: 'currentCredit',
             title: '贷方',
           },
-        ]
+        ],
       }, {
         title: '期末余额',
         children: [
@@ -337,8 +323,8 @@ class BalanceBook extends PureComponent {
             dataIndex: 'endCredit',
             title: '贷方',
           },
-        ]
-      }
+        ],
+      },
     ];
 
     return (
@@ -352,8 +338,7 @@ class BalanceBook extends PureComponent {
             <div className={styles.voucherForm}>
               {this.renderForm()}
             </div>
-            <div className={styles.voucherOperator}>
-            </div>
+            <div className={styles.voucherOperator} />
           </div>
           <Table
             loading={loading}

@@ -12,42 +12,23 @@ export const getNavData = app => [
   {
     component: dynamicWrapper(app, ['user'], import('../layouts/BasicLayout')),
     layout: 'BasicLayout',
-    name: '首页', // for breadcrumb
-    path: '/',
+    name: 'Chains', // for breadcrumb
+    path: '/finance',
     isHide: false,
     children: [
-      // {
-      //   name: 'Dashboard',
-      //   icon: 'dashboard',
-      //   path: 'dashboard',
-      //   isHide: false,
-      //   children: [
-      //     {
-      //       name: '分析页',
-      //       path: 'analysis',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['chart'], import('../routes/Dashboard/Analysis')),
-      //     },
-      //     {
-      //       name: '监控页',
-      //       path: 'monitor',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['monitor'], import('../routes/Dashboard/Monitor')),
-      //     },
-      //     {
-      //       name: '工作台',
-      //       path: 'workplace',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['project', 'activities', 'chart'], import('../routes/Dashboard/Workplace')),
-      //     },
-      //   ],
-      // },
       {
         name: '财务管理',
         icon: 'bank',
         path: 'finance',
         isHide: false,
         children: [
+          {
+            name: '预警',
+            icon: 'warning',
+            path: 'warning',
+            isHide: false,
+            component: dynamicWrapper(app, ['warning'], import('../routes/Finance/Warning')),
+          },
           {
             name: '凭证',
             icon: 'credit-card',
@@ -87,19 +68,12 @@ export const getNavData = app => [
             isHide: false,
             component: dynamicWrapper(app, ['tables'], import('../routes/Finance/Sheet/ThreePages')),
           },
-          {
-            name: '财务预警',
-            icon: 'warning',
-            path: 'warning',
-            isHide: false,
-            component: dynamicWrapper(app, ['warning'], import('../routes/Finance/Warning')),
-          },
         ],
       },
       {
         name: '供应链管理',
         icon: 'api',
-        path: 'supply',
+        path: 'finance/supply',
         isHide: false,
         children: [{
           name: '现金管理',
@@ -132,111 +106,10 @@ export const getNavData = app => [
           component: dynamicWrapper(app, [], import('../routes/FinancialInstitutions/Institutions')),
         }],
       },
-      // {
-      //   name: '表单页',
-      //   path: 'form',
-      //   icon: 'form',
-      //   isHide: false,
-      //   children: [
-      //     {
-      //       name: '基础表单',
-      //       path: 'basic-form',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['form'], import('../routes/Forms/BasicForm')),
-      //     },
-      //     {
-      //       name: '分步表单',
-      //       path: 'step-form',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['form'], import('../routes/Forms/StepForm')),
-      //       children: [
-      //         {
-      //           path: 'confirm',
-      //           isHide: false,
-      //           component: dynamicWrapper(app, ['form'], import('../routes/Forms/StepForm/Step2')),
-      //         },
-      //         {
-      //           path: 'result',
-      //           isHide: false,
-      //           component: dynamicWrapper(app, ['form'], import('../routes/Forms/StepForm/Step3')),
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       name: '高级表单',
-      //       path: 'advanced-form',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['form'], import('../routes/Forms/AdvancedForm')),
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: '列表页',
-      //   path: 'list',
-      //   icon: 'table',
-      //   isHide: false,
-      //   children: [
-      //     {
-      //       name: '查询表格',
-      //       path: 'table-list',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['rule'], import('../routes/List/TableList')),
-      //     },
-      //     {
-      //       name: '标准列表',
-      //       path: 'basic-list',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['list'], import('../routes/List/BasicList')),
-      //     },
-      //     {
-      //       name: '卡片列表',
-      //       path: 'card-list',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['list'], import('../routes/List/CardList')),
-      //     },
-      //     {
-      //       name: '搜索列表（项目）',
-      //       path: 'cover-card-list',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['list'], import('../routes/List/CoverCardList')),
-      //     },
-      //     {
-      //       name: '搜索列表（应用）',
-      //       path: 'filter-card-list',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['list'], import('../routes/List/FilterCardList')),
-      //     },
-      //     {
-      //       name: '搜索列表（文章）',
-      //       path: 'search',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, ['list'], import('../routes/List/SearchList')),
-      //     },
-      //   ],
-      // },
-      {
-        name: '详情页',
-        path: 'profile',
-        icon: 'profile',
-        isHide: false,
-        children: [
-          {
-            name: '基础详情页',
-            path: 'basic',
-            isHide: false,
-            component: dynamicWrapper(app, ['profile'], import('../routes/Profile/BasicProfile')),
-          },
-          {
-            name: '高级详情页',
-            path: 'advanced',
-            isHide: false,
-            component: dynamicWrapper(app, ['profile'], import('../routes/Profile/AdvancedProfile')),
-          },
-        ],
-      },
       {
         name: '设置',
-        path: 'setting',
+        path: 'finance/setting',
+
         icon: 'setting',
         isHide: false,
         children: [
@@ -266,52 +139,6 @@ export const getNavData = app => [
           },
         ],
       },
-      // {
-      //   name: '结果',
-      //   path: 'result',
-      //   icon: 'check-circle-o',
-      //   isHide: false,
-      //   children: [
-      //     {
-      //       name: '成功',
-      //       path: 'success',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, [], import('../routes/Result/Success')),
-      //     },
-      //     {
-      //       name: '失败',
-      //       path: 'fail',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, [], import('../routes/Result/Error')),
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: '异常',
-      //   path: 'exception',
-      //   icon: 'warning',
-      //   isHide: false,
-      //   children: [
-      //     {
-      //       name: '403',
-      //       path: '403',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, [], import('../routes/Exception/403')),
-      //     },
-      //     {
-      //       name: '404',
-      //       path: '404',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, [], import('../routes/Exception/404')),
-      //     },
-      //     {
-      //       name: '500',
-      //       path: '500',
-      //       isHide: false,
-      //       component: dynamicWrapper(app, [], import('../routes/Exception/500')),
-      //     },
-      //   ],
-      // },
     ],
   },
   {
@@ -350,28 +177,16 @@ export const getNavData = app => [
   },
   {
     component: dynamicWrapper(app, [], import('../layouts/HomeLayout')),
-    path: '/home',
+    path: '/',
     layout: 'HomeLayout',
-    isHide: false,
+    isHide: true,
     children: [
       {
         name: '首页',
-        path: 'home',
-        isHide: false,
+        path: '',
+        isHide: true,
         component: dynamicWrapper(app, [], import('../routes/Home')),
       },
     ],
-  },
-  {
-    component: dynamicWrapper(app, [], import('../layouts/BlankLayout')),
-    layout: 'BlankLayout',
-    isHide: false,
-    children: {
-      name: '使用文档',
-      path: 'http://pro.ant.design/docs/getting-started',
-      target: '_blank',
-      icon: 'book',
-      isHide: false,
-    },
   },
 ];

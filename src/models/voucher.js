@@ -27,7 +27,7 @@ export default {
       });
       yield put({
         type: 'changeLoading',
-        payload: true,
+        payload: false,
       });
     },
     *fetchAllVoucher({ payload }, { call, put }) {
@@ -58,7 +58,7 @@ export default {
       });
       yield put({
         type: 'changeLoading',
-        payload: true,
+        payload: false,
       });
     },
     *fetchSingleVoucher({ payload }, { call, put }) {

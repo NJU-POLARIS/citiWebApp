@@ -145,9 +145,6 @@ class Voucher extends PureComponent {
     for (const item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
-    const first = period.map((item, i) => {
-      if (i === period.length - 1) { return item; }
-    }).toString();
 
     const { getFieldDecorator } = this.props.form;
     return (
@@ -157,9 +154,7 @@ class Voucher extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('startPeriod')(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -171,9 +166,7 @@ class Voucher extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -202,9 +195,6 @@ class Voucher extends PureComponent {
     for (const item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
-    const first = period.map((item, i) => {
-      if (i === period.length - 1) { return item; }
-    }).toString();
 
     return (
       <Form layout="inline">
@@ -213,9 +203,7 @@ class Voucher extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('startPeriod')(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -227,9 +215,7 @@ class Voucher extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -370,7 +356,7 @@ class Voucher extends PureComponent {
       remark: '测试数据',
       voucher_maker: 'company1admin',
       data: [],
-      totalVo: { chineseTotal: '零元零角零分', debitAmount: 0, creditAmount: 0 },
+      totalVo: { chineseTotal: '零元整', debitAmount: 0, creditAmount: 0 },
     };
 
     const columns = [

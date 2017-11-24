@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'dva/router';
 import TweenOne from 'rc-tween-one';
 import { Menu } from 'antd';
 
@@ -23,7 +24,12 @@ class Header extends React.Component {
     const isMode = props.isMode;
     delete props.isMode;
     const navData = { menu1: '登录', menu2: '注册'};
-    const navChildren = Object.keys(navData)
+    const navChildren = [
+      <Item key={0}><Link to={"/user/login"}>登录</Link></Item>,
+      <Item key={0}><Link to={"/user/register"}>注册</Link></Item>
+    ];
+
+      Object.keys(navData)
       .map((key, i) => (<Item key={i}>{navData[key]}</Item>));
     return (<TweenOne
       component="header"
@@ -35,7 +41,7 @@ class Header extends React.Component {
         animation={{ x: -30, type: 'from', ease: 'easeOutQuad' }}
         id={`${this.props.id}-logo`}
       >
-        <img width="100%" src="https://os.alipayobjects.com/rmsportal/mlcYmsRilwraoAe.svg" />
+        <img src="../../assets/logo.png" />
       </TweenOne>
       {isMode ? (<div
         className={`${this.props.className}-phone-nav${this.state.phoneOpen ? ' open' : ''}`}
@@ -62,6 +68,7 @@ class Header extends React.Component {
           </Menu>
         </div>
       </div>) : (<TweenOne
+
         className={`${this.props.className}-nav`}
         animation={{ x: 30, type: 'from', ease: 'easeOutQuad' }}
       >

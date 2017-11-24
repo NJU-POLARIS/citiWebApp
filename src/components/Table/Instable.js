@@ -77,7 +77,10 @@ class InsTable extends PureComponent {
         render(val) {
           return <Badge status={statusMap[val]} text={status[val]} />;
         },
-      },
+      }, {
+        title: '金额',
+        dataIndex: 'amount',
+      }
     ];
 
     const paginationProps = {

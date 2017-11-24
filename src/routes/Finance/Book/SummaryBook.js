@@ -27,12 +27,12 @@ class SummaryBook extends PureComponent {
       type: 'book/fetchSummary',
       payload: {
         companyId: 1,
-        startPeriod: '2017年第10期',
-        endPeriod: '2017年第10期',
+        startPeriod: '2016年第1期',
+        endPeriod: '2017年第4期',
         startSubjectId: '1001',
         endSubjectId: '8001',
         lowLevel: 1,
-        highLevel: 1,
+        highLevel: 3,
       },
     });
   }
@@ -79,10 +79,7 @@ class SummaryBook extends PureComponent {
     for (let item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
-    const first = period.map((item, i) => {
-      if (i === period.length - 1)
-        return item;
-    }).toString();
+
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline">
@@ -91,9 +88,7 @@ class SummaryBook extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('startPeriod')(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -105,9 +100,7 @@ class SummaryBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -136,10 +129,7 @@ class SummaryBook extends PureComponent {
     for (let item of period) {
       options.push(<Option value={item}>{item}</Option>);
     }
-    const first = period.map((item, i) => {
-      if (i === period.length - 1)
-        return item;
-    }).toString();
+
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline">
@@ -148,9 +138,7 @@ class SummaryBook extends PureComponent {
             <FormItem label="会计期间">
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('startPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('startPeriod')(
                     <Select placeholder="开始期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -162,9 +150,7 @@ class SummaryBook extends PureComponent {
               </Col>
               <Col span={11}>
                 <FormItem>
-                  {getFieldDecorator('endPeriod', {
-                    initialValue: first,
-                  })(
+                  {getFieldDecorator('endPeriod')(
                     <Select placeholder="结束期间" style={{ width: '100%' }}>
                       {options}
                     </Select>
@@ -223,7 +209,7 @@ class SummaryBook extends PureComponent {
               <Col span={11}>
                 <FormItem>
                   {getFieldDecorator('highLevel', {
-                    initialValue: 1
+                    initialValue: 3
                   })(
                     <InputNumber min={0} placeholder="结束级别" style={{ width: '100%' }} />
                   )}

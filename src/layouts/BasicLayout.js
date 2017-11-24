@@ -168,10 +168,10 @@ class BasicLayout extends React.PureComponent {
   getPageTitle() {
     const { location, getRouteData } = this.props;
     const { pathname } = location;
-    let title = 'Ant Design Pro';
+    let title = 'Chains';
     getRouteData('BasicLayout').forEach((item) => {
       if (item.path === pathname) {
-        title = `${item.name} - Ant Design Pro`;
+        title = `${item.name} - Chains`;
       }
     });
     return title;
@@ -246,7 +246,6 @@ class BasicLayout extends React.PureComponent {
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         <Menu.Item disabled><Icon type="user" />{login.currentUser.type}</Menu.Item>
-        <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
       </Menu>
@@ -269,11 +268,8 @@ class BasicLayout extends React.PureComponent {
           width={256}
           className={styles.sider}
         >
-          <div className={styles.logo}>
-            <Link to="/">
-              <img src="https://gw.alipayobjects.com/zos/rmsportal/iwWyPinUoseUxIAeElSx.svg" alt="logo" />
-              <h1>Ant Design Pro</h1>
-            </Link>
+          <div className={styles.wrapper}>
+            <Link className={styles.logo} to="/" />
           </div>
           <Menu
             theme="dark"
@@ -297,7 +293,7 @@ class BasicLayout extends React.PureComponent {
               { (
                 <Dropdown overlay={menu}>
                   <span className={`${styles.action} ${styles.account}`}>
-                    <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
+                    <Avatar size="small" className={styles.avatar} src="https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png" />
                     {currentUser.userName}
                   </span>
                 </Dropdown>

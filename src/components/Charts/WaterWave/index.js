@@ -37,7 +37,7 @@ class WaterWave extends PureComponent {
 
   renderChart() {
     const { percent, color = '#1890FF' } = this.props;
-    const data = percent / 100;
+    const data = 0.5;
     const self = this;
 
     if (!this.node || !data) {
@@ -190,7 +190,7 @@ class WaterWave extends PureComponent {
           {
             title && <span>{title}</span>
           }
-          <h4>{percent}%</h4>
+          <h4>￥{percent}</h4>
         </div>
       </div>
     );

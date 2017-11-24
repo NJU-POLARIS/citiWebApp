@@ -43,11 +43,11 @@ export default class Login extends Component {
   // 控制跳转
   componentWillReceiveProps(nextProps) {
     if ((nextProps.login.type === 'NORMAL') && this.state.type === 'account') {
-      this.props.dispatch(routerRedux.push('/'));
+      this.props.dispatch(routerRedux.push('/finance/warning'));
     } else if ((nextProps.login.type === 'FINANCE') && this.state.type === 'finance') {
-      this.props.dispatch(routerRedux.push('/'));
+      this.props.dispatch(routerRedux.push('/finance/warning'));
     } else if ((nextProps.login.type === 'ADMIN') && this.state.type === 'account') {
-      this.props.dispatch(routerRedux.push('/'));
+      this.props.dispatch(routerRedux.push('/finance/warning'));
     }
   }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'antd';
+import { connect } from 'dva';
+import { routerRedux, Link } from 'dva/router';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne, { TweenOneGroup } from 'rc-tween-one';
 import BannerAnim, { Element } from 'rc-banner-anim';
@@ -68,7 +70,7 @@ class Banner2 extends React.Component {
           key="button"
           id={`${props.id}-buttonBlock0`}
         >
-          踏上云端，链动未来
+          <Link to="/user/login">踏上云端，链动未来</Link>
         </Button>
       </QueueAnim>
     </Element>);
@@ -102,4 +104,4 @@ class Banner2 extends React.Component {
   }
 }
 
-export default Banner2;
+export default connect()(Banner2);
