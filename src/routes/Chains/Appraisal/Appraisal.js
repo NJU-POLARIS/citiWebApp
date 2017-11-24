@@ -71,77 +71,77 @@ class Appraisal extends PureComponent {
 
       lineData1A1B2 = [{
         date: "2016-11",
-        value: 0,
+        value: A1B2[0],
       }, {
         date: "2016-12",
-        value: 1,
+        value: A1B2[1],
       }, {
         date: "2017-01",
-        value: 0,
+        value: A1B2[2],
       }, {
         date: "2017-02",
-        value: 1,
+        value: A1B2[3],
       }, {
         date: "2017-03",
-        value: 1,
+        value: A1B2[4],
       }, {
         date: "2017-04",
-        value: 0,
+        value: A1B2[5],
       }, {
         date: "2017-05",
-        value: 0,
+        value: A1B2[6],
       }, {
         date: "2017-06",
-        value: 0,
+        value: A1B2[7],
       }, {
         date: "2017-07",
-        value: 0,
+        value: A1B2[8],
       }, {
         date: "2017-08",
-        value: 0,
+        value: A1B2[9],
       }, {
         date: "2017-09",
-        value: 0,
+        value: A1B2[10],
       }, {
         date: "2017-10",
-        value: 0,
+        value: A1B2[11],
       }];
       lineData1A2B1 = [{
         date: "2016-11",
-        value: 0,
+        value: A2B1[0],
       }, {
         date: "2016-12",
-        value: 0,
+        value: A2B1[1],
       }, {
         date: "2017-01",
-        value: 0,
+        value: A2B1[2],
       }, {
         date: "2017-02",
-        value: 0,
+        value: A2B1[3],
       }, {
         date: "2017-03",
-        value: 1,
+        value: A2B1[4],
       }, {
         date: "2017-04",
-        value: 0,
+        value: A2B1[5],
       }, {
         date: "2017-05",
-        value: 0,
+        value: A2B1[6],
       }, {
         date: "2017-06",
-        value: 1,
+        value: A2B1[7],
       }, {
         date: "2017-07",
-        value: 0,
+        value: A2B1[8],
       }, {
         date: "2017-08",
-        value: 0,
+        value: A2B1[9],
       }, {
         date: "2017-09",
-        value: 0,
+        value: A2B1[10],
       }, {
         date: "2017-10",
-        value: 0,
+        value: A2B1[11],
       }];
       lineData1B1C1 = [{
         date: "2016-11",
