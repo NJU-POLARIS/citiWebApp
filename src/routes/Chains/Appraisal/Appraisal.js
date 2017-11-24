@@ -1171,8 +1171,8 @@ class Appraisal extends PureComponent {
             <Select className={styles.select} style={{ width: 200 }} placeholder="A1B1">
               <Option value="A1B1">A1B1</Option>
               <Option value="A2B1">A2B1</Option>
-              <Option value="B1C1">B1C1</Option>
-              <Option value="B1C2">B1C2</Option>
+              {/*<Option value="B1C1">B1C1</Option>*/}
+              {/*<Option value="B1C2">B1C2</Option>*/}
             </Select>
             <br />
             <Row gutter={48}>

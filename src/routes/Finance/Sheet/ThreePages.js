@@ -18,12 +18,12 @@ class ThreePages extends Component{
   constructor() {
     super();
     this.state = {
-      year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
-      yearPro: new Date().getFullYear(),
-      monthPro: new Date().getMonth() + 1,
-      yearCash: new Date().getFullYear(),
-      monthCash: new Date().getMonth() + 1,
+      year: 2016,
+      month: 12,
+      yearPro: 2016,
+      monthPro: 12,
+      yearCash: 2016,
+      monthCash: 12,
     };
 
   }
@@ -35,18 +35,28 @@ class ThreePages extends Component{
         type: 'tables/fetchBalanceSheet',
         payload: {
           companyID: 1,
-          phase: { phase: this.state.year+1+'-'+1 },
+          phase: { phase: this.state.year+1+'-0'+1 },
         },
       });
     } else {
       this.setState({year: this.state.year, month: this.state.month + 1});
-      dispatch({
-        type: 'tables/fetchBalanceSheet',
-        payload: {
-          companyID: 1,
-          phase: { phase: this.state.year+'-'+(this.state.month+1) },
-        },
-      });
+      if(this.state.month>8) {
+        dispatch({
+          type: 'tables/fetchBalanceSheet',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.year + '-' + (this.state.month + 1)},
+          },
+        });
+      }else{
+        dispatch({
+          type: 'tables/fetchBalanceSheet',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.year + '-0' + (this.state.month + 1)},
+          },
+        });
+      }
     }
 
   };
@@ -54,13 +64,23 @@ class ThreePages extends Component{
     const { dispatch } = this.props;
     if (this.state.month > 1) {
       this.setState({ year: this.state.year, month: this.state.month - 1 });
-      dispatch({
-        type: 'tables/fetchBalanceSheet',
-        payload: {
-          companyID: 1,
-          phase: { phase: this.state.year+'-'+(this.state.month-1)},
-        },
-      });
+      if(this.state.month<=10) {
+        dispatch({
+          type: 'tables/fetchBalanceSheet',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.year + '-0' + (this.state.month - 1)},
+          },
+        });
+      }else{
+        dispatch({
+          type: 'tables/fetchBalanceSheet',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.year + '-' + (this.state.month - 1)},
+          },
+        });
+      }
     } else {
       this.setState({ year: this.state.year - 1, month: 12 });
       dispatch({
@@ -82,18 +102,28 @@ class ThreePages extends Component{
         type: 'tables/fetchProfit',
         payload: {
           companyID: 1,
-          phase: { phase: this.state.yearPro+1+'-'+1 },
+          phase: { phase: this.state.yearPro+1+'-0'+1 },
         },
       });
     } else {
       this.setState({yearPro: this.state.yearPro, monthPro: this.state.monthPro + 1});
-      dispatch({
-        type: 'tables/fetchProfit',
-        payload: {
-          companyID: 1,
-          phase: { phase: this.state.yearPro+'-'+(this.state.monthPro+1) },
-        },
-      });
+      if(this.state.monthPro>8) {
+        dispatch({
+          type: 'tables/fetchProfit',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearPro + '-' + (this.state.monthPro + 1)},
+          },
+        });
+      }else{
+        dispatch({
+          type: 'tables/fetchProfit',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearPro + '-0' + (this.state.monthPro + 1)},
+          },
+        });
+      }
     }
 
   };
@@ -101,13 +131,23 @@ class ThreePages extends Component{
     const { dispatch } = this.props;
     if (this.state.monthPro > 1) {
       this.setState({ yearPro: this.state.yearPro, monthPro: this.state.monthPro - 1 });
-      dispatch({
-        type: 'tables/fetchProfit',
-        payload: {
-          companyID: 1,
-          phase: { phase: this.state.yearPro+'-'+(this.state.monthPro-1)},
-        },
-      });
+      if(this.state.monthPro<=10) {
+        dispatch({
+          type: 'tables/fetchProfit',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearPro + '-0' + (this.state.monthPro - 1)},
+          },
+        });
+      }else{
+        dispatch({
+          type: 'tables/fetchProfit',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearPro + '-' + (this.state.monthPro - 1)},
+          },
+        });
+      }
     } else {
       this.setState({ yearPro: this.state.yearPro - 1, monthPro: 12 });
       dispatch({
@@ -129,18 +169,28 @@ class ThreePages extends Component{
         type: 'tables/fetchCashflow',
         payload: {
           companyID: 1,
-          phase: { phase: this.state.yearCash+1+'-'+1 },
+          phase: { phase: this.state.yearCash+1+'-0'+1 },
         },
       });
     } else {
       this.setState({yearCash: this.state.yearCash, monthCash: this.state.monthCash + 1});
-      dispatch({
-        type: 'tables/fetchCashflow',
-        payload: {
-          companyID: 1,
-          phase: { phase: this.state.yearCash+'-'+(this.state.monthCash+1) },
-        },
-      });
+      if(this.state.month>8) {
+        dispatch({
+          type: 'tables/fetchCashflow',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearCash + '-' + (this.state.monthCash + 1)},
+          },
+        });
+      }else{
+        dispatch({
+          type: 'tables/fetchCashflow',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearCash + '-0' + (this.state.monthCash + 1)},
+          },
+        });
+      }
     }
 
   };
@@ -148,13 +198,23 @@ class ThreePages extends Component{
     const { dispatch } = this.props;
     if (this.state.monthCash > 1) {
       this.setState({ yearCash: this.state.yearCash, monthCash: this.state.monthCash - 1 });
-      dispatch({
-        type: 'tables/fetchCashflow',
-        payload: {
-          companyID: 1,
-          phase: { phase: this.state.yearCash+'-'+(this.state.monthCash-1)},
-        },
-      });
+      if(this.state.monthCash<=10) {
+        dispatch({
+          type: 'tables/fetchCashflow',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearCash + '-0' + (this.state.monthCash - 1)},
+          },
+        });
+      }else{
+        dispatch({
+          type: 'tables/fetchCashflow',
+          payload: {
+            companyID: 1,
+            phase: {phase: this.state.yearCash + '-' + (this.state.monthCash - 1)},
+          },
+        });
+      }
     } else {
       this.setState({ yearCash: this.state.yearCash - 1, monthCash: 12 });
       dispatch({

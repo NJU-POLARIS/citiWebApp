@@ -6,7 +6,7 @@ import request from '../utils/request';
 
 export function fetchBalanceSheet(param) {
   const { companyID, phase } = param;
-  // console.log("api"+`/api/sheets/balance/${JSON.stringify(companyID)}?${stringify(phase)}`);
+  console.log("api: "+`/api/sheets/balance/${JSON.stringify(companyID)}?${stringify(phase)}`);
   return request(`/api/sheets/balance/${JSON.stringify(companyID)}?${stringify(phase)}`);
 }
 
