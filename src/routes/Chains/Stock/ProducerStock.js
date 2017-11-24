@@ -117,7 +117,7 @@ function ProducerStock ({ dispatch, materialCharData, materialTableData, product
       <Tabs defaultActiveKey="1">
         <TabPane tab="原材料库存实时监控" key="1">
           <b>截止日期：</b>
-          <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange}/>
+          <DatePicker format="YYYY-MM-DD" placeholder="2016-12-31" onChange={handleChange}/>
           <br/>
           <br/>
           <Table columns={columns_1} dataSource={tableData1} className={styles.t1}/>
@@ -126,7 +126,7 @@ function ProducerStock ({ dispatch, materialCharData, materialTableData, product
         <TabPane tab="原材料安全库存量" key="2">
           <Card bordered={false}>
             <b>截止日期：</b>
-            <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange}/>
+            <DatePicker format="YYYY-MM-DD" placeholder="2016-12-31" onChange={handleChange}/>
             <br/>
             <br/>
             <StackBarChart data={ chartData1 }/>
@@ -135,7 +135,7 @@ function ProducerStock ({ dispatch, materialCharData, materialTableData, product
 
         <TabPane tab="产品库存实时监控" key="3">
           <b>截止日期：</b>
-          <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange2}/>
+          <DatePicker format="YYYY-MM-DD" placeholder="2016-12-31" onChange={handleChange2}/>
           <br/>
           <br/>
           <Table columns={columns_2} dataSource={tableData2} className={styles.t1}/>
@@ -144,7 +144,7 @@ function ProducerStock ({ dispatch, materialCharData, materialTableData, product
         <TabPane tab="产品安全库存量" key="4">
           <Card bordered={false}>
             <b>截止日期：</b>
-            <DatePicker format="YYYY-MM-DD" placeholder="2017-11-11" onChange={handleChange2}/>
+            <DatePicker format="YYYY-MM-DD" placeholder="2016-12-31" onChange={handleChange2}/>
             <br/>
             <br/>
             <StackBarChart data={ chartData2 }/>

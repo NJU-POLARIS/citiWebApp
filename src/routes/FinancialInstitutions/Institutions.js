@@ -14,6 +14,7 @@ const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
 @connect(state => ({
   institutions: state.institutions,
+  login: state.login,
 }))
 @Form.create()
 export default class Institutions extends PureComponent {
@@ -70,6 +71,11 @@ export default class Institutions extends PureComponent {
     });
   }
 
+  handleLogOut = (e) => {
+    this.props.dispatch({
+      type: 'login/logout',
+    });
+  }
   handleSearch = (e) => {
     e.preventDefault();
 
@@ -110,6 +116,7 @@ export default class Institutions extends PureComponent {
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">查询</Button>
               <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
+              <Button style={{ marginLeft: 8 }} onClick={(e) => this.handleLogOut(e)}>登出</Button>
             </span>
           </Col>
         </Row>

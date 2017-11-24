@@ -91,7 +91,7 @@ class Warning extends PureComponent {
       <PageHeaderLayout
         title="财务预警"
       >
-        <Select defaultValue="2016-01" style={{ marginBottom: 24 }} onChange={this.handleChange}>
+        <Select defaultValue="2016-12" style={{ marginBottom: 24 }} onChange={this.handleChange}>
           <Option value="2016-01">2016-01</Option>
           <Option value="2016-02">2016-02</Option>
           <Option value="2016-03">2016-03</Option>
