@@ -26,114 +26,122 @@ class Appraisal extends PureComponent {
     let lineData1B1C1,lineData2B1C1,lineData3B1C1;
     let lineData1B1C2,lineData2B1C2,lineData3B1C2;
     let t1,t2,t3,t4,t5,t6,t7,t8,t9,t10;
-    if(m1) {
-      list = [{
+    // if(m1) {
+      list=[{
         title: "盈利--资产报酬率",
-        num: m1[0].operate[0],
+        // num: m1[0].operate[0],
+        num:0.0,
       }, {
         title: "盈利--销售利润率",
-        num: m1[0].operate[1],
+        // num: m1[0].operate[1],
+        num:0.0,
       }, {
         title: "运营--资产周转率",
-        num: m1[0].profit[0],
+        // num: m1[0].profit[0],
+        num:0.84,
       }, {
         title: "运营--存货周转率",
-        num: m1[0].profit[1],
+        // num: m1[0].profit[1],
+        num:0.0,
       }, {
         title: "发展--销售增长率",
-        num: m1[0].sinking[0],
+        // num: m1[0].sinking[0],
+        num:0.0,
       }, {
         title: "发展--利润增长率",
-        num: m1[0].sinking[1],
+        // num: m1[0].sinking[1],
+        num:0.0,
       }, {
         title: "偿债--资产负债率",
-        num: m1[0].develop[0],
+        // num: m1[0].develop[0],
+        num:0.275,
       }, {
         title: "偿债--速动比率",
-        num: m1[0].develop[1],
+        // num: m1[0].develop[1],
+        num:3.73,
       }];
-      console.log(list);
-    }
+    //   console.log(list);
+    // }
 
-    if(m2d1) {
-      const A1B2=m2d1[0];
-      const A2B1=m2d1[1];
-      const B1C1=m2d1[2];
-      const B1C2=m2d1[3];
+    // if(m2d1) {
+      const A1B2=[0.0,1.0,0.0,1.0,1.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0];
+      const A2B1=[0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+      const B1C1=[0.0,1.0,0.0,1.0,1.0,0.0,0.5,0.0,0.5,0.0,0.0,0.0];
+      const B1C2=[0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,1.0,0.0];
 
       lineData1A1B2 = [{
         date: "2016-11",
-        value: A1B2[0],
+        value: 0,
       }, {
         date: "2016-12",
-        value: A1B2[1],
+        value: 1,
       }, {
         date: "2017-01",
-        value: A1B2[2],
+        value: 0,
       }, {
         date: "2017-02",
-        value: A1B2[3],
+        value: 1,
       }, {
         date: "2017-03",
-        value: A1B2[4],
+        value: 1,
       }, {
         date: "2017-04",
-        value: A1B2[5],
+        value: 0,
       }, {
         date: "2017-05",
-        value: A1B2[6],
+        value: 0,
       }, {
         date: "2017-06",
-        value: A1B2[7],
+        value: 0,
       }, {
         date: "2017-07",
-        value: A1B2[8],
+        value: 0,
       }, {
         date: "2017-08",
-        value: A1B2[9],
+        value: 0,
       }, {
         date: "2017-09",
-        value: A1B2[10],
+        value: 0,
       }, {
         date: "2017-10",
-        value: A1B2[11],
+        value: 0,
       }];
       lineData1A2B1 = [{
         date: "2016-11",
-        value: A2B1[0],
+        value: 0,
       }, {
         date: "2016-12",
-        value: A2B1[1],
+        value: 0,
       }, {
         date: "2017-01",
-        value: A2B1[2],
+        value: 0,
       }, {
         date: "2017-02",
-        value: A2B1[3],
+        value: 0,
       }, {
         date: "2017-03",
-        value: A2B1[4],
+        value: 1,
       }, {
         date: "2017-04",
-        value: A2B1[5],
+        value: 0,
       }, {
         date: "2017-05",
-        value: A2B1[6],
+        value: 0,
       }, {
         date: "2017-06",
-        value: A2B1[7],
+        value: 1,
       }, {
         date: "2017-07",
-        value: A2B1[8],
+        value: 0,
       }, {
         date: "2017-08",
-        value: A2B1[9],
+        value: 0,
       }, {
         date: "2017-09",
-        value: A2B1[10],
+        value: 0,
       }, {
         date: "2017-10",
-        value: A2B1[11],
+        value: 0,
       }];
       lineData1B1C1 = [{
         date: "2016-11",
@@ -209,7 +217,7 @@ class Appraisal extends PureComponent {
         date: "2017-10",
         value: B1C2[11],
       }];
-    }
+
     if(m2d1) {
       const A1B2=m2d1[0];
       const A2B1=m2d1[1];
@@ -365,48 +373,48 @@ class Appraisal extends PureComponent {
         value: B1C2[11],
       }];
     }
-    if(m2d2) {
-      const A1B22=m2d2[0];
-      const A2B12=m2d2[1];
-      const B1C12=m2d2[2];
-      const B1C22=m2d2[3];
+    // if(m2d2) {
+      const A1B22=[0.0,0.48,0.0,0.48,0.48,0.0,0.0,0.48,0.0,0.0,0.0,0.0];
+      const A2B12=[0.0,0.0,0.0,0.0,0.66,0.0,0.66,0.0,0.66,0.0,0.0,0.0];
+      const B1C12=[0.0,0.67,0.0,0.67,0.67,0.0,0.67,0.0,0.67,0.0,0.0,0.0];
+      const B1C22=[0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,0.0];
 
        lineData2A1B2 = [{
         date: "2016-11",
-        value: A1B22[0],
+        value: 0,
       }, {
         date: "2016-12",
-        value: A1B22[1],
+        value: 0.48,
       }, {
         date: "2017-01",
-        value: A1B22[2],
+        value: 0,
       }, {
         date: "2017-02",
-        value: A1B22[3],
+        value: 0.48,
       }, {
         date: "2017-03",
-        value: A1B22[4],
+        value: 0.48,
       }, {
         date: "2017-04",
-        value: A1B22[5],
+        value: 0,
       }, {
         date: "2017-05",
-        value: A1B22[6],
+        value: 0.66,
       }, {
         date: "2017-06",
-        value: A1B22[7],
+        value: 0.66,
       }, {
         date: "2017-07",
-        value: A1B22[8],
+        value: 0,
       }, {
         date: "2017-08",
-        value: A1B22[9],
+        value: 0,
       }, {
         date: "2017-09",
-        value: A1B22[10],
+        value: 0,
       }, {
         date: "2017-10",
-        value: A1B22[11],
+        value: 0,
       }];
        lineData2A2B1 = [{
         date: "2016-11",
@@ -519,12 +527,12 @@ class Appraisal extends PureComponent {
         date: "2017-10",
         value: B1C22[11],
       }];
-    }
-    if(m2d3) {
-      const A1B23=m2d3[0];
-      const A2B13=m2d3[1];
-      const B1C13=m2d3[2];
-      const B1C23=m2d3[3];
+    // }
+    // if(m2d3) {
+      const A1B23=[16.66666667,-57.0,15.0,-38.0,0.0,10.0,10.0,-12.66666667,0.0,0.0,0.0,0.0];
+      const A2B13=[45.0,0.0,0.0,0.0,-14.5,45.0,-58.0,0.0,0.0,0.0,0.0,0.0];
+      const B1C13=[0.014285714,0.05,0.005882353,0.1,-0.01,0.1,0.0,-0.04,0.0,0.0,0.0,0.0];
+      const B1C23=[0.0,0.0,0.0,0.0,0.011904762,0.0,0.071428571,0.0,0.013513514,-0.018867925,0.0,0.0];
 
        lineData3A1B2 = [{
         date: "2016-11",
@@ -674,18 +682,19 @@ class Appraisal extends PureComponent {
         date: "2017-10",
         value: B1C23[11],
       }];
-    }
-    if(m3){
-      const tt1=m3[0];
-      const tt2=m3[1];
-      const tt3=m3[2];
-      const tt4=m3[3];
-      const tt5=m3[4];
-      const tt6=m3[5];
-      const tt7=m3[6];
-      const tt8=m3[7];
-      const tt9=m3[8];
-      const tt10=m3[9];
+    // }
+    // if(m3){
+      let tt1=[0.010755509,0.034402358,0.018966236,0.042705764,0.037462275,0.01259167,0.025227927,0.021230368,0.032676556,0.009299762,0.01504821,0.017086956];
+      const tt2=[5.128205128,5.530973451,1.13960114,14.7766323,95.69892473,1.13960114,6.097037355,3.686200378,5.475663717,0.854700855,-0.228021282,0.630252101];
+      const tt3=[0.540005247,0.428577713,0.575760734,0.455977284,0.49366881,0.659817352,0.520094783,0.665963126,0.507587194,0.673647229,0.456871087,0.454002291];
+      const tt4=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+    const tt5= [0.0,1.0,0.0,1.0,1.0,0.0,0.75,1.0,0.833333,1.0,0.0,0.0];
+
+      const tt6=[1.0,0.33333,0.0,0.3333,0.3333,1.0,0.0,0.0,0.5,1.0,0.0,0.0];
+      const tt7=[0.427350427,1.477272727,1.01010101,5.227272727,2.857142857,0.649350649,1.544715447,0.693641618,1.777777778,0.407239819,0.511363636,0.763358779];
+      const tt8=[0.0,1.0,0.0,1.0,1.0,0.0,0.75,1.0,0.833333,0.0,0.0,0.0];
+      const tt9=[1.0,0.4,0.0,0.244186047,0.269662921,1.0,0.0,0.0,0.242424242,1.0,0.0,0.0];
+      const tt10=[0.0,8.536585366,-0.767263427,5.164835165,0.017825312,-0.840630473,4.065934066,-0.629067245,2.923976608,-0.87928465,0.0,0.12345679];
        t1 = [{
         date: "2016-11",
         value: tt1[0],
@@ -799,7 +808,7 @@ class Appraisal extends PureComponent {
       }];
        t4 = [{
         date: "2016-11",
-        value: tt41[0],
+        value: tt4[0],
       }, {
         date: "2016-12",
         value: tt4[1],
@@ -1056,7 +1065,7 @@ class Appraisal extends PureComponent {
         date: "2017-10",
         value: tt10[11],
       }];
-    }
+    // }
     const z=[{
       date: "2016-11",
       value: 0,
@@ -1207,7 +1216,7 @@ class Appraisal extends PureComponent {
 
           <TabPane tab="整体绩效评价" key="3">
             <Card bordered={false}>
-            <Select className={styles.select} style={{ width: 200 }} placeholder="请选择一条供应链">
+            <Select className={styles.select} style={{ width: 200 }} placeholder="A1B1C2">
               <Option value="A1B1C2">A1B1C2</Option>
             </Select>
             <br />
