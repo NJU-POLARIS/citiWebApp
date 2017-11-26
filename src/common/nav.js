@@ -194,7 +194,7 @@ export const getNavData = app => [
       {
         name: '金融机构',
         path: 'financing',
-        isHide: false,
+        isHide: true,
         component: dynamicWrapper(app, [], import('../routes/FinancialInstitutions/Institutions')),
       }
     ],

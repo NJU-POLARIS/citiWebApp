@@ -60,6 +60,11 @@ export default class Institutions extends PureComponent {
         amount: '￥ 2,000,000',
       }],
     });
+
+    dispatch({ type: 'institutions/fetchType1' });
+    dispatch({ type: 'institutions/fetchType2' });
+    dispatch({ type: 'institutions/fetchType3' });
+
   }
 
   handleTableChange = (pagination, filtersArg, sorter) => {

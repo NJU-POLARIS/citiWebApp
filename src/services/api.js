@@ -84,3 +84,15 @@ export async function fakeRegister(params) {
 export async function queryNotices() {
   return request('/api/notices');
 }
+
+export async function fetchDataType1() {
+  return request('/api/supplychains/financing/type1')
+}
+
+export async function fetchDataType2() {
+  return request('/api/supplychains/financing/type2')
+}
+
+export async function fetchDataType3() {
+  return request('/api/supplychains/financing/type3')
+}
